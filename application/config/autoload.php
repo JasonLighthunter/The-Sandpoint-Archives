@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
@@ -28,9 +27,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | 6. Language files
 | 7. Models
 |
-*/
-
-/*
 | -------------------------------------------------------------------
 |  Auto-load Packages
 | -------------------------------------------------------------------
@@ -40,7 +36,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $autoload['packages'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Libraries
@@ -59,7 +54,6 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 $autoload['libraries'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Drivers
@@ -80,7 +74,6 @@ $autoload['libraries'] = array();
 |
 */
 $autoload['drivers'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files
@@ -90,7 +83,6 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 $autoload['helper'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Config files
@@ -101,10 +93,8 @@ $autoload['helper'] = array();
 |
 | NOTE: This item is intended for use ONLY if you have created custom
 | config files.  Otherwise, leave it blank.
-|
 */
 $autoload['config'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Language files
@@ -115,10 +105,8 @@ $autoload['config'] = array();
 |
 | NOTE: Do not include the "_lang" part of your file.  For example
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
-|
 */
 $autoload['language'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Models

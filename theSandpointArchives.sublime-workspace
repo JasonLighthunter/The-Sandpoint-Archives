@@ -59,7 +59,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 127.0,
+		"height": 392.0,
 		"last_filter": "comm",
 		"selected_items":
 		[
@@ -260,12 +260,19 @@
 	"expanded_folders":
 	[
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application",
+		"/C/xampp/htdocs/The-Sandpoint-Archives/application/cache",
+		"/C/xampp/htdocs/The-Sandpoint-Archives/application/config",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/views",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/views/pages",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/views/templates"
 	],
 	"file_history":
 	[
+		"/C/xampp/htdocs/The-Sandpoint-Archives/application/config/database.php",
+		"/C/xampp/htdocs/The-Sandpoint-Archives/application/config/constants.php",
+		"/C/xampp/htdocs/The-Sandpoint-Archives/application/config/doctypes.php",
+		"/C/xampp/htdocs/The-Sandpoint-Archives/application/config/config.php",
+		"/C/xampp/htdocs/The-Sandpoint-Archives/application/config/autoload.php",
 		"/C/xampp/htdocs/vanillaMail/mailer.php",
 		"/C/xampp/htdocs/vanillaMail/index.php",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/views/pages/about.php",
@@ -273,7 +280,6 @@
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/views/templates/footer.php",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/models/alignmentsModel.php",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/controllers/pages.php",
-		"/C/xampp/htdocs/The-Sandpoint-Archives/application/config/config.php",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/config/routes.php",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/views/templates/header.php",
 		"/C/xampp/htdocs/The-Sandpoint-Archives/application/views/welcome_message.php",
