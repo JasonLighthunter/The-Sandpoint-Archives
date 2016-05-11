@@ -1,8 +1,7 @@
-<?php 
-  echo 
-  '<h2>'.$title.'</h2>'.
+<?php
+  echo
   '<p>'.
-    'Name: '.$name.'<br>'.
-    'Abbreviation: '.$abbreviation.
+    'Name: '.$alignment['name'].'<br>'.
+    'Abbreviation: '.$alignment['abbreviation'].
   '</p>';
 ?>

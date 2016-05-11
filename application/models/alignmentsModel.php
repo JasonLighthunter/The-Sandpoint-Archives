@@ -4,7 +4,7 @@
       $this->load->database();
     }
 
-    /* 
+    /*
        RETURNS
        alignments by id
        (parameter filled)
@@ -17,7 +17,7 @@
         return $query->result_array();
       }
       $whereCondition = array ('id' => $id);
-      $query = $this->db->get_where('id', $whereCondition);
+      $query = $this->db->get_where('alignments', $whereCondition);
       return $query->row_array();
     }
   }
