@@ -8,7 +8,7 @@
 
     //this calls the index pages of the Alignments section
     public function index() {
-      $data['alignments'] = $this->alignmentsModel->getAll();
+      $data['alignments'] = $this->alignmentsModel->get();
       $data['title']      = 'Alignments';
 
       $this->load->view('templates/header', $data);
@@ -18,7 +18,7 @@
 
     //this calls a certian view of the Alignments section
     public function view($id = FALSE) {
-      $data['alignment'] = $this->alignmentsModel->getById($id);
+      $data['alignment'] = $this->alignmentsModel->get($id);
       if(empty($data['alignment'])) {
         show_404();
       } else {

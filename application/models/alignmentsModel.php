@@ -1,5 +1,5 @@
 <?php
-  class AlignmetsModel extends CI_Model {
+  class AlignmentsModel extends CI_Model {
     public function __construct() {
       $this->load->database();
     }
@@ -11,8 +11,8 @@
        all alignments
        (parameter is left empty)
     */
-    public function getByID($id = FALSE) {
-      if(id === FALSE){
+    public function get($id = FALSE) {
+      if($id === FALSE){
         $query = $this->db->get('alignments');
         return $query->result_array();
       }
