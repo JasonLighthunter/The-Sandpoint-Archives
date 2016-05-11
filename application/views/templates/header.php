@@ -1,14 +1,14 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>
-      <?php
-        echo $title; 
-      ?>
-    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-widht, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href=<?php echo '"'. base_url('assets/css/bootstrap.min.css').'"' ?> rel="stylesheet">
+
+    <title><?php echo $title; ?></title>
   </head>
   <body>
-    <h1>
-      <?php 
-        echo $title;
-      ?>
-    </h1>
+    <?php require_once 'navbar.inc.php'; ?>
+    <div class="well">

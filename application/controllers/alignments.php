@@ -3,7 +3,6 @@
     public function __construct() {
       parent::__construct();
       $this->load->model('alignmentsModel');
-      $this->load->helper('url_helper');
     }
 
     //this calls the index pages of the Alignments section
