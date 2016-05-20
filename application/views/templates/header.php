@@ -1,14 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>
-      <?php
-        echo $title; 
-      ?>
-    </title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <link 
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    >
+    <title><?php echo $title; ?></title>
   </head>
   <body>
-    <h1>
-      <?php 
-        echo $title;
-      ?>
-    </h1>
+    <?php require_once 'navbar.inc.php'; ?>
+    <div class="container-fluid">
+      <div class="well">

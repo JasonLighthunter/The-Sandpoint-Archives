@@ -1,7 +1,16 @@
-<?php
-  echo
-  '<p>'.
-    'Name: '.$alignment['name'].'<br>'.
-    'Abbreviation: '.$alignment['abbreviation'].
-  '</p>';
-?>
+<div class="row">
+  <div class="col-sm-1">
+    Name:
+  </div>
+  <div class="col-sm-2">
+    <?php echo $alignment['name']; ?>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-1">
+    Abbreviation:
+  </div>
+  <div class="col-sm-2">
+    <?php echo $alignment['abbreviation']; ?>
+  </div>
+</div>
