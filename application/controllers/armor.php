@@ -1,27 +1,26 @@
 <?php
-  class Feats extends CI_Controller {
+  class Armor extends CI_Controller {
     public function __construct() {
       parent::__construct();
-      $this->load->model('featsModel');
+      $this->load->model('armorModel');
       $this->load->model('navItemsModel');
     }
 
-    //this calls the index pages of the Feats section
+    //this calls the index pages of the Armor section
     public function index() {
-      $data['feats'] = $this->featsModel->get();
-      $data['title'] = 'Feats';
+      $data['armor_items'] = $this->armorModel->get();
+      $data['title']       = 'Armor';
 
       $this->view($data, 'index');
     }
 
-    //this calls a certian view of the Feats section
+    //this calls a certian view of the Armor section
     public function detail($id = FALSE) {
-      $data['feat'] = $this->featsModel->get($id);
-      
-      if(empty($data['feat'])) {
+      $data['armor'] = $this->armorModel->get($id);
+      if(empty($data['armor'])) {
         show_404();
       } else {
-        $data['title'] = $data['feat']['name'];
+        $data['title'] = $data['armor']['name'];
 
         $this->view($data, 'view');
       }
@@ -32,7 +31,7 @@
       $data['navItems'] = $this->navItemsModel->get();
 
       $this->load->view('templates/header', $data);
-      $this->load->view('feats/'.$type, $data);
+      $this->load->view('armor/'.$type, $data);
       $this->load->view('templates/footer');
     }
   }

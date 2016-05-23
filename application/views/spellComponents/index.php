@@ -4,11 +4,11 @@
     <tr>
       <th>Name</th>
     </tr>
-    <?php foreach ($feats as $feat) { ?>
+    <?php foreach ($spellComponents as $component) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url('feats/'.$feat['id']); ?>> 
-            <?php echo  $feat['name']; ?>
+          <a href=<?php echo site_url('spell_components/'.$component['id']); ?>> 
+            <?php echo $component['name']; ?>
           </a>
         </td>
       </tr>

@@ -4,11 +4,11 @@
     <tr>
       <th>Name</th>
     </tr>
-    <?php foreach ($feats as $feat) { ?>
+    <?php foreach ($goods as $good) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url('feats/'.$feat['id']); ?>> 
-            <?php echo  $feat['name']; ?>
+          <a href=<?php echo site_url('goods/'.$good['id']); ?>> 
+            <?php echo  $good['name']; ?>
           </a>
         </td>
       </tr>

@@ -11,27 +11,27 @@
       $data['alignments'] = $this->alignmentsModel->get();
       $data['title']      = 'Alignments';
 
-      $this->view($data);
+      $this->view($data,'index');
     }
 
     //this calls a certian view of the Alignments section
     public function detail($id = FALSE) {
       $data['alignment'] = $this->alignmentsModel->get($id);
-      var_dump($data);
       if(empty($data['alignment'])) {
         show_404();
       } else {
         $data['title'] = $data['alignment']['name'];
 
-        $this->view($data);
+        $this->view($data,'view');
       }
     }
 
-    private function view($data) {
+    //type is the name of the file that has to be called.
+    private function view($data,$type) {
       $data['navItems'] = $this->navItemsModel->get();
 
       $this->load->view('templates/header', $data);
-      $this->load->view('alignments/index', $data);
+      $this->load->view('alignments/'.$type, $data);
       $this->load->view('templates/footer');
     }
   }
