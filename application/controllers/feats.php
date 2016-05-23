@@ -9,6 +9,7 @@
     //this calls the index pages of the Feats section
     public function index() {
       $data['feats'] = $this->featsModel->get();
+      $data['title'] = 'Feats';
 
       $this->view($data);
     }

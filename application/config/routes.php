@@ -54,6 +54,9 @@ $route['alignments']           = 'alignments/index';
 //Feats Routes
 $route['feats/(:any)']         = 'feats/detail/$1';
 $route['feats']                = 'feats/index';
+//Weapons Routes
+$route['weapons/(:any)']       = 'weapons/detail/$1';
+$route['weapons']              = 'weapons/index';
 //CodeIgniter Routes
 $route['(:any)']               = 'pages/view/$1';
 $route['default_controller']   = 'pages/view';

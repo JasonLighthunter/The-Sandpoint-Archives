@@ -1,3 +1,4 @@
+<?php require APPPATH.'views/templates/pageTitle.inc.php'; ?>
 <div class="row">
 <?php
   foreach ($alignments as $alignment) {

@@ -1,6 +1,6 @@
       </div>
     </div>
-    <em>&copy; JasonLighthuner 2016</em>
+    <em>&copy; JasonLighthunter 2016</em>
   </body>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js">
   </script>

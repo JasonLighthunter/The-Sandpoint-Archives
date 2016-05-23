@@ -9,11 +9,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <?php
-          foreach ($navItems as $item) {
-            echo '<li><a href='.site_url($item['uri']).'>'.$item['name'].'</a></li>';
-          }
-        ?>
+        <?php require_once 'loadNavItems.inc.php'; ?>
       </ul>
     </div>
   </div>

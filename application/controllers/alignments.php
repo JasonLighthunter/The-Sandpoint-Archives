@@ -17,6 +17,7 @@
     //this calls a certian view of the Alignments section
     public function detail($id = FALSE) {
       $data['alignment'] = $this->alignmentsModel->get($id);
+      var_dump($data);
       if(empty($data['alignment'])) {
         show_404();
       } else {
