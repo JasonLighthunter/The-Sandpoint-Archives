@@ -52,16 +52,16 @@
       $this->load->view('templates/header', $data);
       switch ($itemType) {
         case 'weapons':
-          $this->load->view('weapons/'.$pageType, $data);
+          $this->load->view('items/weapons/'.$pageType, $data);
           break;
         case 'armor':
-          $this->load->view('armor/'.$pageType, $data);
+          $this->load->view('items/armor/'.$pageType, $data);
           break;
         case 'goods':
-          $this->load->view('goods/'.$pageType, $data);
+          $this->load->view('items/goods/'.$pageType, $data);
           break;
         case 'spellComponents':
-          $this->load->view('spellComponents/'.$pageType, $data);
+          $this->load->view('items/spellComponents/'.$pageType, $data);
           break;
         default:
           break;
