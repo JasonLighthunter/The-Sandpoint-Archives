@@ -51,21 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //Alignments Routes
 $route['alignments/(:any)']    = 'alignments/detail/$1';
 $route['alignments']           = 'alignments/index';
-//Armor Routes
-$route['armor/(:any)']         = 'armor/detail/$1';
-$route['armor']                = 'armor/index';
 //Feats Routes
 $route['feats/(:any)']         = 'feats/detail/$1';
 $route['feats']                = 'feats/index';
-//Goods Routes
-$route['goods/(:any)']         = 'goods/detail/$1';
-$route['goods']                = 'goods/index';
-//Spell Components Routes
-$route['spell_components/(:any)'] = 'spellComponents/detail/$1';
-$route['spell_components']       = 'spellComponents/index';
-//Weapons Routes
-$route['weapons/(:any)']       = 'weapons/detail/$1';
-$route['weapons']              = 'weapons/index';
+//Items Routes
+$route['items/(:any)/(:any)']  = 'items/detail/$2/$1';
+$route['items/(:any)']         = 'items/index/$1';
 //CodeIgniter Routes
 $route['(:any)']               = 'pages/view/$1';
 $route['default_controller']   = 'pages/view';

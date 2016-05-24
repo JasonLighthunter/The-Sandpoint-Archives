@@ -4,7 +4,7 @@
     <b>Name:</b>
   </div>
   <div class="col-sm-10">
-    <?php echo $weapon['name']; ?>
+    <?php echo $item['name']; ?>
   </div>
 </div>
 <div class="row">
@@ -12,7 +12,7 @@
     <b>Weapon Class:</b>
   </div>
   <div class="col-sm-10">
-    <?php echo $weapon['weapon_class']; ?>
+    <?php echo $item['weapon_class']; ?>
   </div>
 </div>
 <div class="row">
@@ -20,6 +20,6 @@
     <b>Description:</b>
   </div>
   <div class="col-sm-10">
-    <?php echo $weapon['description']; ?> 
+    <?php echo $item['description']; ?> 
   </div>
 </div>

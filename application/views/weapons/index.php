@@ -5,10 +5,10 @@
       <th>Name</th>
       <th>Weapon Class</th>
     </tr>
-    <?php foreach ($weapons as $weapon) { ?>
+    <?php foreach ($items as $weapon) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url('weapons/'.$weapon['id']); ?>> 
+          <a href=<?php echo site_url($weapon['class_uri'].'/'.$weapon['id']); ?>> 
             <?php echo  $weapon['name']; ?>
           </a>
         </td>

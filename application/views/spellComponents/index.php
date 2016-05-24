@@ -4,10 +4,10 @@
     <tr>
       <th>Name</th>
     </tr>
-    <?php foreach ($spellComponents as $component) { ?>
+    <?php foreach ($items as $component) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url('spell_components/'.$component['id']); ?>> 
+          <a href=<?php echo site_url($component['class_uri'].'/'.$component['id']); ?>> 
             <?php echo $component['name']; ?>
           </a>
         </td>
