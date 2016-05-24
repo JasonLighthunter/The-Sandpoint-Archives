@@ -6,6 +6,10 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     >
+    <link
+      rel="stylesheet"
+      href=<?php echo base_url('assets/style.css'); ?>
+    >
     <title><?php echo $title; ?></title>
   </head>
   <body>
