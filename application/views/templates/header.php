@@ -10,6 +10,10 @@
       rel="stylesheet"
       href=<?php echo base_url('assets/style.css'); ?>
     >
+    <link
+      rel="stylesheet"
+      href=<?php echo base_url('assets/octicons.css'); ?>
+    >
     <title><?php echo $title; ?></title>
   </head>
   <body>

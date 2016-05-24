@@ -1,5 +1,14 @@
 .footer-custom {
   padding-top:       10px;
   padding-bottom:    10px;
-	background-color: #f8f8f8;
+	background-color:  #f8f8f8;
+}
+
+.list-no-style {
+  list-style-type: none;
+}
+
+.footer-item {
+  display:         flex;   
+  vertical-align:  middle;
 }

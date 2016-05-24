@@ -3,7 +3,7 @@
     if(empty($item['has_children'])) {
       echo "<li>";
       echo '<a href='.site_url($item['uri']).'>'.$item['name'].'</a>';
-    } else {
+    } else { 
       echo '<li class="dropdown">';
 ?>      
       <a class="dropdown-toggle" data-toggle="dropdown" role="button">
