@@ -4,10 +4,10 @@
     <tr>
       <th>Name</th>
     </tr>
-    <?php foreach ($goods as $good) { ?>
+    <?php foreach ($items as $good) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url('goods/'.$good['id']); ?>> 
+          <a href=<?php echo site_url($good['class_uri'].'/'.$good['id']); ?>> 
             <?php echo  $good['name']; ?>
           </a>
         </td>

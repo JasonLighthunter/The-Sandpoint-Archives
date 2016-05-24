@@ -4,7 +4,7 @@
     <b>Name:</b>
   </div>
   <div class="col-sm-10">
-    <?php echo $spellComponent['name']; ?>
+    <?php echo $item['name']; ?>
   </div>
 </div>
 <div class="row">
@@ -12,6 +12,6 @@
     <b>Description:</b>
   </div>
   <div class="col-sm-10">
-    <?php echo $spellComponent['description']; ?> 
+    <?php echo $item['description']; ?> 
   </div>
 </div>
