@@ -1,8 +1,7 @@
       </div>
     </div>
     <footer class="footer navbar-fixed-bottom footer-custom">
-      <div class="container ">
-        <p class="text-muted">Place sticky footer content here.</p>
+      <div class="container-fluid">
         <em>&copy; JasonLighthunter 2016</em>
       </div>
     </footer>

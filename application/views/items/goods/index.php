@@ -1,4 +1,3 @@
-<?php require APPPATH.'views/templates/pageTitle.inc.php'; ?>
 <div class="table-responsive">
   <table class="table">
     <tr>
@@ -7,7 +6,7 @@
     <?php foreach ($items as $good) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url($good['class_uri'].'/'.$good['id']); ?>> 
+          <a href=<?php echo site_url($good['class_uri'].'/'.$good['id']); ?>>
             <?php echo  $good['name']; ?>
           </a>
         </td>

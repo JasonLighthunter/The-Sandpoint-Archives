@@ -5,7 +5,7 @@
     }
 
     public function get($id = FALSE, $itemType = FALSE) {
-      if($id === FALSE){
+      if($id === FALSE) {
         if($itemType === FALSE) {
           return FALSE;
         }
@@ -86,8 +86,6 @@
             'inner'
           );
           break;
-        case 'goods':
-        case 'spellComponents':
         default:
           break;
       }
@@ -104,13 +102,11 @@
         case 'spellComponents':
           $this->db->where('item_classes.name', 'Spell Components');
           break;
-        case 'weapons':
-        case 'armor':
         default:
           break;
       }
     }
-    
+
     private function getOrderStatements($itemType) {
       switch ($itemType) {
         case 'weapons':
