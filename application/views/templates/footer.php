@@ -4,41 +4,68 @@
       <div class="container-fluid">
         <ul class="list-inline align-center">
           <li>
-            <a 
-              class="footer-item" rel="license" 
-              href="http://creativecommons.org/licenses/by-sa/4.0/">
-              <img 
-                alt="Creative Commons License" style="border-width:0"
-                src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
-              />
+            <a class="footer-item" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              <!-- CC image -->
+              <?php 
+                $imgData = array(
+                  'alt' => 'Creative Commons License',
+                  'class' => 'cc-img',
+                  'src'   => 'https://i.creativecommons.org/l/by-sa/4.0/88x31.png'
+                );
+                echo img($imgData);
+              ?>
             </a>
           </li>
           <li>
-            <a 
-              aria-label="Follow @jasonlighthunter on GitHub"
-              data-count-aria-label="# followers on GitHub" class="github-button footer-item"
-              data-count-api="/users/jasonlighthunter#followers"
-              data-count-href="/jasonlighthunter/followers"
-              data-style="mega" href="https://github.com/jasonlighthunter" >
-              Follow @jasonlighthunter
-            </a>
+            <!-- Github Follow -->
+            <?php 
+              $data = array(
+                'aria-label'            => 'Follow @jasonlighthunter on GitHub',
+                'data-count-aria-label' => '# followers on GitHub',
+                'data-count-api'        => '/users/jasonlighthunter#followers',
+                'data-count-href'       => '/jasonlighthunter/followers',
+                'class'                 => 'github-button footer-item',
+                'data-style'            => 'mega',
+                'href'                  => 'https://github.com/jasonlighthunter'
+              );
+              echo anchor($data, 'Follow @jasonlighthunter');
+            ?>
           </li>
           <li>
-            <a 
-              aria-label="Star jasonlighthunter/The-Sandpoint-Archives on GitHub"
-              data-count-aria-label="# stargazers on GitHub"
-              data-count-api="/repos/jasonlighthunter/The-Sandpoint-Archives#stargazers_count"
-              data-count-href="/jasonlighthunter/The-Sandpoint-Archives/stargazers"
-              data-style="mega" data-icon="octicon-star" class="github-button footer-item"
-              href="https://github.com/jasonlighthunter/The-Sandpoint-Archives">
-              Star
-            </a>
+            <!-- Github Star -->
+            <?php 
+              $data = array(
+                'aria-label'            => 'Star jasonlighthunter/The-Sandpoint-Archives on GitHub',
+                'data-count-aria-label' => '# stargazers on GitHub',
+                'data-count-api'        => '/repos/jasonlighthunter/The-Sandpoint-Archives#stargazers_count',
+                'data-count-href'       => '/jasonlighthunter/The-Sandpoint-Archives/stargazers',
+                'data-style'            => 'mega',
+                'data-icon'             =>'octicon-star',
+                'class'                 =>'github-button footer-item',
+                'href'                  =>'https://github.com/jasonlighthunter/The-Sandpoint-Archives'
+              );
+              echo anchor($data, 'Star');
+            ?>
           </li>
           <li>
-            <a class="footer-item" href=<?php echo site_url('about'); ?>>About</a>
+            <!-- About -->
+            <?php 
+              $data = array(
+                'class' => 'footer-item',
+                'href'  => $site_url('about')
+              );
+              echo anchor($data, 'About');
+            ?>
           </li>
           <li>
-            <a class="footer-item" href=<?php echo site_url('contact'); ?>>Contact</a>
+            <!-- Contact -->
+            <?php 
+              $data = array(
+                'class' => 'footer-item',
+                'href'  => $site_url('contact')
+              );
+              echo anchor($data, 'Contact');
+            ?>
           </li>
         </ul>
       </div>

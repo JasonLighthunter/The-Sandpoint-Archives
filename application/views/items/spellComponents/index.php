@@ -6,9 +6,12 @@
     <?php foreach ($items as $component) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url($component['class_uri'].'/'.$component['id']); ?>>
-            <?php echo $component['name']; ?>
-          </a>
+          <?php 
+            echo anchor(
+              $component['class_uri'].'/'.$component['id'],
+              $component['name']
+            );
+          ?>
         </td>
       </tr>
     <?php } ?>

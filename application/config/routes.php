@@ -57,6 +57,9 @@ $route['feats']                = 'feats/index';
 //Items Routes
 $route['items/(:any)/(:any)']  = 'items/detail/$2/$1';
 $route['items/(:any)']         = 'items/index/$1';
+//Login Routes
+$route['login/submit']         = 'login/submit';
+$route['login']                = 'login/view';
 //CodeIgniter Routes
 $route['(:any)']               = 'pages/view/$1';
 $route['default_controller']   = 'pages/view';

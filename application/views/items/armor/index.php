@@ -7,9 +7,9 @@
     <?php foreach ($items as $armor) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url($armor['class_uri'].'/'.$armor['id']); ?>>
-            <?php echo  $armor['name']; ?>
-          </a>
+          <?php 
+            echo anchor($armor['class_uri'].'/'.$armor['id'], $armor['name']);
+          ?>
         </td>
         <td>
           <?php echo $armor['armor_type']; ?>

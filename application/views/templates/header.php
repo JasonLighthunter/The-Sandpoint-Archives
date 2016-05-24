@@ -1,19 +1,31 @@
-<!DOCTYPE html>
+<?php 
+  $this->load->helper('html');
+
+  echo doctype('html5');
+?>
 <html lang="en">
   <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-    >
-    <link
-      rel="stylesheet"
-      href=<?php echo base_url('assets/style.css'); ?>
-    >
-    <link
-      rel="stylesheet"
-      href=<?php echo base_url('assets/octicons.css'); ?>
-    >
+    <?php 
+      $inputData = array(
+        'charset' => 'utf-8',
+        'name'    => 'viewport',
+        'content' => 'width=device-width, initial-scale=1'
+      );
+      echo meta($inputData);
+
+      $bootstrap = array(
+        'href' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+        'rel'  => 'stylesheet',
+        'type' => 'text/css'
+      );
+      $style     = array(
+        'href' => 'assets/style.css',
+        'rel'  => 'stylesheet',
+        'type' => 'text/css'
+      );
+      echo link_tag($bootstrap);
+      echo link_tag($style);
+    ?>
     <title><?php echo $title; ?></title>
   </head>
   <body>
