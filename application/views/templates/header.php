@@ -16,7 +16,7 @@
         'type' => 'text/css'
       );
       $style     = array(
-        'href' => 'assets/style.css',
+        'href' => 'assets/css/style.css',
         'rel'  => 'stylesheet',
         'type' => 'text/css'
       );
@@ -26,6 +26,7 @@
     ?>
   </head>
   <body>
+    <?php var_dump($this->session->loggedInUser); ?>
     <?php require_once 'navbar.inc.php'; ?>
     <div class="container-fluid">
       <div class="well">

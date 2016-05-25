@@ -15,6 +15,9 @@
       <ul class="nav navbar-nav">
         <?php require_once 'loadNavItems.inc.php'; ?>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <?php require_once 'loadLoginNavItem.inc.php' ?>
+      </ul>
     </div>
   </div>
 </nav>

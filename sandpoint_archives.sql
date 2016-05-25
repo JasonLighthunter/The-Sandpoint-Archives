@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2016 at 05:32 PM
+-- Generation Time: May 25, 2016 at 07:19 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -68,6 +68,27 @@ INSERT INTO `armor_types` (`id`, `name`) VALUES
 (3, 'Heavy Armor'),
 (4, 'Shields'),
 (5, 'Armor Extras');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ci_sessions`
+--
+
+CREATE TABLE `ci_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `data` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('6845e49c911a6c3719013493e679cb8f0433e054', '::1', 1464192956, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343139323935323b),
+('eb9cfb33bce1f87ddf8cf18439fb2de1a514da13', '::1', 1464192133, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343139313934383b);
 
 -- --------------------------------------------------------
 
@@ -160,7 +181,6 @@ CREATE TABLE `nav_items` (
 
 INSERT INTO `nav_items` (`id`, `name`, `uri`, `has_children`, `table_name_children`) VALUES
 (1, 'Home', 'home', 0, NULL),
-(2, 'About', 'about', 0, NULL),
 (3, 'Alignments', 'alignments', 0, NULL),
 (4, 'Feats', 'feats', 0, NULL),
 (5, 'Items', 'items', 1, 'item_classes');
@@ -183,7 +203,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
 (1, 'admin', 'admin'),
-(2, 'jasonlighthunter', 'user');
+(2, 'user', 'user');
 
 -- --------------------------------------------------------
 
@@ -222,6 +242,13 @@ ALTER TABLE `armor_types`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ci_sessions`
+--
+ALTER TABLE `ci_sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
 -- Indexes for table `feats`
 --
 ALTER TABLE `feats`
@@ -249,7 +276,8 @@ ALTER TABLE `nav_items`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `weapon_classes`
@@ -295,7 +323,7 @@ ALTER TABLE `nav_items`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `weapon_classes`
 --

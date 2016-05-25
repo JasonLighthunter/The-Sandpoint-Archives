@@ -1,6 +1,6 @@
       </div>
     </div>
-    <footer class="footer navbar-fixed-bottom footer-custom">
+    <footer class="footer footer-custom">
       <div class="container-fluid">
         <ul class="list-inline align-center">
           <li>
@@ -66,5 +66,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/ff9e874976.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src=<?php echo base_url('assets/js/validator.js') ?>></script>
   </body>
 </html>
