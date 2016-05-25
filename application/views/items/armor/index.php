@@ -8,7 +8,10 @@
       <tr>
         <td>
           <?php 
-            echo anchor($armor['class_uri'].'/'.$armor['id'], $armor['name']);
+            echo anchor(
+              $armor['class_uri'].'/'.$armor['id'],
+              $armor['name']
+            );
           ?>
         </td>
         <td>

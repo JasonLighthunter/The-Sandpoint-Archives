@@ -1,10 +1,7 @@
-<?php 
-  $this->load->helper('html');
-
-  echo doctype('html5');
-?>
+<?php echo doctype('html5'); ?>
 <html lang="en">
   <head>
+    <!-- head -->
     <?php 
       $inputData = array(
         'charset' => 'utf-8',
@@ -25,8 +22,8 @@
       );
       echo link_tag($bootstrap);
       echo link_tag($style);
+      echo '<title>'.$title.'</title>'; 
     ?>
-    <title><?php echo $title; ?></title>
   </head>
   <body>
     <?php require_once 'navbar.inc.php'; ?>

@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-sm-12">
-    <?php echo heading('Made by JasonLighthunter', 4); ?>
+    <h4>Made by JasonLighthunter</h4>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <?php echo heading('With some help of:', 4); ?>
+    <h4>With some help of:</h4>
   </div>
 </div>
 

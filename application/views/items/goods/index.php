@@ -7,7 +7,10 @@
       <tr>
         <td>
           <?php 
-            echo anchor($good['class_uri'].'/'.$good['id'], $good['name']);
+            echo anchor(
+              $good['class_uri'].'/'.$good['id'],
+              $good['name']
+            );
           ?>
         </td>
       </tr>

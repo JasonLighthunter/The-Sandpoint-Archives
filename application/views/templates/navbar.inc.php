@@ -5,7 +5,11 @@
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href= <?php echo site_url('home'); ?> >The Sandpoint Archives</a>
+      <?php 
+        $href = site_url('home');
+        $attributes = array('class' => 'navbar-brand');
+        echo anchor($href, 'The Sandpoint Archives', $attributes);
+      ?>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">

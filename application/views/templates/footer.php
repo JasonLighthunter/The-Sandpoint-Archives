@@ -8,7 +8,7 @@
               <!-- CC image -->
               <?php 
                 $imgData = array(
-                  'alt' => 'Creative Commons License',
+                  'alt'   => 'Creative Commons License',
                   'class' => 'cc-img',
                   'src'   => 'https://i.creativecommons.org/l/by-sa/4.0/88x31.png'
                 );
@@ -18,53 +18,45 @@
           </li>
           <li>
             <!-- Github Follow -->
-            <?php 
-              $data = array(
-                'aria-label'            => 'Follow @jasonlighthunter on GitHub',
-                'data-count-aria-label' => '# followers on GitHub',
-                'data-count-api'        => '/users/jasonlighthunter#followers',
-                'data-count-href'       => '/jasonlighthunter/followers',
-                'class'                 => 'github-button footer-item',
-                'data-style'            => 'mega',
-                'href'                  => 'https://github.com/jasonlighthunter'
-              );
-              echo anchor($data, 'Follow @jasonlighthunter');
-            ?>
+            <a 
+              aria-label="Follow @JasonLighthunter on GitHub"
+              data-count-aria-label="# followers on GitHub"
+              data-count-api="/users/JasonLighthunter#followers"
+              data-count-href="/JasonLighthunter/followers"
+              data-style="mega"
+              href="https://github.com/JasonLighthunter"
+              class="github-button footer-item">
+                Follow @JasonLighthunter
+            </a>
           </li>
           <li>
             <!-- Github Star -->
-            <?php 
-              $data = array(
-                'aria-label'            => 'Star jasonlighthunter/The-Sandpoint-Archives on GitHub',
-                'data-count-aria-label' => '# stargazers on GitHub',
-                'data-count-api'        => '/repos/jasonlighthunter/The-Sandpoint-Archives#stargazers_count',
-                'data-count-href'       => '/jasonlighthunter/The-Sandpoint-Archives/stargazers',
-                'data-style'            => 'mega',
-                'data-icon'             =>'octicon-star',
-                'class'                 =>'github-button footer-item',
-                'href'                  =>'https://github.com/jasonlighthunter/The-Sandpoint-Archives'
-              );
-              echo anchor($data, 'Star');
-            ?>
+            <a 
+              aria-label="Star JasonLighthunter/The-Sandpoint-Archives on GitHub"
+              data-count-aria-label="# stargazers on GitHub"
+              data-count-api="/repos/JasonLighthunter/The-Sandpoint-Archives#stargazers_count"
+              data-count-href="/JasonLighthunter/The-Sandpoint-Archives/stargazers"
+              data-style="mega"
+              data-icon="octicon-star"
+              href="https://github.com/JasonLighthunter/The-Sandpoint-Archives"
+              class="github-button footer-item">
+                Star
+            </a>
           </li>
           <li>
             <!-- About -->
             <?php 
-              $data = array(
-                'class' => 'footer-item',
-                'href'  => $site_url('about')
-              );
-              echo anchor($data, 'About');
+              $href       = site_url('about');
+              $attributes = array('class' => 'footer-item');
+              echo anchor($href, 'About', $attributes);
             ?>
           </li>
           <li>
             <!-- Contact -->
             <?php 
-              $data = array(
-                'class' => 'footer-item',
-                'href'  => $site_url('contact')
-              );
-              echo anchor($data, 'Contact');
+              $href       = site_url('contact');
+              $attributes = array('class' => 'footer-item');
+              echo anchor($href, 'Contact', $attributes);
             ?>
           </li>
         </ul>
