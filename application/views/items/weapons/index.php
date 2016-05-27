@@ -1,4 +1,3 @@
-<?php require APPPATH.'views/templates/pageTitle.inc.php'; ?>
 <div class="table-responsive">
   <table class="table">
     <tr>
@@ -8,12 +7,15 @@
     <?php foreach ($items as $weapon) { ?>
       <tr>
         <td>
-          <a href=<?php echo site_url($weapon['class_uri'].'/'.$weapon['id']); ?>> 
-            <?php echo  $weapon['name']; ?>
-          </a>
+          <?php 
+            echo anchor(
+              $weapon['class_uri'].'/'.$weapon['id'],
+              $weapon['name']
+            );
+          ?>
         </td>
         <td>
-          <?php echo $weapon['weapon_class']; ?> 
+          <?php echo $weapon['weapon_class']; ?>
         </td>
       </tr>
     <?php } ?>

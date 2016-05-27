@@ -1,9 +1,9 @@
 <?php
   foreach ($navItems as $item) {
     if(empty($item['has_children'])) {
-      echo "<li>";
-      echo '<a href='.site_url($item['uri']).'>'.$item['name'].'</a>';
-    } else {
+      echo '<li>';
+      echo anchor(site_url($item['uri']), $item['name']);
+    } else { 
       echo '<li class="dropdown">';
 ?>      
       <a class="dropdown-toggle" data-toggle="dropdown" role="button">
@@ -11,11 +11,11 @@
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-      <?php
-        foreach ($item['children'] as $child) {
-          echo '<li><a href='.site_url($child['uri']).'>'.$child['name'].'</a></li>';
-        }
-      ?>
+        <?php
+          foreach ($item['children'] as $child) {
+            echo '<li>'.anchor(site_url($child['uri']), $child['name']).'</li>';
+          }
+        ?>
       </ul>
 <?php
     }

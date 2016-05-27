@@ -1,16 +1,13 @@
-<?php require APPPATH.'views/templates/pageTitle.inc.php'; ?>
 <div class="row">
-<?php
-  foreach ($alignments as $alignment) {
-?>
-    <div class="col-sm-4">   
-      <h3>
+  <?php foreach ($alignments as $alignment) { ?>
+    <div class="col-sm-4">
       <?php
-        echo '<a href='.site_url('/alignments/'.$alignment['id']).'>'.$alignment['name'].'</a>'
+        $anchor = anchor(
+          'alignment/'.$alignment['id'],
+          $alignment['name']
+        );
+        echo heading($anchor, 3);
       ?>
-      </h3>
     </div>
-<?php
-  }
-?>
+  <?php } ?>
 </div>
