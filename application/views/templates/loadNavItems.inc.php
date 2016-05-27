@@ -2,8 +2,7 @@
   foreach ($navItems as $item) {
     if(empty($item['has_children'])) {
       echo '<li>';
-      $href = site_url($item['uri']);
-      echo anchor($href, $item['name']);
+      echo anchor(site_url($item['uri']), $item['name']);
     } else { 
       echo '<li class="dropdown">';
 ?>      
@@ -14,8 +13,7 @@
       <ul class="dropdown-menu">
         <?php
           foreach ($item['children'] as $child) {
-            $href = site_url($child['uri']);
-            echo '<li>'.anchor($href, $child['name']).'</li>';
+            echo '<li>'.anchor(site_url($child['uri']), $child['name']).'</li>';
           }
         ?>
       </ul>

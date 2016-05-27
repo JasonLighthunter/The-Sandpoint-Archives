@@ -3,19 +3,19 @@
   <head>
     <!-- head -->
     <?php 
-      $inputData = array(
+      $inputData = array (
         'charset' => 'utf-8',
         'name'    => 'viewport',
         'content' => 'width=device-width, initial-scale=1'
       );
       echo meta($inputData);
 
-      $bootstrap = array(
+      $bootstrap = array (
         'href' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
         'rel'  => 'stylesheet',
         'type' => 'text/css'
       );
-      $style     = array(
+      $style     = array (
         'href' => 'assets/css/style.css',
         'rel'  => 'stylesheet',
         'type' => 'text/css'
@@ -30,4 +30,4 @@
     <?php require_once 'navbar.inc.php'; ?>
     <div class="container-fluid">
       <div class="well">
-        <?php require APPPATH.'views/templates/pageTitle.inc.php'; ?>
+        <?php require_once 'pageTitle.inc.php'; ?>

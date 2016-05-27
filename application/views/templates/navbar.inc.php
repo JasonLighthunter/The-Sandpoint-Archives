@@ -6,9 +6,12 @@
         <span class="icon-bar"></span>
       </button>
       <?php 
-        $href = site_url('home');
         $attributes = array('class' => 'navbar-brand');
-        echo anchor($href, 'The Sandpoint Archives', $attributes);
+        echo anchor(
+          site_url('home'),
+          'The Sandpoint Archives',
+          $attributes
+        );
       ?>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

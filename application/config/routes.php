@@ -60,6 +60,7 @@ $route['items/(:any)']         = 'items/index/$1';
 //Login Routes
 $route['login/submit']         = 'login/submit';
 $route['login']                = 'login/login';
+$route['logout']               = 'login/logout';
 //CodeIgniter Routes
 $route['(:any)']               = 'pages/view/$1';
 $route['default_controller']   = 'pages/view';

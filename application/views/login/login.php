@@ -11,8 +11,8 @@
   //username
   $label       = 'Username';
   $hasIcon     = TRUE;
-  $iconData    = array('fa','fa-user','fa-fw');
-  $inputData   = array(
+  $iconData    = array ('fa','fa-user','fa-fw');
+  $inputData   = array (
     'type'        => 'text',
     'name'        => 'username',
     'id'          => 'username',
@@ -27,8 +27,8 @@
   //password
   $label       = 'Password';
   $hasIcon     = TRUE;
-  $iconData    = array('fa', 'fa-unlock', 'fa-fw');
-  $inputData   = array(
+  $iconData    = array ('fa', 'fa-unlock', 'fa-fw');
+  $inputData   = array (
     'type'        => 'password',
     'name'        => 'password',
     'id'          => 'password',

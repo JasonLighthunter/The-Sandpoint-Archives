@@ -1,13 +1,11 @@
 <li>
   <?php 
-    if (isset($this->session->loggedInUser)) {
-      $href = site_url('account');
-      echo anchor($href, $this->session->loggedInUser->username);
-      $href = site_url('logout');
-      echo anchor($href, 'Log out');
+    if ($this->session->has_userdata('loggedInUser')) {
+      echo anchor(site_url('#'), $this->session->loggedInUser['username']);
+      echo '</li><li>';
+      echo anchor(site_url('logout'), 'Log out');
     } else {
-      $href = site_url('login');
-      echo anchor($href, 'Log in');
+      echo anchor(site_url('login'), 'Log in');
     }
   ?>
 </li>

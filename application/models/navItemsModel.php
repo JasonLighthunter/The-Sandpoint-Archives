@@ -10,9 +10,8 @@
         $result = $query->result_array();
         foreach ($result as $key => $navItem) {
           if($navItem['has_children'] === '1') {
-            $id                        = ($key);
-            $query                     = $this->db->get($navItem['table_name_children']);
-            $result[($id)]['children'] = $query->result_array();
+            $query                      = $this->db->get($navItem['table_name_children']);
+            $result[($key)]['children'] = $query->result_array();
           }
         }
         return $result;

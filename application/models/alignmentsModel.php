@@ -2,16 +2,17 @@
   class AlignmentsModel extends CI_Model {
     public function __construct() {
       $this->load->database();
+      $tableName = 'alignments';
     }
 
     public function get($id = FALSE) {
       if($id === FALSE){
-        $query = $this->db->get('alignments');
+        $query = $this->db->get($tableName);
         return $query->result_array();
       }
 
       $whereCondition = array('id' => $id);
-      $query = $this->db->get_where('alignments', $whereCondition);
+      $query = $this->db->get_where($tableName, $whereCondition);
       return $query->row_array();
     }
   }

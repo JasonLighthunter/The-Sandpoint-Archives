@@ -10,7 +10,6 @@
               echo $i.' ';
             }
             echo '"></i>';
-
           echo '</span>';
           echo form_input($inputData);
         echo '</div>';

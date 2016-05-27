@@ -17,18 +17,23 @@
       $this->view('login');
     }
 
+    public function logout() {
+      if ($this->session->has_userdata('loggedInUser')) {
+        $this->session->unset_userdata('loggedInUser');
+        redirect('home');
+      }
+    }
+
     public function submit() {
       $this->setValidationRules();
       if ($this->form_validation->run() === FALSE) {
-        $data['errorType']    = 'danger';
+        $data['errorType'] = 'danger';
         $this->view('login', $data);
       } else {
-        $this->session->loggedInUser = array(
-          'username'
-          //GA HIER VERDERkl
-          kljsdf;;
+        $this->session->loggedInUser = array (
+          'username' => $this->input->post('username')
         );
-        redirect('dashboard');
+        redirect('account');
       }
     }
 

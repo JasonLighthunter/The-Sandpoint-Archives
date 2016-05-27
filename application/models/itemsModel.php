@@ -2,6 +2,7 @@
   class ItemsModel extends CI_Model {
     public function __construct() {
       $this->load->database();
+      $tableName = 'items';
     }
 
     public function get($id = FALSE, $itemType = FALSE) {
@@ -21,7 +22,7 @@
 
     private function prepareQuery($itemType, $id = FALSE) {
       $this->getSelectStatements($itemType);
-      $this->db->from('items');
+      $this->db->from($tableName);
       $this->getJoinStatements($itemType);
       $this->getWhereStatements($itemType, $id);
       $this->getOrderStatements($itemType);
