@@ -6,7 +6,10 @@
     'data-toggle' => 'validator',
     'role'        => 'form'
   );
-  echo form_open('login/submit', $attributes);
+  echo form_open('login/submit/'.$formTarget, $attributes);
+
+  echo '<div class="row">';
+    echo '<div class="col-sm-3">';
 
   //username
   $label       = 'Username';
@@ -24,6 +27,12 @@
   $hasErrorDiv = TRUE;
   generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv);
 
+    echo '</div>';
+  echo '</div>';
+
+  echo '<div class="row">';
+    echo '<div class="col-sm-3">';
+
   //password
   $label       = 'Password';
   $hasIcon     = TRUE;
@@ -39,6 +48,9 @@
   );
   $hasErrorDiv = TRUE;
   generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv);
+
+    echo '</div>';
+  echo '</div>';
 
   //submit button
   $inputData = array(

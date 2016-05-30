@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.4.14
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: May 30, 2016 at 12:04 PM
--- Server version: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Host: localhost
+-- Generation Time: May 30, 2016 at 02:48 PM
+-- Server version: 5.6.26
+-- PHP Version: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,11 +26,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `alignments`
 --
 
-CREATE TABLE `alignments` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `alignments` (
+  `id` int(11) unsigned NOT NULL,
   `name` varchar(100) NOT NULL,
   `abbreviation` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `alignments`
@@ -53,10 +53,10 @@ INSERT INTO `alignments` (`id`, `name`, `abbreviation`) VALUES
 -- Table structure for table `armor_types`
 --
 
-CREATE TABLE `armor_types` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `armor_types` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `armor_types`
@@ -75,10 +75,10 @@ INSERT INTO `armor_types` (`id`, `name`) VALUES
 -- Table structure for table `ci_sessions`
 --
 
-CREATE TABLE `ci_sessions` (
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `id` varchar(40) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
-  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -87,18 +87,7 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('0f67ea733ba2115a8055f55ae7406f78403f7544', '::1', 1464333917, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343333333735333b),
-('159e1eb42680ca35d7383d56885c04971397e5d6', '::1', 1464362650, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343336323633373b6c6f67676564496e557365727c613a313a7b733a383a22757365726e616d65223b733a353a2261646d696e223b7d),
-('28b1ce4e94d60cada88f2c06148a4b91452a336c', '::1', 1464362059, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343336313936343b6c6f67676564496e557365727c613a313a7b733a383a22757365726e616d65223b733a353a2261646d696e223b7d),
-('469baa1ce746e01d4629b0262a6d990e252fe2cd', '::1', 1464334581, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343333343336323b6c6f67676564496e557365727c613a313a7b733a383a22757365726e616d65223b733a353a2261646d696e223b7d),
-('53f1882ec3ef81928c683f3891a43d19a0343937', '::1', 1464333724, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343333333635363b6c6f67676564496e557365727c613a313a7b733a383a22757365726e616d65223b4e3b7d),
-('6845e49c911a6c3719013493e679cb8f0433e054', '::1', 1464192956, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343139323935323b),
-('88c483ec3d39be017e01db412c911c947d6aeee1', '::1', 1464343289, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343334333238393b),
-('98389351f8ef2c009c9f3bbf269683f67dd0267b', '::1', 1464336092, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343333363039323b),
-('aa571f75721dd4fc0bff78f5eac704ef9d2c2b67', '::1', 1464334331, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343333343035383b6c6f67676564496e557365727c613a313a7b733a383a22757365726e616d65223b733a353a2261646d696e223b7d),
-('b4cc922a636a7b8f2419e8f890fd6044bd419e39', '::1', 1464334952, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343333343636343b),
-('eb9cfb33bce1f87ddf8cf18439fb2de1a514da13', '::1', 1464192133, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343139313934383b),
-('f6eb1eb4a614dc19a976184d72fed179fdc588ae', '::1', 1464333612, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343333333331383b6c6f67676564496e557365727c613a313a7b733a383a22757365726e616d65223b4e3b7d);
+('82ba2d1ed01f8fc2ec19d43cca1d2096b9f89476', '::1', 1464612473, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343631323238303b);
 
 -- --------------------------------------------------------
 
@@ -106,12 +95,12 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 -- Table structure for table `feats`
 --
 
-CREATE TABLE `feats` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `feats` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `benefit` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `feats`
@@ -128,14 +117,14 @@ INSERT INTO `feats` (`id`, `name`, `description`, `benefit`) VALUES
 -- Table structure for table `items`
 --
 
-CREATE TABLE `items` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `items` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `item_class` int(11) NOT NULL,
   `weapon_class` int(11) DEFAULT NULL,
-  `armor_type` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `armor_type` int(10) unsigned DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
@@ -155,11 +144,11 @@ INSERT INTO `items` (`id`, `name`, `description`, `item_class`, `weapon_class`, 
 -- Table structure for table `item_classes`
 --
 
-CREATE TABLE `item_classes` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `item_classes` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
   `uri` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `item_classes`
@@ -177,13 +166,13 @@ INSERT INTO `item_classes` (`id`, `name`, `uri`) VALUES
 -- Table structure for table `nav_items`
 --
 
-CREATE TABLE `nav_items` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `nav_items` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
   `uri` varchar(100) NOT NULL,
   `has_children` tinyint(1) NOT NULL DEFAULT '0',
   `table_name_children` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `nav_items`
@@ -201,18 +190,20 @@ INSERT INTO `nav_items` (`id`, `name`, `uri`, `has_children`, `table_name_childr
 -- Table structure for table `roles`
 --
 
-CREATE TABLE `roles` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `value` int(50) unsigned NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`) VALUES
-(1, 'admin'),
-(2, 'user');
+INSERT INTO `roles` (`id`, `name`, `value`) VALUES
+(1, 'admin', 4),
+(2, 'user', 1),
+(3, 'moderator', 2);
 
 -- --------------------------------------------------------
 
@@ -220,19 +211,20 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) unsigned NOT NULL,
   `username` varchar(25) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(255) NOT NULL,
+  `role_value` int(3) unsigned NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'admin', 'admin'),
-(2, 'user', 'user');
+INSERT INTO `users` (`id`, `username`, `password`, `role_value`) VALUES
+(1, 'admin', 'admin', 7),
+(2, 'user', 'user', 1);
 
 -- --------------------------------------------------------
 
@@ -240,10 +232,10 @@ INSERT INTO `users` (`id`, `username`, `password`) VALUES
 -- Table structure for table `weapon_classes`
 --
 
-CREATE TABLE `weapon_classes` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `weapon_classes` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `weapon_classes`
@@ -305,7 +297,8 @@ ALTER TABLE `nav_items`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `value` (`value`);
 
 --
 -- Indexes for table `users`
@@ -328,47 +321,47 @@ ALTER TABLE `weapon_classes`
 -- AUTO_INCREMENT for table `alignments`
 --
 ALTER TABLE `alignments`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `armor_types`
 --
 ALTER TABLE `armor_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `feats`
 --
 ALTER TABLE `feats`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `item_classes`
 --
 ALTER TABLE `item_classes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `nav_items`
 --
 ALTER TABLE `nav_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `weapon_classes`
 --
 ALTER TABLE `weapon_classes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -3,7 +3,7 @@
     <div class="col-sm-4">
       <?php
         $anchor = anchor(
-          'alignment/'.$alignment['id'],
+          'alignments/'.$alignment['id'],
           $alignment['name']
         );
         echo heading($anchor, 3);
