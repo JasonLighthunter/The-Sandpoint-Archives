@@ -55,7 +55,7 @@
         case 'armor':
         case 'spellComponents':
         case 'goods':
-          $this->load->view('items/'.$itemType.$pageType, $data);
+          $this->load->view('items/'.$itemType.'/'.$pageType, $data);
           break;
         default:
           show_404();

@@ -18,7 +18,7 @@
   <div class="col-sm-2">
     <b>Description:</b>
   </div>
-  <div class="col-sm-10">
+  <div class="col-sm-6">
     <?php echo $item['description']; ?>
   </div>
 </div>

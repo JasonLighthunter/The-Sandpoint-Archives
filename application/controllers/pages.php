@@ -9,7 +9,14 @@
       if(!file_exists(APPPATH.'views/pages/'.$page.'.php')) {
         show_404();
       }
-      $data['title']    = ucfirst($page);
+      switch ($page) {
+        case 'loggedIn':
+          $data['title'] = "Already Logged In";
+          break;
+        default:
+          $data['title'] = ucfirst($page);
+          break;
+      }
       $data['navItems'] = $this->navItemsModel->get();
 
       $this->load->view('templates/header', $data);

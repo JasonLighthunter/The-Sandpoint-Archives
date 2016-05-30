@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- head -->
-    <?php 
+    <?php
       $inputData = array (
         'charset' => 'utf-8',
         'name'    => 'viewport',
@@ -22,7 +22,7 @@
       );
       echo link_tag($bootstrap);
       echo link_tag($style);
-      echo '<title>'.$title.'</title>'; 
+      echo '<title>'.$title.'</title>';
     ?>
   </head>
   <body>

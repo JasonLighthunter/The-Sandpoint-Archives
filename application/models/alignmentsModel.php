@@ -1,4 +1,4 @@
-<?php 
+<?php
   class AlignmentsModel extends CI_Model {
     private $tableName = 'alignments';
 
