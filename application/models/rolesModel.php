@@ -6,15 +6,17 @@
       $this->load->database();
     }
 
-    public function get($id = FALSE) {
+    public function get($id = FALSE, $order = FALSE) {
       if($id === FALSE) {
-        $this->db->order_by('value DESC');
+        if($order !== FALSE) {
+          $this->db->order_by('value '.$order);
+        }
         $query = $this->db->get($this->tableName);
         return $query->result_array();
       }
 
       $whereCondition = array('id' => $id);
-      $query          = $this->db->get_where($tableName, $whereCondition);
+      $query          = $this->db->get_where($this->tableName, $whereCondition);
       return $query->row_array();
     }
 

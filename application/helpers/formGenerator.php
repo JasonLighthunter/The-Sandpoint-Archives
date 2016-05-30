@@ -1,5 +1,5 @@
-<?php 
-  function generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv) {
+<?php
+  function generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $helpBlockText = '') {
     echo '<div class="form-group">';
       echo form_label($label, $inputData['id']);
       if ($hasIcon) {
@@ -17,7 +17,7 @@
         echo form_input($inputData);
       }
       if ($hasErrorDiv) {
-        echo '<div class="help-block with-errors"></div>';
+        echo '<div class="help-block with-errors">'.$helpBlockText.'</div>';
       }
     echo '</div>';
   }

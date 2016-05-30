@@ -3,12 +3,8 @@
     public function __construct() {
       parent::__construct();
       $this->load->model('navItemsModel');
-      $this->load->model('userModel');
+      $this->load->model('accountsModel');
       $this->load->model('rolesModel');
-
-      if (isset($data['errorType'])) {
-        unset($data['errorType']);
-      }
     }
 
     public function login($role = 'user') {
@@ -23,6 +19,7 @@
 
     public function logout() {
       if ($this->session->has_userdata('loggedInUser')) {
+
         $this->session->unset_userdata('loggedInUser');
 
         redirect('home');
@@ -33,20 +30,20 @@
       if(empty($this->rolesModel->getByName($role))) {
         show_404();
       }
+
       $this->setValidationRules($role);
       if ($this->form_validation->run() === FALSE) {
-        $data['errorType'] = 'danger';
-
         $this->view('login', $data, $role);
       } else {
         $username = $this->input->post('username');
         $this->session->loggedInUser = array (
+          'user_id'    => $this->accountsModel->getByUsername($username)['id'],
           'username'   => $username,
-          'role_value' => $this->userModel->getByUsername($username)['role_value']
+          'role_value' => $this->accountsModel->getByUsername($username)['role_value']
         );
 
         if($role === 'user') {
-          redirect('account');
+          redirect('account/'.$this->session->loggedInUser['id']);
         }
         redirect('dashboard');
       }
@@ -101,7 +98,7 @@
 
     //Validation Methods
     public function usernameExists($username) {
-      $result = $this->userModel->getByUsername($username);
+      $result = $this->accountsModel->getByUsername($username);
       if(!empty($result)){
         return TRUE;
       }
@@ -113,10 +110,16 @@
     }
 
     public function userHasRole($username, $role) {
-      $user = $this->userModel->getByUsername($username);
+      $user = $this->accountsModel->getByUsername($username);
       $role = $this->rolesModel->getByName($role);
 
-      if(empty($role) || $user['role_value'] < $role['value']) {
+      if(empty($role)) {
+        show_error(
+          'The table "roles" seems to be empty. Please contact the owner of the website.',
+          500
+        );
+      }
+      if($user['role_value'] < $role['value']) {
         $this->form_validation->set_message(
           'userHasRole',
           'You do not have the permissions to log in here.'
@@ -127,7 +130,7 @@
     }
 
     public function passwordsMatch($password) {
-      $result = $this->userModel->getByUsername($this->input->post('username'));
+      $result = $this->accountsModel->getByUsername($this->input->post('username'));
 
       if(!empty($result) && $result['password'] === $password) {
         return TRUE;

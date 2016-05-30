@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 30, 2016 at 02:48 PM
+-- Generation Time: May 30, 2016 at 06:11 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -19,6 +19,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `sandpoint_archives`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts` (
+  `id` int(10) unsigned NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role_value` int(3) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `username`, `password`, `role_value`) VALUES
+(1, 'admin', 'admin', 7),
+(2, 'user', 'user', 1),
+(3, 'test', 'testtest', 1);
 
 -- --------------------------------------------------------
 
@@ -81,13 +103,6 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ci_sessions`
---
-
-INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('82ba2d1ed01f8fc2ec19d43cca1d2096b9f89476', '::1', 1464612473, 0x5f5f63695f6c6173745f726567656e65726174657c693a313436343631323238303b);
 
 -- --------------------------------------------------------
 
@@ -208,27 +223,6 @@ INSERT INTO `roles` (`id`, `name`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) unsigned NOT NULL,
-  `username` varchar(25) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role_value` int(3) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `role_value`) VALUES
-(1, 'admin', 'admin', 7),
-(2, 'user', 'user', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `weapon_classes`
 --
 
@@ -249,6 +243,13 @@ INSERT INTO `weapon_classes` (`id`, `name`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `alignments`
@@ -301,13 +302,6 @@ ALTER TABLE `roles`
   ADD UNIQUE KEY `value` (`value`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
 -- Indexes for table `weapon_classes`
 --
 ALTER TABLE `weapon_classes`
@@ -317,6 +311,11 @@ ALTER TABLE `weapon_classes`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `alignments`
 --
@@ -352,11 +351,6 @@ ALTER TABLE `nav_items`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `weapon_classes`
 --

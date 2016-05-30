@@ -1,10 +1,9 @@
 <?php
-  class UserModel extends CI_Model {
-    private $tableName = 'users';
+  class AccountsModel extends CI_Model {
+    private $tableName = 'accounts';
 
     public function __construct() {
       $this->load->database();
-
     }
 
     public function get($id = FALSE) {
@@ -14,7 +13,7 @@
       }
 
       $whereCondition = array('id' => $id);
-      $query          = $this->db->get_where($tableName, $whereCondition);
+      $query          = $this->db->get_where($this->tableName, $whereCondition);
       return $query->row_array();
     }
 
@@ -25,6 +24,15 @@
         return $query->row_array();
       }
       return FALSE;
+    }
+
+    public function create() {
+      $data = array(
+        'username'   => $this->input->post('username'),
+        'password'   => $this->input->post('password')
+      );
+
+      return $this->db->insert($this->tableName, $data);
     }
   }
 ?>
