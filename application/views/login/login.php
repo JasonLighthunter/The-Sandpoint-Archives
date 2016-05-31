@@ -9,7 +9,7 @@
   echo form_open('login/submit/'.$formTarget, $attributes);
 
   echo '<div class="row">';
-    echo '<div class="col-sm-3">';
+    echo '<div class="col-md-4">';
 
   //username
   $label       = 'Username';
@@ -24,19 +24,20 @@
     'value'       => set_value('username'),
     'required'    => ''
   );
+  $isRequired  = TRUE;
   $hasErrorDiv = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv);
+  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';
 
   echo '<div class="row">';
-    echo '<div class="col-sm-3">';
+    echo '<div class="col-md-4">';
 
   //password
   $label       = 'Password';
   $hasIcon     = TRUE;
-  $iconData    = array ('fa', 'fa-unlock', 'fa-fw');
+  $iconData    = array ('fa', 'fa-unlock-alt', 'fa-fw');
   $inputData   = array (
     'type'        => 'password',
     'name'        => 'password',
@@ -47,7 +48,8 @@
     'required'    => ''
   );
   $hasErrorDiv = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv);
+  $isRequired  = TRUE;
+  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';

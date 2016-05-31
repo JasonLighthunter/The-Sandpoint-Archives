@@ -13,6 +13,9 @@
         case 'loggedIn':
           $data['title'] = "Already Logged In";
           break;
+        case 'noPermissions':
+          $data['title'] = "Access Forbidden";
+          break;
         default:
           $data['title'] = ucfirst($page);
           break;
