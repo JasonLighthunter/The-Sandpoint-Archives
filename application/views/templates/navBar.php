@@ -18,10 +18,10 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <?php require_once 'loadNavItems.inc.php'; ?>
+        <?php require_once 'loadNavLeft.php'; ?>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <?php require_once 'loadLoginNavItem.inc.php' ?>
+        <?php require_once 'loadNavRight.php' ?>
       </ul>
     </div>
   </div>

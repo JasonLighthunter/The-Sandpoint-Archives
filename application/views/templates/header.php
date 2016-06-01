@@ -27,7 +27,7 @@
   </head>
   <body>
     <?php var_dump($this->session->loggedInUser); ?>
-    <?php require_once 'navbar.inc.php'; ?>
+    <?php require_once 'navBar.php'; ?>
     <div class="container-fluid">
       <div class="well">
-        <?php require_once 'pageTitle.inc.php'; ?>
+        <?php require_once 'pageTitle.php'; ?>

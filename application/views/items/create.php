@@ -25,8 +25,9 @@
     'value'       => set_value('username'),
     'required'    => ''
   );
+  $isRequired  = TRUE;
   $hasErrorDiv = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv);
+  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';
