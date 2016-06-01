@@ -21,6 +21,8 @@
       if ($this->session->has_userdata('loggedInUser')) {
 
         $this->session->unset_userdata('loggedInUser');
+        $this->session->unset_userdata('inAdminMode');
+
         redirect('home');
       }
     }
@@ -35,12 +37,21 @@
         $this->view('login', FALSE, $role);
       } else {
         $username = $this->input->post('username');
-        $this->session->loggedInUser = array (
-          'user_id'    => $this->accountsModel->getByUsername($username)['id'],
-          'username'   => $username,
-          'role_value' => $this->accountsModel->getByUsername($username)['role_value']
-        );
-        
+
+        if($role === 'user') {
+          $this->session->loggedInUser = array (
+            'user_id'    => $this->accountsModel->getByUsername($username)['id'],
+            'username'   => $username,
+            'role_value' => 1
+          );
+        } else {
+          $this->session->loggedInUser = array (
+            'user_id'    => $this->accountsModel->getByUsername($username)['id'],
+            'username'   => $username,
+            'role_value' => $this->accountsModel->getByUsername($username)['role_value']
+          );
+          $this->session->inAdminMode = TRUE;
+        }
         redirect('account/'.$this->session->loggedInUser['id']);
       }
     }

@@ -25,7 +25,6 @@
  * THE SOFTWARE.
  * ======================================================================== */
 
-
 +function ($) {
   'use strict';
   // VALIDATOR CLASS DEFINITION

@@ -26,15 +26,5 @@
       $this->load->view('pages/'.$page, $data);
       $this->load->view('templates/footer', $data);
     }
-
-    public function viewDashboard(){
-      if(!$this->session->has_userdata('loggedInUser')) {
-        redirect('login/admin');
-      }
-      if(!$this->session->loggedInUser['role_value'] > 1) {
-        redirect('noPermissions');
-      }
-      $this->view('dashboard');
-    }
   }
 ?>

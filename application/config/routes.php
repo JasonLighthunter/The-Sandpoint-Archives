@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 //Categories Routes
+$route['categories/create']    = 'categories/create';
 $route['categories/(:any)']    = 'categories/detail/$1';
 $route['categories']           = 'categories/index';
 
@@ -70,8 +71,6 @@ $route['login/submit/(:any)']  = 'login/submit/$1';
 $route['login']                = 'login/login';
 $route['login/(:any)']         = 'login/login/$1';
 $route['logout']               = 'login/logout';
-//Misc Routes
-$route['dashboard']            = 'pages/viewDashboard';
 //CodeIgniter Routes
 $route['(:any)']               = 'pages/view/$1';
 $route['default_controller']   = 'pages/view';

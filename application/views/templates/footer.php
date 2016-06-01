@@ -6,7 +6,7 @@
           <li>
             <a class="footer-item" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
               <!-- CC image -->
-              <?php 
+              <?php
                 $imgData = array(
                   'alt'   => 'Creative Commons License',
                   'class' => 'cc-img',
@@ -18,7 +18,7 @@
           </li>
           <li>
             <!-- Github Follow -->
-            <a 
+            <a
               aria-label="Follow @JasonLighthunter on GitHub"
               data-count-aria-label="# followers on GitHub"
               data-count-api="/users/JasonLighthunter#followers"
@@ -31,7 +31,7 @@
           </li>
           <li>
             <!-- Github Star -->
-            <a 
+            <a
               aria-label="Star JasonLighthunter/The-Sandpoint-Archives on GitHub"
               data-count-aria-label="# stargazers on GitHub"
               data-count-api="/repos/JasonLighthunter/The-Sandpoint-Archives#stargazers_count"
@@ -45,7 +45,7 @@
           </li>
           <li>
             <!-- About -->
-            <?php 
+            <?php
               $href       = site_url('about');
               $attributes = array('class' => 'footer-item');
               echo anchor($href, 'About', $attributes);
@@ -53,7 +53,7 @@
           </li>
           <li>
             <!-- Contact -->
-            <?php 
+            <?php
               $href       = site_url('contact');
               $attributes = array('class' => 'footer-item');
               echo anchor($href, 'Contact', $attributes);
@@ -61,16 +61,17 @@
           </li>
           <!-- webs2 delete later -->
           <li>
-            <?php 
+            <?php
               $href       = site_url('login/admin');
               $attributes = array('class' => 'footer-item');
               echo anchor($href, 'Webs2 dashboard', $attributes);
             ?>
           </li>
+          <!-- webs2 ends -->
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/ff9e874976.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>

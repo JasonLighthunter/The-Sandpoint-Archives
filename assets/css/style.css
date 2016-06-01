@@ -1,14 +1,22 @@
+/* for all a tags with the class admin-mode in the list of navbar items
+   oddly specific but otherwise it wont overrule bootstrap
+*/
+.navbar-default .navbar-nav>li>a.admin-mode {
+  color:             red;
+  pointer-events:    none;
+}
+
 .footer-custom {
   padding-top:       10px;
   padding-bottom:    10px;
 	background-color:  #f8f8f8;
 }
 
-.list-no-style {
-  list-style-type:   none;
+.footer-item {
+  display:           flex;
+  vertical-align:    middle;
 }
 
-.footer-item {
-  display:           flex;   
-  vertical-align:    middle;
+.list-no-style {
+  list-style-type:   none;
 }

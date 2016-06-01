@@ -26,6 +26,26 @@
       }
     }
 
+    public function create() {
+      if (!$this->session->inAdminMode) {
+        redirect('noPermission');
+      }
+      $data['title'] = 'Create a new category';
+
+      $this->setValidationRules();
+
+      if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
+        $this->view($data, 'create');
+      } else {
+        $this->categoriesModel->create();
+
+        $data['messageType'] = 'success';
+        $data['message']     = 'You can now log in using your username and password';
+
+        $this->view($data, 'create');
+      }
+    }
+
     //type is the name of the file that has to be called.
     private function view($data, $type) {
       $data['navItems'] = $this->navItemsModel->get();
@@ -33,6 +53,17 @@
       $this->load->view('templates/header', $data);
       $this->load->view('categories/'.$type, $data);
       $this->load->view('templates/footer');
+    }
+
+    private function setValidationRules($role = 'user') {
+      $this->form_validation->set_rules(
+        'name',
+        'Name',
+        array(
+          'required',
+          'callback_categoryNameExists',
+        )
+      );
     }
   }
 ?>

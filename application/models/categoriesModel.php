@@ -12,12 +12,18 @@
         $query = $this->db->get($this->mainTable);
         return $query->result_array();
       }
-
-      $query          = $this->db->get_where(
+      $query = $this->db->get_where(
         $this->mainTable,
         array('id' => $id)
       );
       return $query->row_array();
+    }
+
+    public function create(){
+      var_dump('post');
+      echo '<br>';
+      var_dump($this->input->post);
+      die();
     }
 
     public function getChildrenById($id = FALSE) {

@@ -1,5 +1,5 @@
 <?php
-  function generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrDiv = FALSE, $isReq = FALSE, $helpBlockText = '') {
+  function generateFormGroup($label, $hasIcon, $iconData = FALSE, $inputData, $hasErrDiv = FALSE, $isReq = FALSE, $helpBlockText = '') {
     echo '<div class="form-group">';
       echo form_label($label, $inputData['id']);
       if ($hasIcon || $isReq ) {
@@ -10,13 +10,13 @@
             foreach ($iconData as $i) {
               echo $i.' ';
             }
-            echo '"></i>';
+            echo '" aria-hidden="true"></i>';
           echo '</span>';
         }
         echo form_input($inputData);
         if($isReq) {
           echo '<span class="input-group-addon">';
-            echo '<i  class="fa fa-asterisk fa-fw"></i>';
+            echo '<i  class="fa fa-asterisk fa-fw" aria-hidden="true"></i>';
           echo '</span>';
         }
         echo '</div>';
