@@ -10,7 +10,7 @@
   echo form_open('accounts/create', $attributes);
 
   echo '<div class="row">';
-    echo '<div class="col-sm-3">';
+    echo '<div class="col-md-3">';
 
   //username
   $label       = 'Username';
@@ -26,18 +26,19 @@
     'required'    => ''
   );
   $hasErrorDiv = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv);
+  $isRequired  = TRUE;
+  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';
 
   echo '<div class="row">';
-    echo '<div class="col-sm-3">';
+    echo '<div class="col-md-3">';
 
   //password
   $label         = 'Password';
   $hasIcon       = TRUE;
-  $iconData      = array ('fa', 'fa-unlock', 'fa-fw');
+  $iconData      = array ('fa', 'fa-unlock-alt', 'fa-fw');
   $inputData     = array (
     'type'           => 'password',
     'name'           => 'password',
@@ -50,8 +51,9 @@
     'required'       => ''
   );
   $hasErrorDiv   = TRUE;
-  $helpBlockText = 'Minimum of 6 characters, maximum of 72 characters';
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $helpBlockText);
+  $isRequired    = TRUE;
+  $helpBlockText = 'Minimum of 6 characters';
+  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired, $helpBlockText);
 
     echo '</div>';
   echo '</div>';
@@ -62,7 +64,7 @@
   //password - confirm
   $label         = 'Password Confirmation';
   $hasIcon       = TRUE;
-  $iconData      = array ('fa', 'fa-unlock', 'fa-fw');
+  $iconData      = array ('fa', 'fa-unlock-alt', 'fa-fw');
   $inputData     = array (
     'type'        => 'password',
     'name'        => 'password-confirm',
@@ -74,7 +76,8 @@
     'required'    => ''
   );
   $hasErrorDiv   = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv);
+  $isRequired    = TRUE;
+  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';

@@ -1,4 +1,5 @@
 <?php
+  require APPPATH.'helpers/messageGenerator.php';
   require APPPATH.'helpers/formGenerator.php';
   require APPPATH.'helpers/errorGenerator.php';
 
@@ -6,13 +7,13 @@
     'data-toggle' => 'validator',
     'role'        => 'form'
   );
-  echo form_open('login/submit/'.$formTarget, $attributes);
+  echo form_open('items/create', $attributes);
 
   echo '<div class="row">';
-    echo '<div class="col-md-4">';
+    echo '<div class="col-sm-3">';
 
   //username
-  $label       = 'Username';
+  $label       = 'Name';
   $hasIcon     = TRUE;
   $iconData    = array ('fa','fa-user','fa-fw');
   $inputData   = array (
@@ -31,34 +32,11 @@
     echo '</div>';
   echo '</div>';
 
-  echo '<div class="row">';
-    echo '<div class="col-md-4">';
-
-  //password
-  $label       = 'Password';
-  $hasIcon     = TRUE;
-  $iconData    = array ('fa', 'fa-unlock-alt', 'fa-fw');
-  $inputData   = array (
-    'type'        => 'password',
-    'name'        => 'password',
-    'id'          => 'password',
-    'class'       => 'form-control',
-    'placeholder' => 'Password',
-    'value'       => set_value('password'),
-    'required'    => ''
-  );
-  $hasErrorDiv = TRUE;
-  $isRequired  = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
-
-    echo '</div>';
-  echo '</div>';
-
   //submit button
   $inputData = array(
     'name'  => 'submit',
     'class' => 'btn btn-default',
-    'value' => 'Log in'
+    'value' => 'Create Account'
   );
   echo form_submit($inputData);
   echo form_close();

@@ -43,15 +43,13 @@
 
       $this->setValidationRules();
 
-      if ($this->form_validation->run() === FALSE) {
-        if(!empty($this->input->post())) {
-        }
+      if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'create');
       } else {
         $this->accountsModel->create();
 
         $data['messageType'] = 'success';
-        $data['message']   = 'You can now log in using your username and password';
+        $data['message']     = 'You can now log in using your username and password';
 
         $this->view($data, 'create');
       }

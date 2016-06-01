@@ -45,6 +45,26 @@
       }
     }
 
+    //this calls the create of the Items section
+    public function create() {
+      if($this->checkIfAdmin()) {
+        $data['title'] = "Create New Item";
+
+        $this->setValidationRules();
+
+        if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
+          $this->view($data, 'create');
+        } else {
+          // $this->itemModel->create();
+
+          $data['messageType'] = 'success';
+          $data['message']     = 'The item ITEMNAME has been created';
+
+          $this->view($data, 'create');
+        }
+      }
+    }
+
     //$type is the name of the file that has to be called.
     private function view($data, $pageType, $itemType) {
       $data['navItems'] = $this->navItemsModel->get();
@@ -63,6 +83,33 @@
       }
 
       $this->load->view('templates/footer');
+    }
+
+    //checks if logged in user has admin permissions 
+    //return TRUE if true or redirects user to adminlogin/noPermissions page
+    private function checkIfAdmin() {
+      if($this->session->has_userdata('LoggedInUser')) {
+        if($this->session->LoggedInUser['role_value'] >= 7) {
+          return TRUE;
+        } else {
+          redirect('noPermissions');
+        }
+      } else {
+        redirect('login/admin');
+      }
+    }
+
+    //this method sets the 
+    private function setValidationRules() {
+      //username field
+      $this->form_validation->set_rules(
+        'username',
+        'Username',
+        array(
+          'required',
+          'callback_usernameExists'
+        )
+      );
     }
   }
 ?>
