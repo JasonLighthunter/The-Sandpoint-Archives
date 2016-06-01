@@ -13,10 +13,9 @@
         return $query->result_array();
       }
 
-      $whereCondition = array('id' => $id);
       $query          = $this->db->get_where(
         $this->mainTable,
-        $whereCondition
+        array('id' => $id)
       );
       return $query->row_array();
     }
@@ -26,11 +25,8 @@
         return FALSE;
       }
 
-      $this->prepareQuery();
-      $query          = $this->db->get_where(
-        $this->linkingTable,
-        $whereCondition
-      );
+      $this->prepareQuery($id);
+      $query = $this->db->get();
       return $query->result_array();
     }
 
@@ -51,7 +47,7 @@
     private function getJoinStatements() {
       $this->db->join(
         $this->mainTable,
-        $this->mainTable.'id = '.$this->linkingTable.'.child_id',
+        $this->mainTable.'.id = '.$this->linkingTable.'.child_id',
         'left'
       );
     }

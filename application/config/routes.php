@@ -70,6 +70,8 @@ $route['login/submit/(:any)']  = 'login/submit/$1';
 $route['login']                = 'login/login';
 $route['login/(:any)']         = 'login/login/$1';
 $route['logout']               = 'login/logout';
+//Misc Routes
+$route['dashboard']            = 'pages/viewDashboard';
 //CodeIgniter Routes
 $route['(:any)']               = 'pages/view/$1';
 $route['default_controller']   = 'pages/view';

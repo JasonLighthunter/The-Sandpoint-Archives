@@ -21,7 +21,9 @@
     }
     echo '</li>';
   }
-  
-    //CATEGORIES DELETE LATER
-    echo '<li>'.anchor(site_url('categories'),'Categories').'</li>';
+  if($this->session->has_userdata('loggedInUser') && $this->session->loggedInUser['role_value'] > 1) {
+    echo '<li><h5>ADMIN MODE</h5></li>
+  }
+  //webs2 DELETE LATER
+  echo '<li>'.anchor(site_url('categories'),'Categories').'</li>';
 ?>

@@ -7,19 +7,19 @@
   </div>
 </div>
 <?php
-  if(!empty($category['subCategories'])) {
+  if(!empty($subCategories)) {
 ?>
 <div class="row">
   <div class="col-sm-2">
     <b>SubCategories:</b>
   </div>
   <div class="col-sm-10">
-    <ul>
-      <?php 
-        foreach ($subCategories as $sub) {
-          echo '<li>'.$sub['name'].'</li>';
-        };
-      ?>
+    <?php 
+      foreach ($subCategories as $sub) {
+        $href = site_url('categories/'.$sub['id']);
+        echo anchor($href, $sub['name']).'<br>';
+      }
+    ?>
     </ul>
   </div>
 </div>

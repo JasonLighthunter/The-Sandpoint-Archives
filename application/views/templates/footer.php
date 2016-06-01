@@ -59,6 +59,14 @@
               echo anchor($href, 'Contact', $attributes);
             ?>
           </li>
+          <!-- webs2 delete later -->
+          <li>
+            <?php 
+              $href       = site_url('login/admin');
+              $attributes = array('class' => 'footer-item');
+              echo anchor($href, 'Webs2 dashboard', $attributes);
+            ?>
+          </li>
         </ul>
       </div>
     </footer>

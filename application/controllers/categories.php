@@ -22,7 +22,6 @@
       } else {
         $data['title']         = $data['category']['name'];
         $data['subCategories'] = $this->categoriesModel->getChildrenById($id);
-        var_dump($data['subCategories']);
         $this->view($data,'view');
       }
     }
