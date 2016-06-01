@@ -21,4 +21,7 @@
     }
     echo '</li>';
   }
+  
+    //CATEGORIES DELETE LATER
+    echo '<li>'.anchor(site_url('categories'),'Categories').'</li>';
 ?>
