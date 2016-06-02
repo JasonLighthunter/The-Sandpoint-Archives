@@ -1,22 +1,18 @@
 <?php
-  function generateFormGroup($label, $hasIcon, $iconData = FALSE, $inputData, $hasErrDiv = FALSE, $isReq = FALSE, $helpBlockText = '') {
+  function generateFormGroup($label, $iconData = FALSE, $inputData, $hasErrDiv = FALSE, $isReq = FALSE, $helpBlockText = '') {
     echo '<div class="form-group">';
       echo form_label($label, $inputData['id']);
-      if ($hasIcon || $isReq ) {
+      if ($iconData !== FALSE || $isReq ) {
         echo '<div class="input-group">';
-        if($hasIcon) {
+        if($iconData !== FALSE) {
           echo '<span class="input-group-addon">';
-            echo '<i  class="';
-            foreach ($iconData as $i) {
-              echo $i.' ';
-            }
-            echo '" aria-hidden="true"></i>';
+            echo '<i class="'.$iconData.'" aria-hidden="true"></i>';
           echo '</span>';
         }
         echo form_input($inputData);
         if($isReq) {
           echo '<span class="input-group-addon">';
-            echo '<i  class="fa fa-asterisk fa-fw" aria-hidden="true"></i>';
+            echo '<i class="fa fa-asterisk fa-fw" aria-hidden="true"></i>';
           echo '</span>';
         }
         echo '</div>';

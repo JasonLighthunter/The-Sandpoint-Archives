@@ -40,7 +40,7 @@
         $this->categoriesModel->create();
 
         $data['messageType'] = 'success';
-        $data['message']     = 'You can now log in using your username and password';
+        $data['message']     = 'You have succesfully created the category: "'.$this->input->post('name').'"';
 
         $this->view($data, 'create');
       }
@@ -55,7 +55,7 @@
       $this->load->view('templates/footer');
     }
 
-    private function setValidationRules($role = 'user') {
+    private function setValidationRules() {
       $this->form_validation->set_rules(
         'name',
         'Name',
@@ -64,6 +64,18 @@
           'callback_categoryNameExists',
         )
       );
+    }
+
+    public function categoryNameExists($name) {
+      $result = $this->categoriesModel->getByName($name);
+      if(empty($result)){
+        return TRUE;
+      }
+      $this->form_validation->set_message(
+        'categoryNameExists',
+        'There is already a category with the same name'
+      );
+      return FALSE;
     }
   }
 ?>

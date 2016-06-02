@@ -7,6 +7,15 @@
       $this->load->database();
     }
 
+    //CREATE
+    public function create() {
+      $data = array(
+        'name'  => $this->input->post('name')
+      );
+      return $this->db->insert($this->mainTable, $data);
+    }
+
+    //READ
     public function get($id = FALSE) {
       if($id === FALSE){
         $query = $this->db->get($this->mainTable);
@@ -19,12 +28,10 @@
       return $query->row_array();
     }
 
-    public function create(){
-      var_dump('post');
-      echo '<br>';
-      var_dump($this->input->post);
-      die();
-    }
+    //UPDATE
+
+    //DELETE
+
 
     public function getChildrenById($id = FALSE) {
       if($id === FALSE) {
@@ -34,6 +41,14 @@
       $this->prepareQuery($id);
       $query = $this->db->get();
       return $query->result_array();
+    }
+
+    public function getByName($name) {
+      $query = $this->db->get_where(
+        $this->mainTable,
+        array('name' => $name)
+      );
+      return $query->row_array();
     }
 
     private function prepareQuery($id = FALSE) {
@@ -61,8 +76,7 @@
     private function getWhereStatements($id) {
       if($id !== FALSE) {
         $this->db->where(
-          $this->linkingTable.'.parent_id',
-          $id
+          $this->linkingTable.'.parent_id', $id
         );
       }
     }

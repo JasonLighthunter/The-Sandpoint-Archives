@@ -11,23 +11,16 @@
         echo anchor(site_url($item['uri']), $item['name']);
     } else {
       echo '<li class="dropdown">';
-?>
-      <a class="dropdown-toggle" data-toggle="dropdown" role="button">
-        <?php echo $item['name']; ?>
-        <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <?php
-          foreach ($item['children'] as $child) {
-            echo '<li>'.anchor(site_url($child['uri']), $child['name']).'</li>';
-          }
-        ?>
-      </ul>
-<?php
+        echo '<a class="dropdown-toggle" data-toggle="dropdown" role="button">';
+          echo $item['name'];
+          echo '<span class="caret"></span>';
+        echo '</a>';
+        echo '<ul class="dropdown-menu">';
+        foreach ($item['children'] as $child) {
+          echo '<li>'.anchor(site_url($child['uri']), $child['name']).'</li>';
+        }
+        echo '</ul>';
     }
     echo '</li>';
   }
-  //webs2 DELETE LATER
-  echo '<li>'.anchor(site_url('categories'),'Categories').'</li>';
-  //
 ?>

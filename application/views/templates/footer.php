@@ -76,5 +76,6 @@
     <script src="https://use.fontawesome.com/ff9e874976.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src=<?php echo base_url('assets/js/validator.js') ?>></script>
+    <script src=<?php echo base_url('assets/js/sandpointArchives.js') ?>></script>
   </body>
 </html>

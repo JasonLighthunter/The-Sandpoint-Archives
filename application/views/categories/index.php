@@ -1,10 +1,14 @@
 <?php
+  require APPPATH.'helpers/buttonGenerator.php';
+
   if($this->session->inAdminMode) {
-    $href = site_url('categories/create');
-    echo '<a class="btn btn-default" href='.$href.' >';
-      echo '<i class="fa fa-plus fa-fw" aria-hidden="true"></i>';
-      echo 'New Category';
-    echo '</a>';
+    $inputData = array(
+      'href'       => site_url('categories/create'),
+      'attributes' => array('class' => 'btn btn-default'),
+      'text'       => 'New Category'
+    );
+    $iconData  = 'fa fa-plus fa-fw';
+    generateButton($inputData, $iconData);
   }
 ?>
 <div class="table-responsive">
