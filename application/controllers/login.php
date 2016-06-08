@@ -51,8 +51,8 @@
             'role_value' => $this->accountsModel->getByUsername($username)['role_value']
           );
           $this->session->inAdminMode = TRUE;
-        }
-        redirect('account/'.$this->session->loggedInUser['id']);
+        } 
+        redirect('accounts/'.$this->session->loggedInUser['user_id']);
       }
     }
 

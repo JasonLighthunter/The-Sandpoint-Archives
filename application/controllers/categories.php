@@ -40,7 +40,8 @@
         $this->categoriesModel->create();
 
         $data['messageType'] = 'success';
-        $data['message']     = 'You have succesfully created the category: "'.$this->input->post('name').'"';
+        $data['message']     = 'You have succesfully created the category: "'.
+                               $this->input->post('name').'"';
 
         $this->view($data, 'create');
       }

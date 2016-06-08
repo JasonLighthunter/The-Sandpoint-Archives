@@ -1,7 +1,6 @@
 <?php
   class CategoriesModel extends CI_Model {
-    private $mainTable    = 'categories';
-    private $linkingTable = 'categories_categories';
+    private $table    = 'categories';
 
     public function __construct() {
       $this->load->database();
@@ -12,17 +11,17 @@
       $data = array(
         'name'  => $this->input->post('name')
       );
-      return $this->db->insert($this->mainTable, $data);
+      return $this->db->insert($this->table, $data);
     }
 
     //READ
     public function get($id = FALSE) {
       if($id === FALSE){
-        $query = $this->db->get($this->mainTable);
+        $query = $this->db->get($this->table);
         return $query->result_array();
       }
       $query = $this->db->get_where(
-        $this->mainTable,
+        $this->table,
         array('id' => $id)
       );
       return $query->row_array();
@@ -37,48 +36,19 @@
       if($id === FALSE) {
         return FALSE;
       }
-
-      $this->prepareQuery($id);
-      $query = $this->db->get();
+      $query = $this->db->get_where(
+        $this->table,
+        array('parent_id' => $id)
+      );
       return $query->result_array();
     }
 
     public function getByName($name) {
       $query = $this->db->get_where(
-        $this->mainTable,
+        $this->table,
         array('name' => $name)
       );
       return $query->row_array();
-    }
-
-    private function prepareQuery($id = FALSE) {
-      $this->getSelectStatements();
-      $this->db->from($this->linkingTable);
-      $this->getJoinStatements();
-      $this->getWhereStatements($id);
-    }
-
-    private function getSelectStatements() {
-      $this->db->select(
-        $this->linkingTable.'.child_id AS id,'.
-        $this->mainTable.'.name AS name'
-      );
-    }
-
-    private function getJoinStatements() {
-      $this->db->join(
-        $this->mainTable,
-        $this->mainTable.'.id = '.$this->linkingTable.'.child_id',
-        'left'
-      );
-    }
-
-    private function getWhereStatements($id) {
-      if($id !== FALSE) {
-        $this->db->where(
-          $this->linkingTable.'.parent_id', $id
-        );
-      }
     }
   }
 ?>
