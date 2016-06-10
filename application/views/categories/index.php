@@ -2,7 +2,8 @@
   <div class="col-xs-12">
     <?php
       require APPPATH.'helpers/buttonGenerator.php';
-
+      require APPPATH.'helpers/messageGenerator.php';
+      // create
       if($this->session->inAdminMode) {
         $inputData = array(
           'href'       => site_url('categories/create'),
@@ -26,6 +27,7 @@
       <tr>
         <td >
           <?php
+            //name
             echo anchor(
               'categories/'.$item['id'],
               $item['name']
@@ -34,30 +36,36 @@
         </td>
         <td >
           <?php
-            $inputData = array(
-              'href'       => site_url('#'),
-              'text'       => '',
-              'attributes' => array(
-                'class' => 'btn btn-danger',
-                'title' => 'Delete this Category'
-              )
-            );
-            $iconData  = 'fa fa-trash-o fa-fw';
-            generateButton($inputData, $iconData);
+            // delete
+            if($this->session->inAdminMode) {
+              $inputData = array (
+                'href'       => site_url('categories/delete/'.$item['id']),
+                'text'       => '',
+                'attributes' => array (
+                  'class' => 'btn btn-danger',
+                  'title' => 'Delete this Category'
+                )
+              );
+              $iconData  = 'fa fa-trash-o fa-fw';
+              generateButton($inputData, $iconData);
+            }
           ?>
         </td>
         <td >
           <?php
-            $inputData = array(
-              'href'       => site_url('#'),
-              'text'       => '',
-              'attributes' => array(
-                'class' => 'btn btn-default',
-                'title' => 'Edit this Category'
-              )
-            );
-            $iconData  = 'fa fa-pencil fa-fw';
-            generateButton($inputData, $iconData);
+            // edit
+            if($this->session->inAdminMode) {
+              $inputData = array(
+                'href'       => site_url('#'),
+                'text'       => '',
+                'attributes' => array(
+                  'class' => 'btn btn-default',
+                  'title' => 'Edit this Category'
+                )
+              );
+              $iconData  = 'fa fa-pencil fa-fw';
+              generateButton($inputData, $iconData);
+            }
           ?>
         </td>
       </tr>

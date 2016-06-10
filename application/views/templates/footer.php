@@ -68,8 +68,6 @@
         </ul>
       </div>
     </footer>
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/ff9e874976.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>

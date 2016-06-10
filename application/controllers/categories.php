@@ -26,16 +26,13 @@
       }
     }
 
+    //create
     public function create() {
       if (!$this->session->inAdminMode) {
         redirect('noPermission');
       }
       $data['title']           = 'Create a new category';
       $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept());
-
-      // echo '<pre>';
-      // var_dump($data['possibleParents']);
-      // echo '</pre>';
 
       $this->setValidationRules();
 
@@ -46,10 +43,29 @@
 
         $data['messageType'] = 'success';
         $data['message']     = 'You have succesfully created the category: "'.
-                               $this->input->post('name').'"';
+                               $this->input->post('name').'".';
 
         $this->view($data, 'create');
       }
+    }
+
+    public function delete($id = FALSE) {
+      if (!$this->session->inAdminMode) {
+        redirect('noPermission');
+      }
+      if ($id !== FALSE) {
+        if($this->categoryExists($id, 'id')) {
+          $name = $this->categoriesModel->get($id)['name'];
+          $this->categoriesModel->delete($id);
+
+          $data['messageType'] = 'success';
+          $data['message']     = 'Category "'.$name.'" is succesfully removed.';
+        } else {
+          $data['messageType'] = 'danger';
+          $data['message']     = 'The category you tried to delete does not exist.';
+        }
+      } 
+      $this->index();
     }
 
     //type is the name of the file that has to be called.
@@ -61,12 +77,30 @@
       $this->load->view('templates/footer');
     }
 
+    // translates {id/name/parent_id} to {id/name}
     private function resultArrayToOptionsArray($resultArray) {
       $optionsArray = array (0 => 'no parent');
       foreach ($resultArray as $category) {
         $optionsArray[$category['id']] = $category['name'];
       }
       return $optionsArray;
+    }
+
+    private function categoryExists($identifier, $type) {
+      switch ($type) {
+        case 'name':
+          $result = $this->categoriesModel->getByName($identifier);
+          break;
+        //default to id
+        default:
+          $result = $this->categoriesModel->get($identifier);
+          break;
+      }
+      
+      if(empty($result)){
+        return TRUE;
+      }
+      return FALSE;
     }
 
     //validation
@@ -87,14 +121,13 @@
         'Name',
         array (
           'required',
-          'callback_categoryNameExists',
+          'callback_NameExists',
         )
       );
     }
-
-    public function categoryNameExists($name) {
-      $result = $this->categoriesModel->getByName($name);
-      if(empty($result)){
+    
+    public function nameExists($name) {
+      if($this->categoryExists($name, 'name')) {
         return TRUE;
       }
       $this->form_validation->set_message(

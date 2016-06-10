@@ -35,6 +35,18 @@
     //UPDATE
 
     //DELETE
+    public function delete($id = FALSE) {
+      if($id !== FALSE) {
+        $this->db->delete(
+          $this->table,
+          array ('id' => $id)
+        );
+
+        $this->db->set('parent_id', NULL);
+        $this->db->where('id', $id);
+        $this->db->update($this->tabled);
+      }
+    }
 
 
     public function getChildrenById($id = FALSE) {
