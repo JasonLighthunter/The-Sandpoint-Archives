@@ -1,6 +1,6 @@
 <?php
   class CategoriesModel extends CI_Model {
-    private $table    = 'categories';
+    private $table = 'categories';
 
     public function __construct() {
       $this->load->database();
@@ -9,8 +9,13 @@
     //CREATE
     public function create() {
       $data = array(
-        'name'  => $this->input->post('name')
+        'name' => $this->input->post('name')
       );
+
+      if($this->input->post('parent') !== "0") {
+        $data['parent_id'] = intval($this->input->post('parent'));
+      }
+
       return $this->db->insert($this->table, $data);
     }
 
@@ -49,6 +54,22 @@
         array('name' => $name)
       );
       return $query->row_array();
+    }
+
+    public function getAllExcept($id = FALSE) {
+      if($id === FALSE) {
+        return $this->get();
+      }
+
+      $this->db->select(
+        'id',
+        'name'
+      );
+      $this->db->from($this->table);
+      $this->db->where('id !=', $id);
+      $query = $this->db->get();
+
+      return $query->result_array();
     }
   }
 ?>

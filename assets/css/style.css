@@ -12,11 +12,16 @@
 	background-color:  #f8f8f8;
 }
 
-.footer-item {
-  display:           flex;
-  vertical-align:    middle;
-}
-
 .list-no-style {
   list-style-type:   none;
+}
+
+.row-margin {
+  margin-bottom:     2px;
+}
+
+.vert-align-mid {
+  display:           inline-block;
+  vertical-align:    middle;
+  float:             none;
 }

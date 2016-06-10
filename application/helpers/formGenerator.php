@@ -1,5 +1,5 @@
 <?php
-  function generateFormGroup($label, $iconData = FALSE, $inputData, $hasErrDiv = FALSE, $isReq = FALSE, $helpBlockText = '') {
+  function generateFormGroupInput($label, $iconData = FALSE, $inputData, $hasErrDiv = FALSE, $isReq = FALSE, $helpBlockText = '') {
     echo '<div class="form-group">';
       echo form_label($label, $inputData['id']);
       if ($iconData !== FALSE || $isReq ) {
@@ -18,6 +18,21 @@
         echo '</div>';
       } else {
         echo form_input($inputData);
+      }
+      if ($hasErrDiv) {
+        echo '<div class="help-block with-errors">'.$helpBlockText.'</div>';
+      }
+    echo '</div>';
+  }
+
+  function generateFormGroupSelect($label, $name, $attributes, $options, $hasErrDiv = FALSE, $helpBlockText = '') {
+    echo '<div class="form-group">';
+      echo form_label($label, $attributes['id']);
+      if ($options === FALSE) {
+        $options = array(0 => 'No Parent Category Possible');
+        echo form_dropdown($name, $options, 0);
+      } else {
+        echo form_dropdown($name, $options, 0, $attributes);
       }
       if ($hasErrDiv) {
         echo '<div class="help-block with-errors">'.$helpBlockText.'</div>';

@@ -12,6 +12,31 @@
   echo '<div class="row">';
     echo '<div class="col-sm-6 col-lg-4">';
 
+    //parent Category
+    $label       = 'Parent Category';
+    $hasErrorDiv = TRUE;
+    $name        = 'parent';
+
+    $attributes  = array (
+      'id'       => 'parent',
+      'required' => '',
+      'class'    => 'form-control'
+    );
+
+    if(!empty($possibleParents)){
+      $options = $possibleParents;
+    } else {
+      $options = FALSE;
+    }
+
+    generateFormGroupSelect($label, $name, $attributes, $options, $hasErrorDiv);
+
+    echo '</div>';
+  echo '</div>';
+
+  echo '<div class="row">';
+    echo '<div class="col-sm-6 col-lg-4">';
+
       //name
       $label         = 'Name';
       $iconData      = FALSE;
@@ -25,7 +50,8 @@
         'required'    => ''
       );
       $hasErrorDiv   = $isRequired = TRUE;
-      generateFormGroup($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
+
+      generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';

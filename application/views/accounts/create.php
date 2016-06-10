@@ -25,7 +25,7 @@
         'value'       => set_value('username'),
         'required'    => ''
       );
-      generateFormGroup($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
+      generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';
@@ -49,7 +49,7 @@
         'required'       => ''
       );
       $helpBlockText = 'Minimum of 6 characters';
-      generateFormGroup($label, $iconData, $inputData, $hasErrorDiv, $isRequired, $helpBlockText);
+      generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired, $helpBlockText);
 
     echo '</div>';
   echo '</div>';
@@ -71,7 +71,7 @@
         'data-match'  => '#password',
         'required'    => ''
       );
-      generateFormGroup($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
+      generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';

@@ -30,7 +30,12 @@
       if (!$this->session->inAdminMode) {
         redirect('noPermission');
       }
-      $data['title'] = 'Create a new category';
+      $data['title']           = 'Create a new category';
+      $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept());
+
+      // echo '<pre>';
+      // var_dump($data['possibleParents']);
+      // echo '</pre>';
 
       $this->setValidationRules();
 
@@ -56,11 +61,31 @@
       $this->load->view('templates/footer');
     }
 
+    private function resultArrayToOptionsArray($resultArray) {
+      $optionsArray = array (0 => 'no parent');
+      foreach ($resultArray as $category) {
+        $optionsArray[$category['id']] = $category['name'];
+      }
+      return $optionsArray;
+    }
+
+    //validation
     private function setValidationRules() {
+      //parent
+      $this->form_validation->set_rules(
+        'parent',
+        'Parent Category',
+        array (
+          'required',
+          'callback_createsEndlessLoop'
+        )
+      );
+
+      //name
       $this->form_validation->set_rules(
         'name',
         'Name',
-        array(
+        array (
           'required',
           'callback_categoryNameExists',
         )
@@ -77,6 +102,42 @@
         'There is already a category with the same name'
       );
       return FALSE;
+    }
+
+    public function createsEndlessLoop($id) {
+      if(intval($id) === 0) {
+        return TRUE;
+      }
+
+      $parents       = array();
+      $currentParent = $this->categoriesModel->get($id);
+      $counter       = 1;
+
+      while($currentParent['parent_id'] !== NULL) {
+        if($counter > 4) {
+          $this->form_validation->set_message(
+            'createsEndlessLoop',
+            'A subcategory of this depth is not allowed'
+          );
+          return FALSE;
+        }
+
+        $newParent = $this->categoriesModel->get($currentParent['parent_id']);
+
+        if(array_search($newParent['name'], $parents) !== FALSE) {
+          $this->form_validation->set_message(
+            'createsEndlessLoop',
+            'You cannot choose this category as a parent as it will create an endless loop'
+          );
+          return FALSE;
+        }
+
+        $parents[$counter] = $newParent['name'];
+        $currentParent     = $newParent;
+
+        $counter++;
+      }
+      return TRUE;
     }
   }
 ?>

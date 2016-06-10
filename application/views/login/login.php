@@ -24,7 +24,7 @@
     'value'       => set_value('username'),
     'required'    => ''
   );
-  generateFormGroup($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
+  generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';
@@ -45,7 +45,7 @@
     'value'       => set_value('password'),
     'required'    => ''
   );
-  generateFormGroup($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
+  generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';

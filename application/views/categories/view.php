@@ -14,7 +14,7 @@
     <b>SubCategories:</b>
   </div>
   <div class="col-sm-10">
-    <?php 
+    <?php
       foreach ($subCategories as $sub) {
         $href = site_url('categories/'.$sub['id']);
         echo anchor($href, $sub['name']).'<br>';

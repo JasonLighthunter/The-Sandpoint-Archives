@@ -26,7 +26,7 @@
   </head>
   <body>
     <?php
-      var_dump($this->session->loggedInUser);
+      echo '<pre>'; var_dump($this->session->loggedInUser); echo '</pre>';
       require_once 'navBar.php';
     ?>
     <div class="container-fluid">
