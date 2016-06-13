@@ -47,7 +47,7 @@
 
     //DELETE
     public function delete($id = FALSE) {
-      if($id === FALSE) {
+      if($id !== FALSE) {
         $this->db->delete(
           $this->table,
           array ('id' => $id)

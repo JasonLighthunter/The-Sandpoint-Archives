@@ -4,6 +4,9 @@
       parent::__construct();
       $this->load->model('navItemsModel');
       $this->load->model('pagesModel');
+      // webs
+      $this->load->model('itemsModel');
+      //webs
     }
 
     public function view($page = 'home') {
@@ -19,7 +22,7 @@
           break;
       }
       switch ($page) {
-        case 'home':
+        // case 'home':
         case 'loggedIn':
         case 'noPermissions':
           $data['page'] = $this->pagesModel->getByName($page);
@@ -34,6 +37,11 @@
           }
           break;
       }
+      //webs
+      if($page === 'home') {
+        $data['weapons'] = $this->itemsModel->getThreeRandomWeapons();
+      }
+      //webs
 
       $data['navItems'] = $this->navItemsModel->get();
 

@@ -21,6 +21,16 @@
       return $query->row_array();
     }
 
+
+    //webs
+
+    public function getThreeRandomWeapons() {
+      $this->db->order_by('name', 'RANDOM');
+      $query = $this->db->get_where($this->tableName, array('item_class' => 5), 3);
+      return $query->result_array();
+    }
+    //webs
+
     private function prepareQuery($itemType, $id = FALSE) {
       $this->getSelectStatements($itemType);
       $this->db->from($this->tableName);

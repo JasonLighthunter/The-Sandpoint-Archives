@@ -7,11 +7,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <?php 
+      <?php
         $attributes = array('class' => 'navbar-brand');
         echo anchor(
           site_url('home'),
-          'The Sandpoint Archives',
+          '<i class="fa fa-book fa-lg" aria-hidden="true"></i> The Sandpoint Archives',
           $attributes
         );
       ?>
