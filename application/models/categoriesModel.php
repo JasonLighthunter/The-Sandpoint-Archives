@@ -1,6 +1,7 @@
 <?php
   class CategoriesModel extends CI_Model {
-    private $table = 'categories';
+    private $table       = 'categories';
+    private $allChildren = array();
 
     public function __construct() {
       $this->load->database();
@@ -90,6 +91,25 @@
       $query = $this->db->get();
 
       return $query->result_array();
+    }
+
+    public function getAllChildrenArray(){
+      $returnValue = $this->allChildren;
+      $this->allChildren = array();
+      return $returnValue;
+    }
+
+    public function getAllChildren($id = FALSE) {
+      if($id === FALSE) {
+        return FALSE;
+      }
+      $directChildren = $this->getChildrenById($id);
+      if(!empty($directChildren)) {
+        foreach ($directChildren as $child) {
+          $this->getAllChildren($child['id']);
+        }
+      }
+      $this->allChildren[] = $id;
     }
   }
 ?>

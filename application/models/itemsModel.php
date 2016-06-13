@@ -1,6 +1,6 @@
 <?php
   class ItemsModel extends CI_Model {
-    private $tableName = 'items';
+    private $table = 'items';
 
     public function __construct() {
       $this->load->database();
@@ -21,41 +21,64 @@
       return $query->row_array();
     }
 
-
     //webs
-
     public function getThreeRandomWeapons() {
       $this->db->order_by('name', 'RANDOM');
-      $query = $this->db->get_where($this->tableName, array('item_class' => 5), 3);
+      $query = $this->db->get_where($this->table, array('item_class' => 5), 3);
+      return $query->result_array();
+    }
+    public function getByCategories($categories) {
+      $this->db->select(
+        $this->table.'.id AS id,'.
+        $this->table.'.name AS name,'.
+        'categories.id AS category_id,'.          //webs
+        'categories.name AS category,'.           //webs
+        'item_classes.uri AS class_uri'
+      );
+      $this->db->from($this->table);
+      $this->db->join(
+        'item_classes',
+        'item_classes.id = '.$this->table.'.item_class',
+        'inner'
+      );
+      $this->db->join(
+        'categories',
+        'categories.id = '.$this->table.'.category_id',
+        'inner'
+      );
+      $this->db->where_in('category_id', $categories);
+      $query = $this->db->get();
       return $query->result_array();
     }
     //webs
 
     private function prepareQuery($itemType, $id = FALSE) {
       $this->getSelectStatements($itemType);
-      $this->db->from($this->tableName);
+      $this->db->from($this->table);
       $this->getJoinStatements($itemType);
       $this->getWhereStatements($itemType, $id);
       $this->getOrderStatements($itemType);
     }
 
     private function getSelectStatements($itemType) {
-      $table = $this->tableName;
+
       switch ($itemType) {
         case 'weapons':
           $this->db->select(
-            $table.'.id AS id,'.
-            $table.'.name AS name,'.
+            $this->table.'.id AS id,'.
+            $this->table.'.name AS name,'.
+            'categories.id AS category_id,'.          //webs
+            'categories.name AS category,'.           //webs
             'item_classes.name AS class_name,'.
             'weapon_classes.name AS weapon_class,'.
-            $table.'.description AS description,'.
+            $this->table.'.description AS description,'.
             'item_classes.uri AS class_uri'
           );
           break;
         case 'armor':
           $this->db->select(
-            $table.'.id AS id,'.
-            $table.'.name AS name,'.
+            $this->table.'.id AS id,'.
+            $this->table.'.name AS name,'.
             'item_classes.name AS class_name,'.
             'armor_types.name AS armor_type,'.
             'items.description AS description,'.
@@ -65,10 +88,10 @@
         case 'goods':
         case 'spellComponents':
           $this->db->select(
-            $table.'.id AS id,'.
-            $table.'.name AS name,'.
+            $this->table.'.id AS id,'.
+            $this->table.'.name AS name,'.
             'item_classes.name AS class_name,'.
-            $table.'.description AS description,'.
+            $this->table.'.description AS description,'.
             'item_classes.uri AS class_uri'
           );
           break;
@@ -79,24 +102,30 @@
     }
 
     private function getJoinStatements($itemType) {
-      $table = $this->tableName;
       $this->db->join(
         'item_classes',
-        'item_classes.id = '.$table.'.item_class',
+        'item_classes.id = '.$this->table.'.item_class',
         'inner'
       );
       switch ($itemType) {
         case 'weapons':
           $this->db->join(
             'weapon_classes',
-            'weapon_classes.id = '.$table.'.weapon_class',
+            'weapon_classes.id = '.$this->table.'.weapon_class',
             'inner'
           );
+          // webs
+          $this->db->join(
+            'categories',
+            'categories.id = '.$this->table.'.category_id',
+            'inner'
+          );
+          // webs
           break;
         case 'armor':
           $this->db->join(
             'armor_types',
-            'armor_types.id = '.$table.'.armor_type',
+            'armor_types.id = '.$this->table.'.armor_type',
             'inner'
           );
           break;
@@ -107,7 +136,7 @@
 
     private function getWhereStatements($itemType, $id) {
       if($id !== FALSE) {
-        $this->db->where($this->tableName.'.id', $id);
+        $this->db->where($this->table.'.id', $id);
       }
       switch ($itemType) {
         case 'goods':

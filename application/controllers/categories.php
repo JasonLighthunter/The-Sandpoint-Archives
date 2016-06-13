@@ -4,6 +4,7 @@
       parent::__construct();
       $this->load->model('categoriesModel');
       $this->load->model('navItemsModel');
+      $this->load->model('itemsModel');
     }
 
     //this calls the index pages of the Categories section
@@ -20,8 +21,13 @@
       if(empty($data['category'])) {
         show_404();
       } else {
+        $this->categoriesModel->getAllChildren($id);
+        $children              = $this->categoriesModel->getAllChildrenArray();
+
+        $data['items']         = $this->itemsModel->getByCategories($children);
         $data['title']         = $data['category']['name'];
         $data['subCategories'] = $this->categoriesModel->getChildrenById($id);
+
         $this->view($data,'view');
       }
     }

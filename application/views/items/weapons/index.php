@@ -3,11 +3,12 @@
     <tr>
       <th>Name</th>
       <th>Weapon Class</th>
+      <th>Category</th>
     </tr>
     <?php foreach ($items as $weapon) { ?>
       <tr>
         <td>
-          <?php 
+          <?php
             echo anchor(
               $weapon['class_uri'].'/'.$weapon['id'],
               $weapon['name']
@@ -17,6 +18,16 @@
         <td>
           <?php echo $weapon['weapon_class']; ?>
         </td>
+        <!--webs-->
+        <td>
+          <?php
+            echo anchor(
+              'categories/'.$weapon['category_id'],
+              $weapon['category']
+            );
+          ?>
+        </td>
+        <!--webs-->
       </tr>
     <?php } ?>
   </table>

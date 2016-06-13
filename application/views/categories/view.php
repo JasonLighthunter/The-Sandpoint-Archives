@@ -25,4 +25,18 @@
 </div>
 <?php
   }
+  echo '<div class="row">';
+    echo '<div class="col-sm-2">';
+      echo '<b>Weapons</b>';
+    echo '</div>';
+    foreach ($items as $item) {
+      echo '<div class="col-sm-5">';
+        echo anchor(
+          $item['class_uri'].'/'.$item['id'],
+          $item['name']
+        );
+      echo '</div>';
+    }
+
+  echo '</div>';
 ?>

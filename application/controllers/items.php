@@ -47,7 +47,7 @@
 
     //this calls the create of the Items section
     public function create() {
-      if($this->checkIfAdmin()) {
+      if(checkIfLoggedIn() && checkIfAdmin()) {
         $data['title'] = "Create New Item";
 
         $this->setValidationRules();
@@ -85,21 +85,22 @@
       $this->load->view('templates/footer');
     }
 
-    //checks if logged in user has admin permissions 
+    //checks if logged in user has admin permissions
     //return TRUE if true or redirects user to adminlogin/noPermissions page
     private function checkIfAdmin() {
-      if($this->session->has_userdata('LoggedInUser')) {
-        if($this->session->LoggedInUser['role_value'] >= 7) {
-          return TRUE;
-        } else {
-          redirect('noPermissions');
-        }
-      } else {
-        redirect('login/admin');
+      if($this->session->inAdminMode) {
+        return TRUE;
       }
+      redirect('noPermissions');
+    }
+    private function checkIfLoggedIn() {
+      if($this->session->has_userdata('LoggedInUser')) {
+        return TRUE;
+      }
+      redirect('login/admin');
     }
 
-    //this method sets the 
+    //this method sets the
     private function setValidationRules() {
       //username field
       $this->form_validation->set_rules(
