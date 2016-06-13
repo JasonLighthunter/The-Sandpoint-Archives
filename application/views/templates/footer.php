@@ -3,10 +3,10 @@
     <footer class="footer footer-custom">
       <div class="container-fluid">
         <ul class="list-inline align-center">
-          <li>
-            <a class="footer-item" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+          <li class="vert-align-mid"">
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
               <!-- CC image -->
-              <?php 
+              <?php
                 $imgData = array(
                   'alt'   => 'Creative Commons License',
                   'class' => 'cc-img',
@@ -16,22 +16,22 @@
               ?>
             </a>
           </li>
-          <li>
+          <li class="vert-align-mid">
             <!-- Github Follow -->
-            <a 
+            <a
               aria-label="Follow @JasonLighthunter on GitHub"
               data-count-aria-label="# followers on GitHub"
               data-count-api="/users/JasonLighthunter#followers"
               data-count-href="/JasonLighthunter/followers"
               data-style="mega"
               href="https://github.com/JasonLighthunter"
-              class="github-button footer-item">
+              class="github-button">
                 Follow @JasonLighthunter
             </a>
           </li>
-          <li>
+          <li class="vert-align-mid"">
             <!-- Github Star -->
-            <a 
+            <a
               aria-label="Star JasonLighthunter/The-Sandpoint-Archives on GitHub"
               data-count-aria-label="# stargazers on GitHub"
               data-count-api="/repos/JasonLighthunter/The-Sandpoint-Archives#stargazers_count"
@@ -39,30 +39,35 @@
               data-style="mega"
               data-icon="octicon-star"
               href="https://github.com/JasonLighthunter/The-Sandpoint-Archives"
-              class="github-button footer-item">
+              class="github-button">
                 Star
             </a>
           </li>
-          <li>
+          <li class="vert-align-mid"">
             <!-- About -->
-            <?php 
-              $href       = site_url('about');
-              $attributes = array('class' => 'footer-item');
-              echo anchor($href, 'About', $attributes);
+            <?php
+              $href = site_url('about');
+              echo anchor($href, 'About');
             ?>
           </li>
-          <li>
+          <li class="vert-align-mid"">
             <!-- Contact -->
-            <?php 
-              $href       = site_url('contact');
-              $attributes = array('class' => 'footer-item');
-              echo anchor($href, 'Contact', $attributes);
+            <?php
+              $href = site_url('contact');
+              echo anchor($href, 'Contact');
             ?>
           </li>
+          <!-- webs2 delete later -->
+          <li class="vert-align-mid"">
+            <?php
+              $href = site_url('login/admin');
+              echo anchor($href, 'Webs2 dashboard');
+            ?>
+          </li>
+          <!-- webs2 ends -->
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/ff9e874976.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>

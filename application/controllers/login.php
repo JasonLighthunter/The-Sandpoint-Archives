@@ -21,6 +21,7 @@
       if ($this->session->has_userdata('loggedInUser')) {
 
         $this->session->unset_userdata('loggedInUser');
+        $this->session->unset_userdata('inAdminMode');
 
         redirect('home');
       }
@@ -33,23 +34,29 @@
 
       $this->setValidationRules($role);
       if ($this->form_validation->run() === FALSE) {
-        $this->view('login', $data, $role);
+        $this->view('login', FALSE, $role);
       } else {
         $username = $this->input->post('username');
-        $this->session->loggedInUser = array (
-          'user_id'    => $this->accountsModel->getByUsername($username)['id'],
-          'username'   => $username,
-          'role_value' => $this->accountsModel->getByUsername($username)['role_value']
-        );
 
         if($role === 'user') {
-          redirect('account/'.$this->session->loggedInUser['id']);
-        }
-        redirect('dashboard');
+          $this->session->loggedInUser = array (
+            'user_id'    => $this->accountsModel->getByUsername($username)['id'],
+            'username'   => $username,
+            'role_value' => 1
+          );
+        } else {
+          $this->session->loggedInUser = array (
+            'user_id'    => $this->accountsModel->getByUsername($username)['id'],
+            'username'   => $username,
+            'role_value' => $this->accountsModel->getByUsername($username)['role_value']
+          );
+          $this->session->inAdminMode = TRUE;
+        } 
+        redirect('accounts/'.$this->session->loggedInUser['user_id']);
       }
     }
 
-    private function view($page, $data = '', $role = 'user') {
+    private function view($page, $data = FALSE, $role = 'user') {
       $data['formTarget'] = $role;
       $data['title']      = ucfirst($role.' '.$page);
       $data['navItems']   = $this->navItemsModel->get();

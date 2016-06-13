@@ -1,7 +1,6 @@
 <?php echo doctype('html5'); ?>
 <html lang="en">
   <head>
-    <!-- head -->
     <?php
       $inputData = array (
         'charset' => 'utf-8',
@@ -26,8 +25,10 @@
     ?>
   </head>
   <body>
-    <?php var_dump($this->session->loggedInUser); ?>
-    <?php require_once 'navBar.php'; ?>
+    <?php
+      echo '<pre>'; var_dump($this->session->loggedInUser); echo '</pre>';
+      require_once 'navBar.php';
+    ?>
     <div class="container-fluid">
       <div class="well">
         <?php require_once 'pageTitle.php'; ?>

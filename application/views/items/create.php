@@ -14,20 +14,18 @@
 
   //username
   $label       = 'Name';
-  $hasIcon     = TRUE;
-  $iconData    = array ('fa','fa-user','fa-fw');
+  $iconData    = 'fa fa-user fa-fw';
   $inputData   = array (
     'type'        => 'text',
     'name'        => 'username',
     'id'          => 'username',
     'class'       => 'form-control',
-    'placeholder' => 'Username',
+    'placeholder' => $label,
     'value'       => set_value('username'),
     'required'    => ''
   );
-  $isRequired  = TRUE;
-  $hasErrorDiv = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
+  $isRequired  = $hasErrorDiv = TRUE;
+  generateFormGroup($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';

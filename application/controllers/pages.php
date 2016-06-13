@@ -3,12 +3,10 @@
     public function __construct() {
       parent::__construct();
       $this->load->model('navItemsModel');
+      $this->load->model('pagesModel');
     }
 
     public function view($page = 'home') {
-      if(!file_exists(APPPATH.'views/pages/'.$page.'.php')) {
-        show_404();
-      }
       switch ($page) {
         case 'loggedIn':
           $data['title'] = "Already Logged In";
@@ -20,6 +18,23 @@
           $data['title'] = ucfirst($page);
           break;
       }
+      switch ($page) {
+        case 'home':
+        case 'loggedIn':
+        case 'noPermissions':
+          $data['page'] = $this->pagesModel->getByName($page);
+          if(empty($data['page'])){
+            show_404();
+          }
+          $page         = 'view';
+          break;
+        default:
+          if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
+            show_404();
+          }
+          break;
+      }
+
       $data['navItems'] = $this->navItemsModel->get();
 
       $this->load->view('templates/header', $data);

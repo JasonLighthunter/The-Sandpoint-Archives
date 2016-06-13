@@ -9,47 +9,43 @@
   echo form_open('login/submit/'.$formTarget, $attributes);
 
   echo '<div class="row">';
-    echo '<div class="col-md-4">';
+    echo '<div class="col-sm-6 col-lg-4">';
 
   //username
   $label       = 'Username';
-  $hasIcon     = TRUE;
-  $iconData    = array ('fa','fa-user','fa-fw');
+  $hasErrorDiv = $isRequired = TRUE;
+  $iconData    = 'fa fa-user fa-fw';
   $inputData   = array (
     'type'        => 'text',
     'name'        => 'username',
     'id'          => 'username',
     'class'       => 'form-control',
-    'placeholder' => 'Username',
+    'placeholder' => $label,
     'value'       => set_value('username'),
     'required'    => ''
   );
-  $isRequired  = TRUE;
-  $hasErrorDiv = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
+  generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';
 
   echo '<div class="row">';
-    echo '<div class="col-md-4">';
+    echo '<div class="col-sm-6 col-lg-4">';
 
   //password
   $label       = 'Password';
-  $hasIcon     = TRUE;
-  $iconData    = array ('fa', 'fa-unlock-alt', 'fa-fw');
+  $hasErrorDiv = $isRequired = TRUE;
+  $iconData    = 'fa fa-unlock-alt fa-fw';
   $inputData   = array (
     'type'        => 'password',
     'name'        => 'password',
     'id'          => 'password',
     'class'       => 'form-control',
-    'placeholder' => 'Password',
+    'placeholder' => $label,
     'value'       => set_value('password'),
     'required'    => ''
   );
-  $hasErrorDiv = TRUE;
-  $isRequired  = TRUE;
-  generateFormGroup($label, $hasIcon, $iconData, $inputData, $hasErrorDiv, $isRequired);
+  generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
 
     echo '</div>';
   echo '</div>';

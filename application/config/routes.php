@@ -48,6 +48,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+//Categories Routes
+$route['categories/create']    = 'categories/create';
+$route['categories/update/(:any)']  = 'categories/update/$1';
+$route['categories/delete/(:any)']  = 'categories/delete/$1';
+$route['categories/(:any)']    = 'categories/detail/$1';
+$route['categories']           = 'categories/index';
 //Accounts Routes
 $route['accounts/create']      = 'accounts/create';
 $route['accounts/(:any)']      = 'accounts/detail/$1';
