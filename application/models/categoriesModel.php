@@ -1,6 +1,7 @@
 <?php
   class CategoriesModel extends CI_Model {
     private $table       = 'categories';
+    private $itemTable   = 'items';
     private $allChildren = array();
 
     public function __construct() {
@@ -53,6 +54,9 @@
           $this->table,
           array ('id' => $id)
         );
+        $this->db->set('category_id', NULL);
+        $this->db->where('category_id', $id);
+        $this->db->update($this->itemTable);
 
         $this->db->set('parent_id', NULL);
         $this->db->where('parent_id', $id);

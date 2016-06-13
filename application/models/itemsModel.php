@@ -118,7 +118,7 @@
           $this->db->join(
             'categories',
             'categories.id = '.$this->table.'.category_id',
-            'inner'
+            'left'
           );
           // webs
           break;

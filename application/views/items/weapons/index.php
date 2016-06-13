@@ -21,10 +21,14 @@
         <!--webs-->
         <td>
           <?php
-            echo anchor(
-              'categories/'.$weapon['category_id'],
-              $weapon['category']
-            );
+            if($weapon['category_id'] === NULL) {
+              echo '-';
+            } else {
+              echo anchor(
+                'categories/'.$weapon['category_id'],
+                $weapon['category']
+              );
+            }
           ?>
         </td>
         <!--webs-->

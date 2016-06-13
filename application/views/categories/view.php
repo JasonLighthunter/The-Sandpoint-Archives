@@ -6,6 +6,7 @@
     <?php echo $category['name']; ?>
   </div>
 </div>
+<br>
 <?php
   if(!empty($subCategories)) {
 ?>
@@ -20,23 +21,25 @@
         echo anchor($href, $sub['name']).'<br>';
       }
     ?>
-    </ul>
   </div>
 </div>
+<br>
 <?php
   }
   echo '<div class="row">';
     echo '<div class="col-sm-2">';
       echo '<b>Weapons</b>';
     echo '</div>';
+
+    echo '<div class="col-sm-10">';
     foreach ($items as $item) {
-      echo '<div class="col-sm-5">';
-        echo anchor(
-          $item['class_uri'].'/'.$item['id'],
-          $item['name']
-        );
-      echo '</div>';
+      echo anchor(
+        $item['class_uri'].'/'.$item['id'],
+        $item['name']
+      );
+      echo '<br>';
     }
+    echo '</div>';
 
   echo '</div>';
 ?>
