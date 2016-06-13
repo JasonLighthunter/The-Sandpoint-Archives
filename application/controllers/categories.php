@@ -7,7 +7,7 @@
     }
 
     //this calls the index pages of the Categories section
-    public function index() {
+    public function index($data = FALSE) {
       $data['categories'] = $this->categoriesModel->get();
       $data['title']      = 'Categories';
 
@@ -49,10 +49,12 @@
       }
     }
 
+    //delete
     public function delete($id = FALSE) {
       if (!$this->session->inAdminMode) {
         redirect('noPermission');
       }
+      $data = FALSE;
       if ($id !== FALSE) {
         if($this->categoryExists($id, 'id')) {
           $name = $this->categoriesModel->get($id)['name'];
@@ -64,8 +66,8 @@
           $data['messageType'] = 'danger';
           $data['message']     = 'The category you tried to delete does not exist.';
         }
-      } 
-      $this->index();
+      }
+      $this->index($data);
     }
 
     //type is the name of the file that has to be called.
@@ -96,11 +98,11 @@
           $result = $this->categoriesModel->get($identifier);
           break;
       }
-      
+
       if(empty($result)){
-        return TRUE;
+        return FALSE;
       }
-      return FALSE;
+      return TRUE;
     }
 
     //validation
@@ -121,17 +123,17 @@
         'Name',
         array (
           'required',
-          'callback_NameExists',
+          'callback_nameAvailable',
         )
       );
     }
-    
-    public function nameExists($name) {
-      if($this->categoryExists($name, 'name')) {
+
+    public function nameAvailable($name) {
+      if(!$this->categoryExists($name, 'name')) {
         return TRUE;
       }
       $this->form_validation->set_message(
-        'categoryNameExists',
+        'nameAvailable',
         'There is already a category with the same name'
       );
       return FALSE;

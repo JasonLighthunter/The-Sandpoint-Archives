@@ -43,8 +43,8 @@
         );
 
         $this->db->set('parent_id', NULL);
-        $this->db->where('id', $id);
-        $this->db->update($this->tabled);
+        $this->db->where('parent_id', $id);
+        $this->db->update($this->table);
       }
     }
 
