@@ -33,10 +33,21 @@
     }
 
     //UPDATE
+    public function update($id = FALSE) {
+      if ($id !== FALSE) {
+        $data['name'] = $this->input->post('name');
+        if ($this->input->post('parent') !== "0") {
+          $data['parent_id'] = intval($this->input->post('parent'));
+        }
+
+        $this->db->where('id', $id);
+        $this->db->update($this->table, $data);
+      }
+    }
 
     //DELETE
     public function delete($id = FALSE) {
-      if($id !== FALSE) {
+      if($id === FALSE) {
         $this->db->delete(
           $this->table,
           array ('id' => $id)
@@ -73,10 +84,7 @@
         return $this->get();
       }
 
-      $this->db->select(
-        'id',
-        'name'
-      );
+      $this->db->select('id, name');
       $this->db->from($this->table);
       $this->db->where('id !=', $id);
       $query = $this->db->get();

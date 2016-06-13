@@ -55,10 +55,10 @@
           <?php
             // edit
             if($this->session->inAdminMode) {
-              $inputData = array(
-                'href'       => site_url('#'),
+              $inputData = array (
+                'href'       => site_url('categories/update/'.$item['id']),
                 'text'       => '',
-                'attributes' => array(
+                'attributes' => array (
                   'class' => 'btn btn-default',
                   'title' => 'Edit this Category'
                 )

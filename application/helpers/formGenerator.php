@@ -25,14 +25,23 @@
     echo '</div>';
   }
 
-  function generateFormGroupSelect($label, $name, $attributes, $options, $hasErrDiv = FALSE, $helpBlockText = '') {
+  function generateFormGroupSelect($label, $name, $attributes, $options, $hasErrDiv = FALSE, $helpBlockText = '', $selectedOption = 0) {
     echo '<div class="form-group">';
       echo form_label($label, $attributes['id']);
       if ($options === FALSE) {
         $options = array(0 => 'No Parent Category Possible');
-        echo form_dropdown($name, $options, 0);
+        echo form_dropdown(
+          $name,
+          $options,
+          $selectedOption
+        );
       } else {
-        echo form_dropdown($name, $options, 0, $attributes);
+        echo form_dropdown(
+          $name,
+          $options,
+          $selectedOption,
+          $attributes
+        );
       }
       if ($hasErrDiv) {
         echo '<div class="help-block with-errors">'.$helpBlockText.'</div>';

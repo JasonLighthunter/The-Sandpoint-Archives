@@ -50,10 +50,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //Categories Routes
 $route['categories/create']    = 'categories/create';
+$route['categories/update/(:any)']  = 'categories/update/$1';
 $route['categories/delete/(:any)']  = 'categories/delete/$1';
 $route['categories/(:any)']    = 'categories/detail/$1';
 $route['categories']           = 'categories/index';
-
 //Accounts Routes
 $route['accounts/create']      = 'accounts/create';
 $route['accounts/(:any)']      = 'accounts/detail/$1';

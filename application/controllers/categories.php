@@ -49,6 +49,37 @@
       }
     }
 
+    //update
+    public function update($id = FALSE) {
+      if($id === FALSE) {
+        return FALSE;
+      }
+      if (!$this->session->inAdminMode) {
+        redirect('noPermission');
+      }
+      $data['category']        = $this->categoriesModel->get($id);
+      $data['title']           = 'Edit category: '.$data['category']['name'];
+      $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept($id));
+
+      $this->setValidationRules('update', $id);
+
+      if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
+        $this->view($data, 'update');
+      } else {
+        $this->categoriesModel->update($id);
+
+        $data['category']        = $this->categoriesModel->get($id);
+        $data['title']           = 'Edit category: '.$data['category']['name'];
+        $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept($id));
+
+        $data['messageType'] = 'success';
+        $data['message']     = 'You have succesfully edited the category: "'.
+                                $this->input->post('name').'".';
+
+        $this->view($data, 'update');
+      }
+    }
+
     //delete
     public function delete($id = FALSE) {
       if (!$this->session->inAdminMode) {
@@ -79,7 +110,7 @@
       $this->load->view('templates/footer');
     }
 
-    // translates {id/name/parent_id} to {id/name}
+    // translates {0:id,1:name,2:parent_id} to {id:name}
     private function resultArrayToOptionsArray($resultArray) {
       $optionsArray = array (0 => 'no parent');
       foreach ($resultArray as $category) {
@@ -106,7 +137,7 @@
     }
 
     //validation
-    private function setValidationRules() {
+    private function setValidationRules($type = 'create', $id = FALSE) {
       //parent
       $this->form_validation->set_rules(
         'parent',
@@ -116,15 +147,29 @@
           'callback_createsEndlessLoop'
         )
       );
-
       //name
+      switch ($type) {
+        case 'update':
+          if($id === FALSE || $this->input->post('name') !== $this->categoriesModel->get($id)['name']) {
+            $ruleArray = array (
+              'required',
+              'callback_nameAvailable'
+            );
+          } else {
+            $ruleArray = array('required');
+          }
+          break;
+        default:
+          $ruleArray = array (
+            'required',
+            'callback_nameAvailable'
+          );
+          break;
+      }
       $this->form_validation->set_rules(
         'name',
         'Name',
-        array (
-          'required',
-          'callback_nameAvailable',
-        )
+        $ruleArray
       );
     }
 
