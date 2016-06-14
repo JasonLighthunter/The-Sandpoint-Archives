@@ -84,17 +84,24 @@
       return $query->row_array();
     }
 
-    public function getAllExcept($id = FALSE) {
-      if($id === FALSE) {
-        return $this->get();
+
+    public function getAllIdExcept($id = FALSE) {
+      if($id !== FALSE) {
+        $this->db->select('id, name');
+        $this->db->from($this->table);
+        $this->db->where('id !=', $id);
+        $query = $this->db->get();
+        $resultArray = $query->result_array();
+      } else {
+        $resultArray = $this->get();
       }
 
-      $this->db->select('id, name');
-      $this->db->from($this->table);
-      $this->db->where('id !=', $id);
-      $query = $this->db->get();
+      $optionsArray = array (0 => 'no category');
 
-      return $query->result_array();
+      foreach ($resultArray as $category) {
+        $optionsArray[$category['id']] = $category['name'];
+      }
+      return $optionsArray;
     }
 
     public function getAllChildrenArray(){

@@ -26,9 +26,12 @@
   </head>
   <body>
     <?php
-      echo '<pre>'; var_dump($this->session->loggedInUser); echo '</pre>';
+      echo '<pre>';
+        var_dump($this->session->loggedInUser);
+      echo '</pre>';
       require_once 'navBar.php';
+      echo '<div class="container-fluid">';
+        require_once 'breadcrumbs.php';
+        echo '<div class="well">';
+          require_once 'pageTitle.php';
     ?>
-    <div class="container-fluid">
-      <div class="well">
-        <?php require_once 'pageTitle.php'; ?>

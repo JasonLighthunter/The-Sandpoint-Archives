@@ -38,7 +38,7 @@
         redirect('noPermission');
       }
       $data['title']           = 'Create a new category';
-      $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept());
+      $data['possibleParents'] = $this->categoriesModel->getAllIdExcept();
 
       $this->setValidationRules();
 
@@ -65,7 +65,7 @@
       }
       $data['category']        = $this->categoriesModel->get($id);
       $data['title']           = 'Edit category: '.$data['category']['name'];
-      $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept($id));
+      $data['possibleParents'] = $this->categoriesModel->getAllIdExcept($id);
 
       $this->setValidationRules('update', $id);
 
@@ -76,7 +76,7 @@
 
         $data['category']        = $this->categoriesModel->get($id);
         $data['title']           = 'Edit category: '.$data['category']['name'];
-        $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept($id));
+        $data['possibleParents'] = $this->categoriesModel->getAllIdExcept($id);
 
         $data['messageType'] = 'success';
         $data['message']     = 'You have succesfully edited the category: "'.
@@ -114,15 +114,6 @@
       $this->load->view('templates/header', $data);
       $this->load->view('categories/'.$type, $data);
       $this->load->view('templates/footer');
-    }
-
-    // translates {0:id,1:name,2:parent_id} to {id:name}
-    private function resultArrayToOptionsArray($resultArray) {
-      $optionsArray = array (0 => 'no parent');
-      foreach ($resultArray as $category) {
-        $optionsArray[$category['id']] = $category['name'];
-      }
-      return $optionsArray;
     }
 
     private function categoryExists($identifier, $type) {

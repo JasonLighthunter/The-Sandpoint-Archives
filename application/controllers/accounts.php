@@ -93,7 +93,8 @@
         'Username',
         array(
           'required',
-          'callback_usernameExists'
+          'callback_usernameExists',
+          'max_length[50]'
         )
       );
 

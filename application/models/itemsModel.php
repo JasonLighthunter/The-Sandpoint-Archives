@@ -21,11 +21,33 @@
       return $query->row_array();
     }
 
+    public function create() {
+      $data = array(
+        'name'         => $this->input->post('name'),
+        'price_gold'   => $this->input->post('price'),
+        'description'  => $this->input->post('desc'),
+        'item_class'   => $this->input->post('item_class'),
+        'weapon_class' => $this->input->post('weapon_class'),
+        'image_id'     => $this->session->image_id
+      );
+      if($this->input->post('category_id') !== "0") {
+        $data['category_id'] = intval($this->input->post('category_id'));
+      }
+      return $this->db->insert($this->table, $data);
+    }
+
     //webs
     public function getThreeRandomWeapons() {
       $this->db->order_by('name', 'RANDOM');
       $query = $this->db->get_where($this->table, array('item_class' => 5), 3);
       return $query->result_array();
+    }
+    public function getByName($name) {
+      $query = $this->db->get_where(
+        $this->table,
+        array('name' => $name)
+      );
+      return $query->row_array();
     }
     public function getByCategories($categories) {
       $this->db->select(
@@ -69,6 +91,7 @@
             $this->table.'.name AS name,'.
             'categories.id AS category_id,'.          //webs
             'categories.name AS category,'.           //webs
+            'images.name AS image_name,'.                 //webs
             'item_classes.name AS class_name,'.
             'weapon_classes.name AS weapon_class,'.
             $this->table.'.description AS description,'.
@@ -118,6 +141,11 @@
           $this->db->join(
             'categories',
             'categories.id = '.$this->table.'.category_id',
+            'left'
+          );
+          $this->db->join(
+            'images',
+            'images.id = '.$this->table.'.image_id',
             'left'
           );
           // webs

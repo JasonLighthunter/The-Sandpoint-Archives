@@ -67,6 +67,7 @@ $route['feats']                = 'feats/index';
 $route['items/create']         = 'items/create';
 $route['items/(:any)/(:any)']  = 'items/detail/$2/$1';
 $route['items/(:any)']         = 'items/index/$1';
+$route['items']                = 'items/index';
 //Login Routes
 $route['login/submit/(:any)']  = 'login/submit/$1';
 $route['login']                = 'login/login';

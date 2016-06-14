@@ -29,7 +29,7 @@
     echo '<div class="form-group">';
       echo form_label($label, $attributes['id']);
       if ($options === FALSE) {
-        $options = array(0 => 'No Parent Category Possible');
+        $options = array(0 => 'No Category Possible');
         echo form_dropdown(
           $name,
           $options,

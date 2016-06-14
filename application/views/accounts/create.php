@@ -23,6 +23,7 @@
         'class'       => 'form-control',
         'placeholder' => $label,
         'value'       => set_value('username'),
+        'maxlength'   => 50,
         'required'    => ''
       );
       generateFormGroupInput($label, $iconData, $inputData, $hasErrorDiv, $isRequired);
