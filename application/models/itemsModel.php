@@ -36,6 +36,39 @@
       return $this->db->insert($this->table, $data);
     }
 
+    public function update($id = FALSE) {
+      if($id === FALSE) {
+        return FALSE;
+      }
+      $data = array(
+        'name'         => $this->input->post('name'),
+        'price_gold'   => $this->input->post('price'),
+        'description'  => $this->input->post('desc'),
+        'item_class'   => $this->input->post('item_class'),
+        'weapon_class' => $this->input->post('weapon_class'),
+      );
+
+      if (intval($this->input->post('category_id')) !== 0) {
+        $data['category_id'] = intval($this->input->post('category_id'));
+      }
+
+      if(intval($this->session->image_id) !== 0) {
+        $data['image_id'] = intval($this->session->image_id);
+      }
+
+      $this->db->where('id', $id);
+      $this->db->update($this->table, $data);
+    }
+
+    public function delete($id) {
+      if($id !== FALSE) {
+        $this->db->delete(
+          $this->table,
+          array ('id' => $id)
+        );
+      }
+    }
+
     //webs
     public function getThreeRandomWeapons() {
       $this->db->order_by('name', 'RANDOM');
@@ -92,6 +125,7 @@
             'categories.id AS category_id,'.          //webs
             'categories.name AS category,'.           //webs
             'images.name AS image_name,'.                 //webs
+            $this->table.'.price_gold AS price_gold,'.  //webs
             'item_classes.name AS class_name,'.
             'weapon_classes.name AS weapon_class,'.
             $this->table.'.description AS description,'.

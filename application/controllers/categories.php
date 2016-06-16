@@ -5,6 +5,7 @@
       $this->load->model('categoriesModel');
       $this->load->model('navItemsModel');
       $this->load->model('itemsModel');
+      $this->load->model('imagesModel');
     }
 
     //this calls the index pages of the Categories section
@@ -45,6 +46,7 @@
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'create');
       } else {
+        $this->session->image_id = $this->do_upload('newFile', 'create');
         $this->categoriesModel->create();
 
         $data['messageType'] = 'success';
@@ -72,6 +74,8 @@
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'update');
       } else {
+        $this->session->image_id = $this->do_upload('newFile', 'update');
+
         $this->categoriesModel->update($id);
 
         $data['category']        = $this->categoriesModel->get($id);
@@ -131,6 +135,33 @@
         return FALSE;
       }
       return TRUE;
+    }
+
+    public function do_upload($upload = '', $mode = 'create') {
+      $config['upload_path']      = './assets/images/uploads/';
+      $config['allowed_types']    = 'gif|jpeg|jpg|png';
+      $config['max_size']         = 100;
+      $config['max_width']        = 300;
+      $config['max_height']       = 300;
+      $config['remove_spaces']    = TRUE;
+      $config['file_ext_tolower'] = TRUE;
+
+      $this->load->library('upload', $config);
+
+      if (! $this->upload->do_upload($upload)) {
+        switch ($mode) {
+          case 'create':
+            return 1;
+          case 'update':
+            return 0;
+          default:
+            return 1;
+        }
+      } else {
+        $this->imagesModel->create($this->upload->data('file_name'));
+
+        return $this->imagesModel->getHighestId();
+      }
     }
 
     //validation

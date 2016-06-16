@@ -7,7 +7,18 @@
     'data-toggle' => 'validator',
     'role'        => 'form'
   );
-  echo form_open('categories/update/'.$category['id'], $attributes);
+  echo form_open_multipart('categories/update/'.$category['id'], $attributes);
+
+  echo '<div class="row">';
+    echo '<div class="col-sm-6 col-lg-4">';
+
+    $inputData = array(
+      'name' => 'newFile'
+    );
+    echo form_upload($inputData);
+
+    echo '</div>';
+  echo '</div>';
 
   echo '<div class="row">';
     echo '<div class="col-sm-6 col-lg-4">';

@@ -1,5 +1,13 @@
 <div class="row">
   <div class="col-sm-2">
+    <b>Image:</b>
+  </div>
+  <div class="col-sm-10">
+    <?php echo '<img src='.base_url('assets/images/uploads/'.$category['image_name']).'>'; ?>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2">
     <b>Name:</b>
   </div>
   <div class="col-sm-10">
@@ -7,9 +15,7 @@
   </div>
 </div>
 <br>
-<?php
-  if(!empty($subCategories)) {
-?>
+<?php if(!empty($subCategories)) { ?>
 <div class="row">
   <div class="col-sm-2">
     <b>SubCategories:</b>
@@ -24,22 +30,18 @@
   </div>
 </div>
 <br>
-<?php
-  }
-  echo '<div class="row">';
-    echo '<div class="col-sm-2">';
-      echo '<b>Weapons</b>';
-    echo '</div>';
-
-    echo '<div class="col-sm-10">';
-    foreach ($items as $item) {
-      echo anchor(
-        $item['class_uri'].'/'.$item['id'],
-        $item['name']
-      );
-      echo '<br>';
-    }
-    echo '</div>';
-
-  echo '</div>';
-?>
+<?php } ?>
+<div class="row">
+  <div class="col-sm-2">
+    <b>Weapons</b>
+  </div>
+  <div class="col-sm-10">
+    <?php
+      foreach ($items as $item) {
+        $href = site_url($item['class_uri'].'/'.$item['id']);
+        echo anchor($href, $item['name']);
+        echo '<br>';
+      }
+    ?>
+  </div>
+</div>

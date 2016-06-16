@@ -9,7 +9,7 @@
     }
 
     //this calls the index pages of the Weapons section
-    public function index($itemType = 'weapons') {
+    public function index($data = FALSE, $itemType = 'weapons') {
       if($itemType === FALSE) {
         show_404();
       }
@@ -70,6 +70,61 @@
       }
     }
 
+    public function update($id = FALSE) {
+      if($id === FALSE) {
+        return FALSE;
+      }
+      if (!$this->session->inAdminMode) {
+        redirect('noPermission');
+      }
+      $data['item']               = $this->itemsModel->get($id, 'weapons');
+      $data['title']              = 'Edit weapon: '.$data['item']['name'];
+      $data['possibleCategories'] = $this->categoriesModel->getAllIdExcept();
+
+      $this->setValidationRules('update', $id);
+
+      if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
+        $this->view($data, 'update', 'weapons');
+      } else {
+        $this->session->image_id = $this->do_upload('newFile', 'update');
+
+        $this->itemsModel->update($id);
+
+        $data['item']            = $this->itemsModel->get($id, 'weapons');
+        $data['title']           = 'Edit weapon: '.$data['item']['name'];
+        $data['possibleParents'] = $this->categoriesModel->getAllIdExcept($id);
+
+        $data['messageType'] = 'success';
+        $data['message']     = 'You have succesfully edited the weapon: "'.
+                                $this->input->post('name').'".';
+
+        $this->view($data, 'update', 'weapons');
+      }
+    }
+
+    public function delete($id = FALSE) {
+      if (!$this->session->inAdminMode) {
+        redirect('noPermission');
+      }
+      $data = FALSE;
+      if ($id !== FALSE) {
+
+        if($this->itemExists($id, 'id')) {
+
+          $name = $this->itemsModel->get($id, 'weapons')['name'];
+
+          $this->itemsModel->delete($id);
+
+          $data['messageType'] = 'success';
+          $data['message']     = 'Weapon "'.$name.'" is succesfully removed.';
+        } else {
+          $data['messageType'] = 'danger';
+          $data['message']     = 'The weapon you tried to delete does not exist.';
+        }
+      }
+      $this->index($data);
+    }
+
     //$type is the name of the file that has to be called.
     private function view($data, $pageType, $itemType) {
       $data['navItems'] = $this->navItemsModel->get();
@@ -84,6 +139,9 @@
             case 'create':
               $this->load->view('items/create', $data);
               break;
+            case 'update':
+              $this->load->view('items/update', $data);
+              break;
             default:
               $this->load->view('items/'.$itemType.'/'.$pageType, $data);
               break;
@@ -97,7 +155,7 @@
       $this->load->view('templates/footer');
     }
 
-    public function do_upload($upload = '') {
+    public function do_upload($upload = '', $mode = 'create') {
       $config['upload_path']      = './assets/images/uploads/';
       $config['allowed_types']    = 'gif|jpg|png';
       $config['max_size']         = 100;
@@ -109,13 +167,26 @@
       $this->load->library('upload', $config);
 
       if (! $this->upload->do_upload($upload)) {
-        return 1;
+        switch ($mode) {
+          case 'create':
+            return 1;
+          case 'update':
+            return 0;
+          default:
+            return 1;
+        }
       } else {
         $this->imagesModel->create($this->upload->data('file_name'));
         return $this->imagesModel->getHighestId();
       }
     }
 
+    private function itemExists($identifier, $type = 'name') {
+      if($this->itemAvailable($identifier, $type)) {
+        return FALSE;
+      }
+      return TRUE;
+    }
 
     //checks if logged in user has admin permissions
     //return TRUE if true or redirects user to adminlogin/noPermissions page
@@ -134,16 +205,30 @@
     }
 
     //this method sets the
-    private function setValidationRules() {
+    private function setValidationRules($type = 'create', $id = FALSE) {
       //name field
+      switch ($type) {
+        case 'update':
+          if($id === FALSE || $this->input->post('name') !== $this->itemsModel->get($id, 'weapons')['name']) {
+            $ruleArray = array (
+              'required',
+              'callback_itemAvailable'
+            );
+          } else {
+            $ruleArray = array('required');
+          }
+          break;
+        default:
+          $ruleArray = array (
+            'required',
+            'callback_itemAvailable'
+          );
+          break;
+      }
       $this->form_validation->set_rules(
         'name',
         'Name',
-        array(
-          'required',
-          'callback_itemExists',
-          'max_length[50]'
-        )
+        $ruleArray
       );
       $this->form_validation->set_rules(
         'desc',
@@ -169,14 +254,22 @@
       );
     }
 
-    public function itemExists($name) {
-      $result = $this->itemsModel->getByName($name);
+    public function itemAvailable($identifier, $type = 'name') {
+      switch ($type) {
+        case 'id':
+          $result = $this->itemsModel->get($identifier, 'weapons');
+          break;
+        case 'name':
+        default:
+          $result = $this->itemsModel->getByName($identifier);
+          break;
+      }
       if(empty($result)){
         return TRUE;
       }
       $this->form_validation->set_message(
-        'usernameExists',
-        'This username is already taken'
+        'itemAvailable',
+        'An item with the same name already exists'
       );
       return FALSE;
     }
