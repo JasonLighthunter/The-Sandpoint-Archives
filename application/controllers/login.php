@@ -18,13 +18,9 @@
     }
 
     public function logout() {
-      if ($this->session->has_userdata('loggedInUser')) {
-
-        $this->session->unset_userdata('loggedInUser');
-        $this->session->unset_userdata('inAdminMode');
-
-        redirect('home');
-      }
+      $this->session->unset_userdata('loggedInUser');
+      $this->session->unset_userdata('inAdminMode');
+      redirect('home');
     }
 
     public function submit($role = 'user') {
@@ -33,6 +29,7 @@
       }
 
       $this->setValidationRules($role);
+
       if ($this->form_validation->run() === FALSE) {
         $this->view('login', FALSE, $role);
       } else {
@@ -51,7 +48,7 @@
             'role_value' => $this->accountsModel->getByUsername($username)['role_value']
           );
           $this->session->inAdminMode = TRUE;
-        } 
+        }
         redirect('accounts/'.$this->session->loggedInUser['user_id']);
       }
     }
@@ -69,29 +66,25 @@
     private function setValidationRules($role = 'user') {
       switch ($role) {
         case 'admin':
-          $this->form_validation->set_rules(
-            'username',
-            'Username',
-            array(
-              'required',
-              'callback_usernameExists',
-              'callback_userHasRole['.$role.']'
-            )
+          $usernameRules = array (
+            'required',
+            'callback_usernameExists',
+            'callback_userHasRole['.$role.']'
           );
           break;
         case 'user':
-          $this->form_validation->set_rules(
-            'username',
-            'Username',
-            array(
-              'required',
-              'callback_usernameExists'
-            )
+        default:
+          $usernameRules = array (
+            'required',
+            'callback_usernameExists'
           );
           break;
-        default:
-          break;
       }
+      $this->form_validation->set_rules(
+        'username',
+        'Username',
+        $usernameRules
+      );
 
       $this->form_validation->set_rules(
         'password',

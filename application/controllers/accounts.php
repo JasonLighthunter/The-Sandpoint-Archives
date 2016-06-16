@@ -3,6 +3,7 @@
     public function __construct() {
       parent::__construct();
       $this->load->model('accountsModel');
+      $this->load->model('customersModel'); //webs
       $this->load->model('rolesModel');
       $this->load->model('navItemsModel');
 
@@ -15,7 +16,10 @@
     }
 
     //this calls the index pages of the Accounts section
-    public function index() {
+    public function index($data = FALSE) {
+      if(!$this->session->inAdminMode) {
+        redirect('home');
+      }
       $data['accounts'] = $this->accountsModel->get();
       $data['title']    = 'Accounts';
 
@@ -24,15 +28,22 @@
 
     //this calls a certian view of the Accounts section
     public function detail($id = FALSE) {
-      $data['account'] = $this->accountsModel->get($id);
-      if(empty($data['account'])) {
+      if($id === FALSE) {
         show_404();
-      } else {
-        $data['roles'] = $this->roleValueToRoles($data['account']['role_value']);
-        $data['title'] = $data['account']['username'];
-
-        $this->view($data,'view');
       }
+      if($this->session->inAdminMode || $id === $this->session->loggedInUser['user_id']) {
+        $data['account'] = $this->accountsModel->get($id);
+        if(empty($data['account'])) {
+          show_404();
+        } else {
+          $data['roles'] = $this->roleValueToRoles($data['account']['role_value']);
+          $data['title'] = $data['account']['username'];
+
+          $this->view($data,'view');
+          return;
+        }
+      }
+      redirect('noPermissions');
     }
 
     public function create() {
@@ -46,6 +57,22 @@
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'create');
       } else {
+
+      //webs
+        $this->customersModel->create();
+
+        $customerData = array (
+          'first_name'  => $this->input->post('first-name'),
+          'last_name'   => $this->input->post('last-name'),
+          'street'      => $this->input->post('street'),
+          'number'      => $this->input->post('number'),
+          'city'        => $this->input->post('city'),
+          'postal_code' => $this->input->post('postal-code')
+        );
+
+        $this->session->customerId = $this->customersModel->getByData($customerData)['id'];
+      //webs
+
         $this->accountsModel->create();
 
         $data['messageType'] = 'success';
@@ -53,6 +80,34 @@
 
         $this->view($data, 'create');
       }
+    }
+
+    public function delete($id = FALSE) {
+      if(!$this->session->inAdminMode) {
+        redirect('noPermissions');
+      }
+      $data = FALSE;
+      if($id !== FALSE){
+        if($this->session->inAdminMode && $id !== $this->session->loggedInUser['user_id']) {
+
+          if($this->accountExists($id)) {
+
+            $name = $this->accountsModel->get($id)['username'];
+
+            $this->accountsModel->delete($id);
+
+            $data['messageType'] = 'success';
+            $data['message']     = 'You succesfully deleted the account of: '.$name;
+          } else {
+            $data['messageType'] = 'danger';
+            $data['message']     = 'The account you are trying to delete does not exist';
+          }
+        } else {
+          $data['messageType'] = 'danger';
+          $data['message']     = 'You cannot delete you own account.';
+        }
+      }
+      $this->index($data);
     }
 
     //type is the name of the file that has to be called.
@@ -64,6 +119,13 @@
       $this->load->view('templates/footer');
     }
 
+    private function accountExists($id) {
+      $result = $this->accountsModel->get($id);
+      if(empty($result)){
+        return FALSE;
+      }
+      return TRUE;
+    }
     //converts roleValue to an array of human readable roles
     //for example: 7 wil become user, moderator, admin because user(1) + moderator(2) + admin(4) = 7;
     private function roleValueToRoles($roleValue) {
@@ -116,6 +178,56 @@
         array(
           'required',
           'matches[password]'
+        )
+      );
+
+      $this->form_validation->set_rules(
+        'first-name',
+        'First Name',
+        array(
+          'required',
+          'max_length[50]'
+        )
+      );
+      $this->form_validation->set_rules(
+        'last-name',
+        'Last Name',
+        array(
+          'required',
+          'max_length[50]'
+        )
+      );
+      $this->form_validation->set_rules(
+        'street',
+        'Street',
+        array(
+          'required',
+          'max_length[50]'
+        )
+      );
+      $this->form_validation->set_rules(
+        'number',
+        'House Number',
+        array(
+          'required',
+          'max_length[4]'
+        )
+      );
+      $this->form_validation->set_rules(
+        'city',
+        'City',
+        array(
+          'required',
+          'max_length[50]'
+        )
+      );
+      $this->form_validation->set_rules(
+        'postal-code',
+        'Postal Code',
+        array(
+          'required',
+          'min_length[7]',
+          'max_length[7]'
         )
       );
     }

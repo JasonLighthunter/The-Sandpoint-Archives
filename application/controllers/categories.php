@@ -36,7 +36,7 @@
     //create
     public function create() {
       if (!$this->session->inAdminMode) {
-        redirect('noPermission');
+        redirect('noPermissions');
       }
       $data['title']           = 'Create a new category';
       $data['possibleParents'] = $this->categoriesModel->getAllIdExcept();
@@ -63,7 +63,7 @@
         return FALSE;
       }
       if (!$this->session->inAdminMode) {
-        redirect('noPermission');
+        redirect('noPermissions');
       }
       $data['category']        = $this->categoriesModel->get($id);
       $data['title']           = 'Edit category: '.$data['category']['name'];
@@ -93,7 +93,7 @@
     //delete
     public function delete($id = FALSE) {
       if (!$this->session->inAdminMode) {
-        redirect('noPermission');
+        redirect('noPermissions');
       }
       $data = FALSE;
       if ($id !== FALSE) {
