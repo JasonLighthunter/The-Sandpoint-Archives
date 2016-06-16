@@ -4,14 +4,14 @@
   require APPPATH.'helpers/errorGenerator.php';
 
   $hidden     = array (
-    'item_class' => '5',
+    'item_class'   => '5',
     'weapon_class' => '2'
   );
   $attributes = array (
     'data-toggle' => 'validator',
     'role'        => 'form'
   );
-  echo form_open_multipart('items/create', $attributes, $hidden);
+  echo form_open_multipart('items/update/'.$item['id'], $attributes, $hidden);
 
   echo '<div class="row">';
     echo '<div class="col-sm-6 col-lg-4">';
@@ -36,7 +36,7 @@
         'class'       => 'form-control',
         'placeholder' => $label,
         'maxlength'   => 50,
-        'value'       => set_value('name'),
+        'value'       => $item['name'],
         'required'    => ''
       );
       //                      label  icondata inputdata   hasErrorDiv isrequired
@@ -56,7 +56,7 @@
         'class'       => 'form-control',
         'placeholder' => $label,
         'maxlength'   => 5000,
-        'value'       => set_value('desc'),
+        'value'       => $item['description'],
         'required'    => ''
       );
       //                      label  icondata inputdata   hasErrorDiv isrequired
@@ -83,7 +83,12 @@
       } else {
         $options = FALSE;
       }
-      generateFormGroupSelect($label, $name, $attributes, $options, TRUE);
+
+      if($item['category_id'] !== NULL) {
+        generateFormGroupSelect($label, $name, $attributes, $options, TRUE, '', $item['category_id']);
+      } else {
+        generateFormGroupSelect($label, $name, $attributes, $options, TRUE);
+      }
 
     echo '</div>';
   echo '</div>';
@@ -99,7 +104,7 @@
         'class'       => 'form-control',
         'placeholder' => $label,
         'maxlength'   => 8,
-        'value'       => set_value('price'),
+        'value'       => $item['price_gold'],
         'step'        => 0.01,
         'min'         => 0.00,
         'max'         => 999999.99,
@@ -110,12 +115,11 @@
 
     echo '</div>';
   echo '</div>';
-
   //submit button
   $inputData = array (
     'name'  => 'submit',
-    'class' => 'btn btn-default',
-    'value' => 'Create Weapon'
+    'class' => 'submit-btn btn btn-default',
+    'value' => 'Edit Weapon'
   );
   echo form_submit($inputData);
   echo form_close();

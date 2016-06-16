@@ -22,3 +22,18 @@
     <?php echo $item['description']; ?>
   </div>
 </div>
+<!-- webs -->
+<div class="row">
+  <div class="col-sm-2">
+    <b>Category:</b>
+  </div>
+  <div class="col-sm-10">
+    <?php
+      echo anchor(
+        'categories/'.$item['category_id'],
+        $item['category']
+      );
+    ?>
+  </div>
+</div>
+<!-- webs -->

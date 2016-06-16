@@ -4,6 +4,8 @@
       parent::__construct();
       $this->load->model('categoriesModel');
       $this->load->model('navItemsModel');
+      $this->load->model('itemsModel');
+      $this->load->model('imagesModel');
     }
 
     //this calls the index pages of the Categories section
@@ -20,8 +22,13 @@
       if(empty($data['category'])) {
         show_404();
       } else {
+        $this->categoriesModel->getAllChildren($id);
+        $children              = $this->categoriesModel->getAllChildrenArray();
+
+        $data['items']         = $this->itemsModel->getByCategories($children);
         $data['title']         = $data['category']['name'];
         $data['subCategories'] = $this->categoriesModel->getChildrenById($id);
+
         $this->view($data,'view');
       }
     }
@@ -32,13 +39,14 @@
         redirect('noPermission');
       }
       $data['title']           = 'Create a new category';
-      $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept());
+      $data['possibleParents'] = $this->categoriesModel->getAllIdExcept();
 
       $this->setValidationRules();
 
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'create');
       } else {
+        $this->session->image_id = $this->do_upload('newFile', 'create');
         $this->categoriesModel->create();
 
         $data['messageType'] = 'success';
@@ -59,18 +67,20 @@
       }
       $data['category']        = $this->categoriesModel->get($id);
       $data['title']           = 'Edit category: '.$data['category']['name'];
-      $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept($id));
+      $data['possibleParents'] = $this->categoriesModel->getAllIdExcept($id);
 
       $this->setValidationRules('update', $id);
 
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'update');
       } else {
+        $this->session->image_id = $this->do_upload('newFile', 'update');
+
         $this->categoriesModel->update($id);
 
         $data['category']        = $this->categoriesModel->get($id);
         $data['title']           = 'Edit category: '.$data['category']['name'];
-        $data['possibleParents'] = $this->resultArrayToOptionsArray($this->categoriesModel->getAllExcept($id));
+        $data['possibleParents'] = $this->categoriesModel->getAllIdExcept($id);
 
         $data['messageType'] = 'success';
         $data['message']     = 'You have succesfully edited the category: "'.
@@ -110,15 +120,6 @@
       $this->load->view('templates/footer');
     }
 
-    // translates {0:id,1:name,2:parent_id} to {id:name}
-    private function resultArrayToOptionsArray($resultArray) {
-      $optionsArray = array (0 => 'no parent');
-      foreach ($resultArray as $category) {
-        $optionsArray[$category['id']] = $category['name'];
-      }
-      return $optionsArray;
-    }
-
     private function categoryExists($identifier, $type) {
       switch ($type) {
         case 'name':
@@ -134,6 +135,33 @@
         return FALSE;
       }
       return TRUE;
+    }
+
+    public function do_upload($upload = '', $mode = 'create') {
+      $config['upload_path']      = './assets/images/uploads/';
+      $config['allowed_types']    = 'gif|jpeg|jpg|png';
+      $config['max_size']         = 100;
+      $config['max_width']        = 300;
+      $config['max_height']       = 300;
+      $config['remove_spaces']    = TRUE;
+      $config['file_ext_tolower'] = TRUE;
+
+      $this->load->library('upload', $config);
+
+      if (! $this->upload->do_upload($upload)) {
+        switch ($mode) {
+          case 'create':
+            return 1;
+          case 'update':
+            return 0;
+          default:
+            return 1;
+        }
+      } else {
+        $this->imagesModel->create($this->upload->data('file_name'));
+
+        return $this->imagesModel->getHighestId();
+      }
     }
 
     //validation

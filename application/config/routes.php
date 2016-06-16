@@ -65,8 +65,11 @@ $route['feats/(:any)']         = 'feats/detail/$1';
 $route['feats']                = 'feats/index';
 //Items Routes
 $route['items/create']         = 'items/create';
+$route['items/delete/(:any)']  = 'items/delete/$1';
+$route['items/update/(:any)']  = 'items/update/$1';
 $route['items/(:any)/(:any)']  = 'items/detail/$2/$1';
-$route['items/(:any)']         = 'items/index/$1';
+$route['items/(:any)']         = 'items/index/$2';
+$route['items']                = 'items/index';
 //Login Routes
 $route['login/submit/(:any)']  = 'login/submit/$1';
 $route['login']                = 'login/login';

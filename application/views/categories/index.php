@@ -19,23 +19,32 @@
 <div class="table-responsive">
   <table class="table">
     <tr>
+      <th>Image</th>
       <th>Name</th>
-      <th></th>
-      <th></th>
+      <?php
+        if($this->session->inAdminMode) {
+          echo '<th></th>';
+          echo '<th></th>';
+        }
+      ?>
     </tr>
-    <?php foreach ($categories as $item) { ?>
-      <tr>
-        <td >
-          <?php
+    <?php
+      foreach ($categories as $item) {
+        echo '<tr>';
+
+          echo '<td>';
+            echo '<img src='.base_url('assets/images/uploads/'.$item['image_name']).'>';
+          echo '</td>';
+
+          echo '<td>';
             //name
             echo anchor(
               'categories/'.$item['id'],
               $item['name']
             );
-          ?>
-        </td>
-        <td >
-          <?php
+          echo '</td>';
+
+          echo '<td>';
             // delete
             if($this->session->inAdminMode) {
               $inputData = array (
@@ -49,10 +58,9 @@
               $iconData  = 'fa fa-trash-o fa-fw';
               generateButton($inputData, $iconData);
             }
-          ?>
-        </td>
-        <td >
-          <?php
+          echo '</td>';
+
+          echo '<td>';
             // edit
             if($this->session->inAdminMode) {
               $inputData = array (
@@ -66,9 +74,9 @@
               $iconData  = 'fa fa-pencil fa-fw';
               generateButton($inputData, $iconData);
             }
-          ?>
-        </td>
-      </tr>
-    <?php } ?>
+          echo '</td>';
+        echo '</tr>';
+      }
+    ?>
   </table>
 </div>
