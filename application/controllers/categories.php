@@ -69,7 +69,7 @@
       $data['title']           = 'Edit category: '.$data['category']['name'];
       $data['possibleParents'] = $this->categoriesModel->getAllIdExcept($id);
 
-      $this->setValidationRules('update', $id);
+      $this->setValidationRules($id);
 
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'update');
@@ -150,10 +150,9 @@
 
       if (! $this->upload->do_upload($upload)) {
         switch ($mode) {
-          case 'create':
-            return 1;
           case 'update':
             return 0;
+          case 'create':
           default:
             return 1;
         }
@@ -165,7 +164,7 @@
     }
 
     //validation
-    private function setValidationRules($type = 'create', $id = FALSE) {
+    private function setValidationRules($id = FALSE) {
       //parent
       $this->form_validation->set_rules(
         'parent',
@@ -175,24 +174,16 @@
           'callback_createsEndlessLoop'
         )
       );
+
       //name
-      switch ($type) {
-        case 'update':
-          if($id === FALSE || $this->input->post('name') !== $this->categoriesModel->get($id)['name']) {
-            $ruleArray = array (
-              'required',
-              'callback_nameAvailable'
-            );
-          } else {
-            $ruleArray = array('required');
-          }
-          break;
-        default:
-          $ruleArray = array (
-            'required',
-            'callback_nameAvailable'
-          );
-          break;
+
+      if($id === FALSE || $this->input->post('name') !== $this->categoriesModel->get($id)['name']) {
+        $ruleArray = array (
+          'required',
+          'callback_nameAvailable'
+        );
+      } else {
+        $ruleArray = array('required');
       }
       $this->form_validation->set_rules(
         'name',

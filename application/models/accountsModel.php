@@ -13,13 +13,33 @@
           $this->table.'.username AS username'
         );
         $this->db->from($this->table);
-        $this->db->join('customers', 'customers.id = '.$this->table.'.customer_id', 'left');
+        $this->db->join(
+          'customers',
+          'customers.id = '.$this->table.'.customer_id',
+          'left'
+        );
         $query = $this->db->get();
         return $query->result_array();
       }
-      $this->db->select('*');
+      $this->db->select(
+        $this->table.'.id as id,'.
+        $this->table.'.username AS username,'.
+        $this->table.'.role_value AS role_value,'.
+        'customers.id AS c_id,'.
+        'customers.first_name AS first_name,'.
+        'customers.last_name AS last_name,'.
+        'customers.street AS street,'.
+        'customers.number AS number,'.
+        'customers.extra_info AS extra_info,'.
+        'customers.city AS city,'.
+        'customers.postal_code'
+      );
       $this->db->from($this->table);
-      $this->db->join('customers', 'customers.id = '.$this->table.'.customer_id', 'left');
+      $this->db->join(
+        'customers',
+        'customers.id = '.$this->table.'.customer_id',
+        'left'
+      );
       $this->db->where($this->table.'.id', $id);
       $query = $this->db->get();
       return $query->row_array();
@@ -44,6 +64,15 @@
       );
 
       return $this->db->insert($this->table, $data);
+    }
+
+    public function update($id) {
+      $data = array(
+        'username' => $this->input->post('username'),
+      );
+
+      $this->db->where('id', $id);
+      $this->db->update($this->table, $data);
     }
 
     public function delete($id) {

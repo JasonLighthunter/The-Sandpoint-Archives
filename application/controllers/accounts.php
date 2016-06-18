@@ -82,6 +82,36 @@
       }
     }
 
+    public function update($id = FALSE) {
+      if($id === FALSE) {
+        return FALSE;
+      }
+      if (!$this->session->inAdminMode) {
+        redirect('noPermissions');
+      }
+
+      $data['account'] = $this->accountsModel->get($id);
+      $data['title']   = 'Edit account: '.$data['account']['username'];
+
+      $this->setValidationRules($id);
+
+      if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
+        $this->view($data, 'update');
+      } else {
+        $this->customersModel->update($data['account']['c_id']);
+        $this->accountsModel->update($id);
+
+        $data['account']     = $this->accountsModel->get($id);
+        $data['title']       = 'Edit account: '.$data['account']['username'];
+        $data['messageType'] = 'success';
+        $data['message']     = 'You have succesfully edited the category: "'.
+                               $this->input->post('username').'".';
+
+        $this->view($data, 'update');
+      }
+
+    }
+
     public function delete($id = FALSE) {
       if(!$this->session->inAdminMode) {
         redirect('noPermissions');
@@ -92,8 +122,11 @@
 
           if($this->accountExists($id)) {
 
-            $name = $this->accountsModel->get($id)['username'];
+            $oldAccount = $this->accountsModel->get($id);
+            $name       = $oldAccount['username'];
+            $customerId = $oldAccount['c_id'];
 
+            $this->customersModel->delete($customerId);
             $this->accountsModel->delete($id);
 
             $data['messageType'] = 'success';
@@ -148,39 +181,46 @@
       return $result;
     }
 
-    private function setValidationRules() {
+    private function setValidationRules($id = FALSE) {
       //username field
+      $ruleArray = array();
+
       $this->form_validation->set_rules(
         'username',
         'Username',
-        array(
+        array (
           'required',
           'callback_usernameExists',
           'max_length[50]'
         )
       );
 
-      //password field
-      $this->form_validation->set_rules(
-        'password',
-        'Password',
-        array (
-          'required',
-          'min_length[6]',
-          'max_length[72]'
-        )
-      );
+      //password and password-conf
+      if($id === FALSE) {
+        //password field
+        $this->form_validation->set_rules(
+          'password',
+          'Password',
+          array (
+            'required',
+            'min_length[6]',
+            'max_length[72]'
+          )
+        );
 
-      //password-confirm field
-      $this->form_validation->set_rules(
-        'password-confirm',
-        'Password Conformation',
-        array(
-          'required',
-          'matches[password]'
-        )
-      );
+        //password-confirm field
+        $this->form_validation->set_rules(
+          'password-confirm',
+          'Password Conformation',
+          array(
+            'required',
+            'matches[password]'
+          )
+        );
+      }
 
+      //webs
+      //fist name
       $this->form_validation->set_rules(
         'first-name',
         'First Name',
@@ -189,6 +229,8 @@
           'max_length[50]'
         )
       );
+
+      //last name
       $this->form_validation->set_rules(
         'last-name',
         'Last Name',
@@ -197,6 +239,8 @@
           'max_length[50]'
         )
       );
+
+      //street
       $this->form_validation->set_rules(
         'street',
         'Street',
@@ -205,6 +249,7 @@
           'max_length[50]'
         )
       );
+      //house number
       $this->form_validation->set_rules(
         'number',
         'House Number',
@@ -213,6 +258,8 @@
           'max_length[4]'
         )
       );
+
+      //city
       $this->form_validation->set_rules(
         'city',
         'City',
@@ -221,6 +268,8 @@
           'max_length[50]'
         )
       );
+
+      //postal code
       $this->form_validation->set_rules(
         'postal-code',
         'Postal Code',
@@ -230,12 +279,17 @@
           'max_length[7]'
         )
       );
+      //webs
     }
 
     //Validation Methods
     public function usernameExists($username) {
-      $result = $this->accountsModel->getByUsername($username);
-      if(empty($result)){
+      $userWithUsername = $this->accountsModel->getByUsername($username);
+      if(empty($userWithUsername)){
+        return TRUE;
+      }
+      $userWithId = $this->accountsModel->get($this->input->post('id'));
+      if(!empty($userWithId) && ($userWithId['username'] === $userWithUsername['username'])) {
         return TRUE;
       }
       $this->form_validation->set_message(
