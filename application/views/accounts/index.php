@@ -3,26 +3,13 @@
     <?php
       require APPPATH.'helpers/buttonGenerator.php';
       require APPPATH.'helpers/messageGenerator.php';
-      // create
-      if($this->session->inAdminMode) {
-        $inputData = array(
-          'href'       => site_url('items/create'),
-          'attributes' => array('class' => 'btn btn-default'),
-          'text'       => 'New Weapon'
-        );
-        $iconData  = 'fa fa-plus fa-fw';
-        generateButton($inputData, $iconData);
-      }
     ?>
   </div>
 </div>
 <div class="table-responsive">
   <table class="table">
     <tr>
-      <th>Image</th>
       <th>Name</th>
-      <th>Weapon Class</th>
-      <th>Category</th>
       <?php
         if($this->session->inAdminMode) {
           echo '<th></th>';
@@ -30,47 +17,25 @@
         }
       ?>
     </tr>
-    <?php foreach ($items as $weapon) { ?>
+    <?php foreach ($accounts as $account) { ?>
       <tr>
         <td>
           <?php
-            echo '<img src='.base_url('assets/images/uploads/'.$weapon['image_name']).'>';
+            $href = site_url('accounts/'.$account['id']);
+            echo anchor($href, $account['username']);
           ?>
         </td>
-        <td>
-          <?php
-            echo anchor(
-              $weapon['class_uri'].'/'.$weapon['id'],
-              $weapon['name']
-            );
-          ?>
-        </td>
-        <td>
-          <?php echo $weapon['weapon_class']; ?>
-        </td>
-        <!--webs-->
-        <td>
-          <?php
-            if($weapon['category_id'] === NULL) {
-              echo '-';
-            } else {
-              echo anchor(
-                'categories/'.$weapon['category_id'],
-                $weapon['category']
-              );
-            }
-          ?>
-        </td>
+
         <?php
           // delete
           if($this->session->inAdminMode) {
             echo '<td>';
               $inputData = array (
-                'href'       => site_url('items/delete/'.$weapon['id']),
+                'href'       => site_url('accounts/delete/'.$account['id']),
                 'text'       => '',
                 'attributes' => array (
                   'class' => 'btn btn-danger',
-                  'title' => 'Delete this Category'
+                  'title' => 'Delete this Account'
                 )
               );
               $iconData  = 'fa fa-trash-o fa-fw';
@@ -82,11 +47,11 @@
           if($this->session->inAdminMode) {
             echo '<td >';
               $inputData = array (
-                'href'       => site_url('items/update/'.$weapon['id']),
+                'href'       => site_url('accounts/update/'.$account['id']),
                 'text'       => '',
                 'attributes' => array (
                   'class' => 'btn btn-default',
-                  'title' => 'Edit this Category'
+                  'title' => 'Edit this Account'
                 )
               );
               $iconData  = 'fa fa-pencil fa-fw';

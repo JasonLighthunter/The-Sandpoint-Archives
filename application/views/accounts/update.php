@@ -3,11 +3,12 @@
   require APPPATH.'helpers/formGenerator.php';
   require APPPATH.'helpers/errorGenerator.php';
 
+  $hidden     = array ('id' => $account['id']);
   $attributes = array (
     'data-toggle' => 'validator',
     'role'        => 'form'
   );
-  echo form_open('accounts/create', $attributes);
+  echo form_open('accounts/update/'.$account['id'], $attributes, $hidden);
 ?>
 
 <div class="row">
@@ -22,54 +23,8 @@
         'id'          => 'username',
         'class'       => 'form-control',
         'placeholder' => $label,
-        'value'       => set_value('username'),
+        'value'       => $account['username'],
         'maxlength'   => 50,
-        'required'    => ''
-      );
-      //                     label,  iconData,  inputdata,  hasErrorDiv isRequired
-      generateFormGroupInput($label, $iconData, $inputData, TRUE,       TRUE);
-    ?>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6 col-lg-4">
-    <!--password-->
-    <?php
-      $label         = 'Password';
-      $iconData      = 'fa fa-unlock-alt fa-fw';
-      $helpBlockText = 'Minimum of 6 characters';
-      $inputData     = array (
-        'type'           => 'password',
-        'name'           => 'password',
-        'id'             => 'password',
-        'class'          => 'form-control',
-        'placeholder'    => $label,
-        'value'          => set_value('password'),
-        'maxlength'      => 72,
-        'data-minlength' => 6,
-        'required'       => ''
-      );
-      //                     label,  iconData,  inputdata,  hasErrorDiv isRequired helpblocktext
-      generateFormGroupInput($label, $iconData, $inputData, TRUE,       TRUE,      $helpBlockText);
-    ?>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6 col-lg-4">
-    <!--password-confirm-->
-    <?php
-      $label         = 'Password Confirmation';
-      $iconData      = 'fa fa-unlock-alt fa-fw';
-      $inputData     = array (
-        'type'        => 'password',
-        'name'        => 'password-confirm',
-        'id'          => 'password-confirm',
-        'class'       => 'form-control',
-        'placeholder' => 'Repeat Password',
-        'value'       => set_value('password-confirm'),
-        'data-match'  => '#password',
         'required'    => ''
       );
       //                     label,  iconData,  inputdata,  hasErrorDiv isRequired
@@ -89,7 +44,7 @@
         'id'          => 'first-name',
         'class'       => 'form-control',
         'placeholder' => $label,
-        'value'       => set_value('first-name'),
+        'value'       => $account['first_name'],
         'maxlength'   => 50,
         'required'    => ''
       );
@@ -109,7 +64,7 @@
         'id'          => 'last-name',
         'class'       => 'form-control',
         'placeholder' => $label,
-        'value'       => set_value('last-name'),
+        'value'       => $account['last_name'],
         'maxlength'   => 50,
         'required'    => ''
       );
@@ -130,7 +85,7 @@
         'id'          => 'street',
         'class'       => 'form-control',
         'placeholder' => $label,
-        'value'       => set_value('street'),
+        'value'       => $account['street'],
         'maxlength'   => 50,
         'required'    => ''
       );
@@ -148,7 +103,7 @@
         'id'          => 'number',
         'class'       => 'form-control',
         'placeholder' => $label,
-        'value'       => set_value('number'),
+        'value'       => $account['number'],
         'min'         => 0,
         'data-error'  => 'invalid value',
         'max'         => 9999,
@@ -168,7 +123,7 @@
         'id'          => 'extra-info',
         'class'       => 'form-control',
         'placeholder' => $label,
-        'value'       => set_value('extra-info'),
+        'value'       => $account['extra_info'],
         'maxlength'   => 50,
       );
       //                     label   iconData inputdata
@@ -188,7 +143,7 @@
         'id'          => 'city',
         'class'       => 'form-control',
         'placeholder' => $label,
-        'value'       => set_value('city'),
+        'value'       => $account['city'],
         'maxlength'   => 50,
         'required'    => ''
       );
@@ -206,7 +161,7 @@
         'id'             => 'postal-code',
         'class'          => 'form-control',
         'placeholder'    => 'ex: 1234 AB',
-        'value'          => set_value('postal-code'),
+        'value'          => $account['postal_code'],
         'maxlength'      => 7,
         'data-minlength' => 7,
         'data-error'     => 'postal code does not match the pattern (4 numbers, a space, 2 capitals) eg: 1234 AB',
@@ -223,7 +178,7 @@
   $inputData = array(
     'name'  => 'submit',
     'class' => 'btn btn-default',
-    'value' => 'Create Account'
+    'value' => 'Edit Account'
   );
   echo form_submit($inputData);
   echo form_close();

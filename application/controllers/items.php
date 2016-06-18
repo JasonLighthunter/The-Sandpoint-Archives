@@ -75,7 +75,7 @@
         return FALSE;
       }
       if (!$this->session->inAdminMode) {
-        redirect('noPermission');
+        redirect('noPermissions');
       }
       $data['item']               = $this->itemsModel->get($id, 'weapons');
       $data['title']              = 'Edit weapon: '.$data['item']['name'];
@@ -104,7 +104,7 @@
 
     public function delete($id = FALSE) {
       if (!$this->session->inAdminMode) {
-        redirect('noPermission');
+        redirect('noPermissions');
       }
       $data = FALSE;
       if ($id !== FALSE) {
