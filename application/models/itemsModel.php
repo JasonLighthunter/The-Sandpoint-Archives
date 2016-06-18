@@ -6,7 +6,7 @@
       $this->load->database();
     }
 
-    public function get($id = FALSE, $itemType = FALSE) {
+    public function get($id = FALSE, $itemType = 'weapons') {
       if($id === FALSE) {
         if($itemType === FALSE) {
           return FALSE;

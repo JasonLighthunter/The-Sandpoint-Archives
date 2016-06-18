@@ -36,4 +36,15 @@
     ?>
   </div>
 </div>
+<div class="row">
+  <div class="col-sm-2">
+    <?php
+      echo anchor(
+        site_url('shoppingBag/add/'.$item['id']),
+        'add to shopping bag',
+        array('class' => 'btn btn-default')
+      );
+   ?>
+  </div>
+</div>
 <!-- webs -->
