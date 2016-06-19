@@ -66,11 +66,12 @@
         }
       }
     }
-    public function add($id = FALSE) {
+    public function addIndex($id = FALSE) {
       $this->inc($id);
-      ?>
-        <script>alert("item added")</script>
-      <?php
+      redirect('items/weapons');
+    }
+    public function addDetail($id = FALSE) {
+      $this->inc($id);
       redirect('items/weapons/'.$id);
     }
   }

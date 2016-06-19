@@ -48,19 +48,39 @@
   echo '<div class="row">';
     echo '<div class="col-sm-6 col-lg-4">';
 
-      $label       = 'Description';
+      $label       = 'Description short';
       $inputData   = array (
-        'type'        => 'textarea',
+        'name'        => 'desc_short',
+        'id'          => 'desc_short',
+        'class'       => 'form-control',
+        'placeholder' => $label,
+        'maxlength'   => 200,
+        'value'       => $item['desc_short'],
+        'rows'        => '2',
+        'columns'     => '6',
+      );
+      //                      label  icondata inputdata   hasErrorDiv
+      generateFormGroupTextArea($label, FALSE,   $inputData, TRUE);
+
+    echo '</div>';
+  echo '</div>';
+
+  echo '<div class="row">';
+    echo '<div class="col-sm-6 col-lg-4">';
+
+      $label       = 'Description long';
+      $inputData   = array (
         'name'        => 'desc',
         'id'          => 'desc',
         'class'       => 'form-control',
         'placeholder' => $label,
         'maxlength'   => 5000,
         'value'       => $item['description'],
-        'required'    => ''
+        'rows'        => '10',
+        'columns'     => '6',
       );
-      //                      label  icondata inputdata   hasErrorDiv isrequired
-      generateFormGroupInput($label, FALSE,   $inputData, TRUE,       TRUE);
+      //                      label  icondata inputdata   hasErrorDiv
+      generateFormGroupTextArea($label, FALSE,   $inputData, TRUE);
 
     echo '</div>';
   echo '</div>';

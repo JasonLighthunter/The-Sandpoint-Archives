@@ -1,4 +1,9 @@
 <div class="row">
+  <div class="col-sm-12">
+    <?php echo '<img src='.base_url('assets/images/uploads/'.$item['image_name']).'>'; ?>
+  </div>
+</div>
+<div class="row">
   <div class="col-sm-2">
     <b>Name:</b>
   </div>
@@ -40,7 +45,7 @@
   <div class="col-sm-2">
     <?php
       echo anchor(
-        site_url('shoppingBag/add/'.$item['id']),
+        site_url('shoppingBag/addD/'.$item['id']),
         'add to shopping bag',
         array('class' => 'btn btn-default')
       );

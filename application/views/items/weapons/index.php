@@ -3,6 +3,7 @@
     <?php
       require APPPATH.'helpers/buttonGenerator.php';
       require APPPATH.'helpers/messageGenerator.php';
+      require APPPATH.'helpers/formGenerator.php';
       // create
       if($this->session->inAdminMode) {
         $inputData = array(
@@ -16,13 +17,52 @@
     ?>
   </div>
 </div>
+
+<?php
+  $attributes = array (
+    'data-toggle' => 'validator',
+    'role'        => 'form'
+  );
+  echo form_open('items/search', $attributes);
+
+  echo '<div class="row">';
+    echo '<div class="col-xs-6 col-lg-3">';
+
+      //Name
+      $inputData   = array (
+        'type'        => 'text',
+        'name'        => 'query',
+        'id'          => 'query',
+        'class'       => 'form-control',
+        'maxlength'   => 50,
+        'required'    => ''
+      );
+      //                      label  icondata inputdata
+      generateFormGroupInput(FALSE, FAlSE,   $inputData);
+
+    echo '</div>';
+
+    echo '<div class="col-xs-6 col-lg-3">';
+      $inputData = array (
+        'name'  => 'submit',
+        'class' => 'btn btn-default',
+        'value' => 'Search'
+      );
+      echo form_submit($inputData);
+    echo '</div>';
+  echo '</div>';
+  echo form_close();
+?>
+
 <div class="table-responsive">
   <table class="table">
     <tr>
       <th>Image</th>
       <th>Name</th>
-      <th>Weapon Class</th>
+      <th>Desc</th>
+      <th>Price (in gold pieces)</th>
       <th>Category</th>
+      <th></th>
       <?php
         if($this->session->inAdminMode) {
           echo '<th></th>';
@@ -45,8 +85,13 @@
             );
           ?>
         </td>
+
         <td>
-          <?php echo $weapon['weapon_class']; ?>
+          <?php echo $weapon['desc_short']; ?>
+        </td>
+
+        <td>
+          <?php echo $weapon['price_gold'].' Gold'; ?>
         </td>
         <!--webs-->
         <td>
@@ -59,6 +104,15 @@
                 $weapon['category']
               );
             }
+          ?>
+        </td>
+        <td>
+          <?php
+            echo anchor(
+              site_url('shoppingBag/addI/'.$weapon['id']),
+              'add to shopping bag',
+              array('class' => 'btn btn-default')
+            );
           ?>
         </td>
         <?php

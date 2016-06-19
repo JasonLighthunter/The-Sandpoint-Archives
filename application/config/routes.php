@@ -51,7 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //shoppingbag
 
-$route['shoppingBag/add/(:any)']     = 'shoppingBag/add/$1';
+$route['shoppingBag/addD/(:any)'] = 'shoppingBag/addDetail/$1';
+$route['shoppingBag/addI/(:any)'] = 'shoppingBag/addIndex/$1';
 $route['shoppingBag/remove/(:any)']  = 'shoppingBag/remove/$1';
 $route['shoppingBag']                = 'shoppingBag/index';
 //Categories Routes
@@ -73,6 +74,7 @@ $route['alignments']           = 'alignments/index';
 $route['feats/(:any)']         = 'feats/detail/$1';
 $route['feats']                = 'feats/index';
 //Items Routes
+$route['items/search']         = 'items/search';
 $route['items/create']         = 'items/create';
 $route['items/delete/(:any)']  = 'items/delete/$1';
 $route['items/update/(:any)']  = 'items/update/$1';

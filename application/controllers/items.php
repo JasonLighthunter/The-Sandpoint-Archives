@@ -8,6 +8,27 @@
       $this->load->model('imagesModel');
     }
 
+
+    public function search($itemType = 'weapons'){
+      $data['items'] = $this->itemsModel->getSearch($this->input->post('query'), $itemType);
+      switch ($itemType) {
+        case 'weapons':
+          $data['title'] = 'Weapons';
+          break;
+        case 'armor':
+          $data['title'] = 'Armor';
+          break;
+        case 'goods':
+          $data['title'] = 'Goods';
+          break;
+        case 'spellComponents':
+          $data['title'] = 'Spell Components';
+          break;
+        default:
+          show_404();
+      }
+      $this->view($data, 'index', $itemType);
+    }
     //this calls the index pages of the Weapons section
     public function index($data = FALSE, $itemType = 'weapons') {
       if($itemType === FALSE) {
@@ -232,10 +253,16 @@
       );
       $this->form_validation->set_rules(
         'desc',
-        'Description',
+        'Description Long',
         array(
-          'required',
           'max_length[5000]'
+        )
+      );
+      $this->form_validation->set_rules(
+        'desc_short',
+        'Description Short',
+        array(
+          'max_length[200]'
         )
       );
       $this->form_validation->set_rules(

@@ -90,7 +90,6 @@
     </tr>
     <?php
         }
-
       } else {
         echo '<tr>';
           echo '<td>There are no items in the Shopping bag.</td>';

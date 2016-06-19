@@ -5,6 +5,18 @@
     public function __construct() {
       $this->load->database();
     }
+    public function getSearch($data, $itemType = 'weapons') {
+      $this->prepareQuery($itemType);
+      $this->db->like('items.name', $data);
+      $this->db->or_like('categories.name', $data);
+      $this->db->or_like('items.price_gold', $data);
+      $this->db->or_like('images.name', $data);
+      $this->db->or_like('items.description', $data);
+      $this->db->or_like('items.desc_short', $data);
+
+      $query = $this->db->get();
+      return $query->result_array();
+    }
 
     public function get($id = FALSE, $itemType = 'weapons') {
       if($id === FALSE) {
@@ -26,6 +38,7 @@
         'name'         => $this->input->post('name'),
         'price_gold'   => $this->input->post('price'),
         'description'  => $this->input->post('desc'),
+        'desc_short'   => $this->input->post('desc_short'),
         'item_class'   => $this->input->post('item_class'),
         'weapon_class' => $this->input->post('weapon_class'),
         'image_id'     => $this->session->image_id
@@ -44,6 +57,7 @@
         'name'         => $this->input->post('name'),
         'price_gold'   => $this->input->post('price'),
         'description'  => $this->input->post('desc'),
+        'desc_short'   => $this->input->post('desc_short'),
         'item_class'   => $this->input->post('item_class'),
         'weapon_class' => $this->input->post('weapon_class'),
       );
@@ -129,6 +143,7 @@
             'item_classes.name AS class_name,'.
             'weapon_classes.name AS weapon_class,'.
             $this->table.'.description AS description,'.
+            $this->table.'.desc_short AS desc_short,'.
             'item_classes.uri AS class_uri'
           );
           break;
