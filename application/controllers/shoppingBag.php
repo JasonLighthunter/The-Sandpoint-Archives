@@ -9,11 +9,13 @@
     public function index() {
       $data['title'] = 'Shopping Bag';
       $data['items'] = array();
-
-      foreach ($_SESSION['shoppingBag'] as $key => $value) {
-        $data['items'][$key]     = $this->itemsModel->get($key);
-        $data['items'][$key]['count'] = $value;
+      if($this->session->has_userdata('shoppingBag')){
+        foreach ($_SESSION['shoppingBag'] as $key => $value) {
+          $data['items'][$key]          = $this->itemsModel->get($key);
+          $data['items'][$key]['count'] = $value;
+        }
       }
+
       $this->view($data,'index');
     }
 
@@ -27,15 +29,35 @@
 
     public function remove($id = FALSE) {
       if($id !== FALSE) {
-        if($this->session->has_userdata($shoppingBag[$id])){
+        if($this->session->shoppingBag[$id] !== NULL){
           unset($_SESSION['shoppingBag'][$id]);
         }
       }
-      $this->index();
-      return;
+      redirect('shoppingBag');
     }
 
-    public function add($id = FALSE) {
+    public function clearBag() {
+      unset($_SESSION['shoppingBag']);
+      redirect('shoppingBag');
+    }
+
+    public function decrease($id = FALSE){
+      if($id !== FALSE) {
+        if($_SESSION['shoppingBag'][$id] > 0) {
+          $_SESSION['shoppingBag'][$id] -= 1;
+          if($_SESSION['shoppingBag'][$id] === 0){
+            unset($_SESSION['shoppingBag'][$id]);
+          }
+        }
+      }
+      redirect('shoppingBag');
+    }
+    public function increase($id = FALSE){
+      $this->inc($id);
+      redirect('shoppingBag');
+    }
+
+    private function inc($id = FALSE){
       if($id !== FALSE) {
         if($_SESSION['shoppingBag'][$id] <= 0) {
           $_SESSION['shoppingBag'][$id] = 1;
@@ -43,8 +65,11 @@
           $_SESSION['shoppingBag'][$id]++;
         }
       }
+    }
+    public function add($id = FALSE) {
+      $this->inc($id);
       ?>
-      <script>alert("item added")</script>
+        <script>alert("item added")</script>
       <?php
       redirect('items/weapons/'.$id);
     }
