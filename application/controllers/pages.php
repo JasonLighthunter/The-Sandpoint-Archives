@@ -10,17 +10,7 @@
     }
 
     public function view($page = 'home') {
-      switch ($page) {
-        case 'loggedIn':
-          $data['title'] = "Already Logged In";
-          break;
-        case 'noPermissions':
-          $data['title'] = "Access Forbidden";
-          break;
-        default:
-          $data['title'] = ucfirst($page);
-          break;
-      }
+      $data['title'] = $this->getTitle($page);
       switch ($page) {
         // case 'home':
         case 'loggedIn':
@@ -29,7 +19,7 @@
           if(empty($data['page'])){
             show_404();
           }
-          $page         = 'view';
+          $page = 'view';
           break;
         default:
           if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
@@ -48,6 +38,19 @@
       $this->load->view('templates/header', $data);
       $this->load->view('pages/'.$page, $data);
       $this->load->view('templates/footer', $data);
+    }
+
+    private function getTitle($page = 'home') {
+      switch ($page) {
+        case 'loggedIn':
+          return "Already Logged In";
+        case 'noPermissions':
+          return "Access Forbidden";
+        case 'shoppingBag':
+          return "Shopping bag";
+        default:
+          return ucfirst($page);
+      }
     }
   }
 ?>

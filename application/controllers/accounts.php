@@ -109,7 +109,6 @@
 
         $this->view($data, 'update');
       }
-
     }
 
     public function delete($id = FALSE) {
