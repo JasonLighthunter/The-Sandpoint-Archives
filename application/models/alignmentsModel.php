@@ -1,6 +1,6 @@
 <?php
   class AlignmentsModel extends CI_Model {
-    private $tableName = 'alignments';
+    private $table = 'alignments';
 
     public function __construct() {
       $this->load->database();
@@ -8,14 +8,11 @@
 
     public function get($id = FALSE) {
       if($id === FALSE){
-        $query = $this->db->get($this->tableName);
-        return $query->result_array();
+        return $this->db->get($this->table)->result_array();
       }
-
-      $whereCondition = array('id' => $id);
       $query = $this->db->get_where(
-        $this->tableName,
-        $whereCondition
+        $this->table,
+        array('id' => $id)
       );
       return $query->row_array();
     }

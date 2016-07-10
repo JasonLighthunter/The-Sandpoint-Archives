@@ -11,19 +11,21 @@
         if($order !== FALSE) {
           $this->db->order_by('value '.$order);
         }
-        $query = $this->db->get($this->tableName);
-        return $query->result_array();
+        return $this->db->get($this->table)->result_array();
       }
-
-      $whereCondition = array('id' => $id);
-      $query          = $this->db->get_where($this->tableName, $whereCondition);
+      $query = $this->db->get_where(
+        $this->table,
+        array('id' => $id)
+      );
       return $query->row_array();
     }
 
     public function getByName($name = FALSE) {
-      if(!$name === FALSE) {
-        $whereCondition = array('name' => $name);
-        $query          = $this->db->get_where($this->tableName, $whereCondition);
+      if($name !== FALSE) {
+        $query = $this->db->get_where(
+          $this->table, 
+          array('name' => $name)
+        );
         return $query->row_array();
       }
       return FALSE;

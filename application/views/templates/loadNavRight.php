@@ -1,6 +1,5 @@
 <li>
   <?php
-    echo anchor(site_url('shoppingBag'), 'Shopping Bag');
     echo '</li><li>';
 
     if ($this->session->has_userdata('loggedInUser')) {

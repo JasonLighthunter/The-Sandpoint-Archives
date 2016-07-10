@@ -57,14 +57,6 @@
               echo anchor($href, 'Contact');
             ?>
           </li>
-          <!-- webs2 delete later -->
-          <li class="vert-align-mid"">
-            <?php
-              $href = site_url('login/admin');
-              echo anchor($href, 'Webs2 dashboard');
-            ?>
-          </li>
-          <!-- webs2 ends -->
         </ul>
       </div>
     </footer>

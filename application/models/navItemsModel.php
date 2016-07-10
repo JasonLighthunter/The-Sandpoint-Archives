@@ -5,13 +5,11 @@
     }
 
     public function get($id = FALSE) {
-      if($id === FALSE){
-        $query  = $this->db->get('nav_items');
-        $result = $query->result_array();
+      if($id === FALSE) {
+        $result = $this->db->get('nav_items')->result_array();
         foreach ($result as $key => $navItem) {
           if($navItem['has_children'] === '1') {
-            $query                      = $this->db->get($navItem['table_name_children']);
-            $result[($key)]['children'] = $query->result_array();
+            $result[($key)]['children'] = $this->db->get($navItem['table_name_children'])->result_array();
           }
         }
         return $result;

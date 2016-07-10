@@ -4,10 +4,6 @@
     echo '<li>';
     echo anchor(current_url(), 'ADMIN MODE', $attributes);
     echo '</li>';
-
-    echo '<li>';
-    echo anchor(site_url('accounts'), 'Accounts');
-    echo '</li>';
   }
   foreach ($navItems as $item) {
     if(empty($item['has_children'])) {
@@ -21,10 +17,12 @@
           'role'        => 'button'
         );
         $content    = $item['name'].'<span class="caret"></span>';
-        echo anchor('',$content,$attributes);
+        echo anchor('', $content, $attributes);
         echo '<ul class="dropdown-menu">';
         foreach ($item['children'] as $child) {
-          echo '<li>'.anchor(site_url($child['uri']), $child['name']).'</li>';
+          $href   = site_url($child['uri']);
+          $anchor = anchor($href, $child['name']);
+          echo '<li>'.$anchor.'</li>';
         }
         echo '</ul>';
     }

@@ -48,20 +48,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-
-//shoppingbag
-
-$route['shoppingBag/addD/(:any)'] = 'shoppingBag/addDetail/$1';
-$route['shoppingBag/addI/(:any)'] = 'shoppingBag/addIndex/$1';
-$route['shoppingBag/remove/(:any)']  = 'shoppingBag/remove/$1';
-$route['shoppingBag']                = 'shoppingBag/index';
-//Categories Routes
-$route['categories/create']    = 'categories/create';
-$route['categories/update/(:any)']  = 'categories/update/$1';
-$route['categories/delete/(:any)']  = 'categories/delete/$1';
-$route['categories/(:any)']    = 'categories/detail/$1';
-$route['categories']           = 'categories/index';
-//Accounts Routes
 $route['accounts/create']      = 'accounts/create';
 $route['accounts/update/(:any)'] = 'accounts/update/$1';
 $route['accounts/delete/(:any)'] ='accounts/delete/$1';
@@ -70,17 +56,6 @@ $route['accounts']             = 'accounts/index';
 //Alignments Routes
 $route['alignments/(:any)']    = 'alignments/detail/$1';
 $route['alignments']           = 'alignments/index';
-//Feats Routes
-$route['feats/(:any)']         = 'feats/detail/$1';
-$route['feats']                = 'feats/index';
-//Items Routes
-$route['items/search']         = 'items/search';
-$route['items/create']         = 'items/create';
-$route['items/delete/(:any)']  = 'items/delete/$1';
-$route['items/update/(:any)']  = 'items/update/$1';
-$route['items/(:any)/(:any)']  = 'items/detail/$2/$1';
-$route['items/(:any)']         = 'items/index/$2';
-$route['items']                = 'items/index';
 //Login Routes
 $route['login/submit/(:any)']  = 'login/submit/$1';
 $route['login']                = 'login/login';

@@ -9,11 +9,8 @@
       </button>
       <?php
         $attributes = array('class' => 'navbar-brand');
-        echo anchor(
-          site_url('home'),
-          '<i class="fa fa-book fa-lg" aria-hidden="true"></i> The Sandpoint Archives',
-          $attributes
-        );
+        $href       = site_url('home');
+        echo anchor($href, 'The Sandpoint Archives', $attributes);
       ?>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

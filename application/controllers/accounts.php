@@ -3,7 +3,6 @@
     public function __construct() {
       parent::__construct();
       $this->load->model('accountsModel');
-      $this->load->model('customersModel'); //webs
       $this->load->model('rolesModel');
       $this->load->model('navItemsModel');
 
@@ -57,22 +56,6 @@
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'create');
       } else {
-
-      //webs
-        $this->customersModel->create();
-
-        $customerData = array (
-          'first_name'  => $this->input->post('first-name'),
-          'last_name'   => $this->input->post('last-name'),
-          'street'      => $this->input->post('street'),
-          'number'      => $this->input->post('number'),
-          'city'        => $this->input->post('city'),
-          'postal_code' => $this->input->post('postal-code')
-        );
-
-        $this->session->customerId = $this->customersModel->getByData($customerData)['id'];
-      //webs
-
         $this->accountsModel->create();
 
         $data['messageType'] = 'success';
@@ -98,11 +81,11 @@
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'update');
       } else {
-        $this->customersModel->update($data['account']['c_id']);
         $this->accountsModel->update($id);
 
         $data['account']     = $this->accountsModel->get($id);
         $data['title']       = 'Edit account: '.$data['account']['username'];
+
         $data['messageType'] = 'success';
         $data['message']     = 'You have succesfully edited the category: "'.
                                $this->input->post('username').'".';
@@ -123,9 +106,7 @@
 
             $oldAccount = $this->accountsModel->get($id);
             $name       = $oldAccount['username'];
-            $customerId = $oldAccount['c_id'];
 
-            $this->customersModel->delete($customerId);
             $this->accountsModel->delete($id);
 
             $data['messageType'] = 'success';
@@ -182,8 +163,6 @@
 
     private function setValidationRules($id = FALSE) {
       //username field
-      $ruleArray = array();
-
       $this->form_validation->set_rules(
         'username',
         'Username',
@@ -217,68 +196,6 @@
           )
         );
       }
-
-      //webs
-      //fist name
-      $this->form_validation->set_rules(
-        'first-name',
-        'First Name',
-        array(
-          'required',
-          'max_length[50]'
-        )
-      );
-
-      //last name
-      $this->form_validation->set_rules(
-        'last-name',
-        'Last Name',
-        array(
-          'required',
-          'max_length[50]'
-        )
-      );
-
-      //street
-      $this->form_validation->set_rules(
-        'street',
-        'Street',
-        array(
-          'required',
-          'max_length[50]'
-        )
-      );
-      //house number
-      $this->form_validation->set_rules(
-        'number',
-        'House Number',
-        array(
-          'required',
-          'max_length[4]'
-        )
-      );
-
-      //city
-      $this->form_validation->set_rules(
-        'city',
-        'City',
-        array(
-          'required',
-          'max_length[50]'
-        )
-      );
-
-      //postal code
-      $this->form_validation->set_rules(
-        'postal-code',
-        'Postal Code',
-        array(
-          'required',
-          'min_length[7]',
-          'max_length[7]'
-        )
-      );
-      //webs
     }
 
     //Validation Methods

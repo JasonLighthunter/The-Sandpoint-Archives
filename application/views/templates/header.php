@@ -21,8 +21,8 @@
       );
       echo link_tag($bootstrap);
       echo link_tag($style);
-      echo '<title>'.$title.'</title>';
     ?>
+    <title><?php echo $title; ?></title>';
   </head>
   <body>
     <?php
@@ -31,7 +31,6 @@
       echo '</pre>';
       require_once 'navBar.php';
       echo '<div class="container-fluid">';
-        require_once 'breadcrumbs.php';
-        echo '<div class="well">';
-          require_once 'pageTitle.php';
+      echo '<div class="well">';
+        require_once 'pageTitle.php';
     ?>

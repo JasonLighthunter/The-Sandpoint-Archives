@@ -2,10 +2,8 @@
   <?php foreach ($alignments as $alignment) { ?>
     <div class="col-sm-4">
       <?php
-        $anchor = anchor(
-          'alignments/'.$alignment['id'],
-          $alignment['name']
-        );
+        $href   = site_url('alignments/'.$alignment['id']);
+        $anchor = anchor($href, $alignment['name']);
         echo heading($anchor, 3);
       ?>
     </div>
