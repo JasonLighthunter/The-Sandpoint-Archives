@@ -2,7 +2,7 @@
   if($this->session->inAdminMode) {
     $attributes = array('class' => 'admin-mode');
     echo '<li>';
-    echo anchor(current_url(), 'ADMIN MODE', $attributes);
+      echo anchor(current_url(), 'ADMIN MODE', $attributes);
     echo '</li>';
   }
   foreach ($navItems as $item) {

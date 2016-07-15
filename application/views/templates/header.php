@@ -22,12 +22,12 @@
       echo link_tag($bootstrap);
       echo link_tag($style);
     ?>
-    <title><?php echo $title; ?></title>';
+    <title><?php echo $title; ?></title>
   </head>
   <body>
     <?php
       echo '<pre>';
-        var_dump($this->session->loggedInUser);
+        var_dump($this->session->userdata());
       echo '</pre>';
       require_once 'navBar.php';
       echo '<div class="container-fluid">';

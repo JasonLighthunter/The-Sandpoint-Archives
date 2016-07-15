@@ -1,12 +1,8 @@
 <li>
   <?php
     echo '</li><li>';
-
-    if ($this->session->has_userdata('loggedInUser')) {
-      $id       = $this->session->loggedInUser['user_id'];
-      $username = $this->session->loggedInUser['username'];
-
-      echo anchor(site_url('accounts/'.$id), 'Welcome, '.$username);
+    if ($this->session->has_userdata('user_id') && $this->session->has_userdata('username')) {
+      echo anchor(site_url('accounts/'.$this->session->user_id), 'Welcome, '.$this->session->username);
       echo '</li><li>';
       echo anchor(site_url('logout'), 'Log out');
     } else {

@@ -8,7 +8,7 @@
     }
 
     public function login($role = 'user') {
-      if($this->session->has_userdata('loggedInUser')) {
+      if($this->session->has_userdata('username') || $this->session->has_userdata('user_id')) {
         redirect('loggedIn');
       }
       if(empty($this->rolesModel->getByName($role)) || !file_exists(APPPATH.'views/login/login.php')) {
@@ -18,8 +18,13 @@
     }
 
     public function logout() {
-      $this->session->unset_userdata('loggedInUser');
-      $this->session->unset_userdata('inAdminMode');
+      $unsetArray = array (
+        'username',
+        'user_id',
+        'role_value',
+        'inAdminMode'
+      );
+      $this->session->unset_userdata($unsetArray);
       redirect('home');
     }
 
@@ -33,23 +38,18 @@
       if ($this->form_validation->run() === FALSE) {
         $this->view('login', FALSE, $role);
       } else {
-        $username = $this->input->post('username');
+        $data['username'] = $this->input->post('username');
+        $data['user_id']  = $this->accountsModel->getByUsername($data['username'])['id'];
 
         if($role === 'user') {
-          $this->session->loggedInUser = array (
-            'user_id'    => $this->accountsModel->getByUsername($username)['id'],
-            'username'   => $username,
-            'role_value' => 1
-          );
+          $data['role_value'] = 1;
         } else {
-          $this->session->loggedInUser = array (
-            'user_id'    => $this->accountsModel->getByUsername($username)['id'],
-            'username'   => $username,
-            'role_value' => $this->accountsModel->getByUsername($username)['role_value']
-          );
-          $this->session->inAdminMode = TRUE;
+          $data['role_value']  = $this->accountsModel->getByUsername($data['username'])['role_value'];
+          $data['inAdminMode'] = TRUE;
         }
-        redirect('accounts/'.$this->session->loggedInUser['user_id']);
+        $this->session->set_userdata($data);
+
+        redirect('accounts/'.$this->session->user_id);
       }
     }
 

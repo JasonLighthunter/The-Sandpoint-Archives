@@ -49,11 +49,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['accounts/create']      = 'accounts/create';
-$route['accounts/update/(:any)'] = 'accounts/update/$1';
-$route['accounts/delete/(:any)'] ='accounts/delete/$1';
 $route['accounts/(:any)']      = 'accounts/detail/$1';
 $route['accounts']             = 'accounts/index';
 //Alignments Routes
+$route['alignments/create']    = 'alignments/create';
 $route['alignments/(:any)']    = 'alignments/detail/$1';
 $route['alignments']           = 'alignments/index';
 //Login Routes

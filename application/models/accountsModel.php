@@ -7,7 +7,7 @@
     }
 
     public function get($id = FALSE) {
-      if($id === FALSE){
+      if($id === FALSE) {
         return $this->db->get($this->table)->result_array();
       }
       $query = $this->db->get_where(
@@ -30,8 +30,8 @@
 
     public function create() {
       $data = array (
-        'username'    => $this->input->post('username'),
-        'password'    => $this->input->post('password'),
+        'username' => $this->input->post('username'),
+        'password' => $this->input->post('password')
       );
       return $this->db->insert($this->table, $data);
     }

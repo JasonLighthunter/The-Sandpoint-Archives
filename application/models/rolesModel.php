@@ -1,6 +1,6 @@
 <?php
   class RolesModel extends CI_Model {
-    private $tableName = 'roles';
+    private $table = 'roles';
 
     public function __construct() {
       $this->load->database();
@@ -23,7 +23,7 @@
     public function getByName($name = FALSE) {
       if($name !== FALSE) {
         $query = $this->db->get_where(
-          $this->table, 
+          $this->table,
           array('name' => $name)
         );
         return $query->row_array();

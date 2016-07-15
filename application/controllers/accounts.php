@@ -30,7 +30,7 @@
       if($id === FALSE) {
         show_404();
       }
-      if($this->session->inAdminMode || $id === $this->session->loggedInUser['user_id']) {
+      if($this->session->inAdminMode || $id === $this->session->user_id) {
         $data['account'] = $this->accountsModel->get($id);
         if(empty($data['account'])) {
           show_404();
@@ -46,12 +46,15 @@
     }
 
     public function create() {
-      if($this->session->has_userdata('loggedInUser')) {
+      if($this->session->has_userdata('user_id') || $this->session->has_userdata('username')) {
         redirect('home');
       }
       $data['title'] = 'Create a new account on "The Sandpoint Archives"';
 
       $this->setValidationRules();
+
+      var_dump($this->input->post());
+      die();
 
       if ($this->form_validation->run() === FALSE || empty($this->input->post())) {
         $this->view($data, 'create');
@@ -83,12 +86,12 @@
       } else {
         $this->accountsModel->update($id);
 
-        $data['account']     = $this->accountsModel->get($id);
-        $data['title']       = 'Edit account: '.$data['account']['username'];
-
-        $data['messageType'] = 'success';
-        $data['message']     = 'You have succesfully edited the category: "'.
-                               $this->input->post('username').'".';
+        $data = array(
+          'account'     => $this->accountsModel->get($id),
+          'title'       => 'Edit account: '.$data['account']['username'],
+          'messageType' => 'success',
+          'message'     => 'Your account has been updated'
+        );
 
         $this->view($data, 'update');
       }
@@ -99,13 +102,10 @@
         redirect('noPermissions');
       }
       $data = FALSE;
-      if($id !== FALSE){
-        if($this->session->inAdminMode && $id !== $this->session->loggedInUser['user_id']) {
-
+      if($id !== FALSE) {
+        if($this->session->inAdminMode && $id !== $this->session->user_id) {
           if($this->accountExists($id)) {
-
-            $oldAccount = $this->accountsModel->get($id);
-            $name       = $oldAccount['username'];
+            $name = $this->accountsModel->get($id)['username'];
 
             $this->accountsModel->delete($id);
 
@@ -168,7 +168,7 @@
         'Username',
         array (
           'required',
-          'callback_usernameExists',
+          'callback_userExists',
           'max_length[50]'
         )
       );
@@ -199,17 +199,15 @@
     }
 
     //Validation Methods
-    public function usernameExists($username) {
+    public function userExists($username) {
       $userWithUsername = $this->accountsModel->getByUsername($username);
-      if(empty($userWithUsername)){
-        return TRUE;
-      }
-      $userWithId = $this->accountsModel->get($this->input->post('id'));
-      if(!empty($userWithId) && ($userWithId['username'] === $userWithUsername['username'])) {
+      $userWithId       = $this->accountsModel->get($this->input->post('id'));
+
+      if(empty($userWithUsername) || (!empty($userWithId) && ($userWithId['username'] === $userWithUsername['username']))) {
         return TRUE;
       }
       $this->form_validation->set_message(
-        'usernameExists',
+        'userExists',
         'This username is already taken'
       );
       return FALSE;
