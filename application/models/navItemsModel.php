@@ -4,6 +4,7 @@
       $this->load->database();
     }
 
+    //READ
     public function get($id = FALSE) {
       if($id === FALSE) {
         $result = $this->db->get('nav_items')->result_array();

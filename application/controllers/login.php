@@ -97,7 +97,7 @@
     }
 
     //Validation Methods
-    public function usernameExists($username) {
+    public function usernameExists($username): bool {
       $result = $this->accountsModel->getByUsername($username);
       if(!empty($result)){
         return TRUE;
@@ -129,7 +129,7 @@
       return TRUE;
     }
 
-    public function passwordsMatch($password) {
+    public function passwordsMatch($password): bool {
       $result = $this->accountsModel->getByUsername($this->input->post('username'));
 
       if(!empty($result) && $result['password'] === $password) {

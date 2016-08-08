@@ -14,7 +14,7 @@
       }
     }
 
-    //this calls the index pages of the Accounts section
+    //INDEX
     public function index($data = FALSE) {
       if(!$this->session->inAdminMode) {
         redirect('home');
@@ -25,7 +25,7 @@
       $this->view($data,'index');
     }
 
-    //this calls a certian view of the Accounts section
+    //DETAIL
     public function detail($id = FALSE) {
       if($id === FALSE) {
         show_404();
@@ -45,6 +45,7 @@
       redirect('noPermissions');
     }
 
+    //CREATE
     public function create() {
       if($this->session->has_userdata('user_id') || $this->session->has_userdata('username')) {
         redirect('home');
@@ -68,6 +69,7 @@
       }
     }
 
+    //UPDATE
     public function update($id = FALSE) {
       if($id === FALSE) {
         return FALSE;
@@ -97,6 +99,7 @@
       }
     }
 
+    //DELETE
     public function delete($id = FALSE) {
       if(!$this->session->inAdminMode) {
         redirect('noPermissions');
@@ -123,6 +126,8 @@
       $this->index($data);
     }
 
+    //PRIVATE FUNCTIONS
+
     //type is the name of the file that has to be called.
     private function view($data, $type) {
       $data['navItems'] = $this->navItemsModel->get();
@@ -139,8 +144,9 @@
       }
       return TRUE;
     }
+
     //converts roleValue to an array of human readable roles
-    //for example: 7 wil become user, moderator, admin because user(1) + moderator(2) + admin(4) = 7;
+    //example: 7 wil become user + mod + admin because user(1) + moderator(2) + admin(4) = 7;
     private function roleValueToRoles($roleValue) {
       $roles = $this->rolesModel->get(FALSE, 'ASC');
       if(empty($roles)) {
@@ -198,7 +204,7 @@
       }
     }
 
-    //Validation Methods
+    //VALIDATION METHODS
     public function userExists($username) {
       $userWithUsername = $this->accountsModel->getByUsername($username);
       $userWithId       = $this->accountsModel->get($this->input->post('id'));

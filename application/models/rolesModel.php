@@ -6,6 +6,7 @@
       $this->load->database();
     }
 
+    //READ
     public function get($id = FALSE, $order = FALSE) {
       if($id === FALSE) {
         if($order !== FALSE) {

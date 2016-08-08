@@ -5,7 +5,16 @@
     public function __construct() {
       $this->load->database();
     }
+    //CREATE
+    public function create() {
+      $data = array (
+        'username' => $this->input->post('username'),
+        'password' => $this->input->post('password')
+      );
+      return $this->db->insert($this->table, $data);
+    }
 
+    //READ
     public function get($id = FALSE) {
       if($id === FALSE) {
         return $this->db->get($this->table)->result_array();
@@ -28,14 +37,7 @@
       return $query->row_array();
     }
 
-    public function create() {
-      $data = array (
-        'username' => $this->input->post('username'),
-        'password' => $this->input->post('password')
-      );
-      return $this->db->insert($this->table, $data);
-    }
-
+    //UPDATE
     public function update($id) {
       $data = array('username' => $this->input->post('username'));
 
@@ -43,6 +45,7 @@
       $this->db->update($this->table, $data);
     }
 
+    //DELETE
     public function delete($id) {
       if($id !== FALSE) {
         $this->db->delete(

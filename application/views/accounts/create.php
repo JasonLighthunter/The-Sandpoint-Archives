@@ -23,8 +23,7 @@
         'value'       => set_value('username'),
         'maxlength'   => 50
       );
-      //                     label,  iconData,  inputdata,  hasErrorDiv isRequired
-      generateFormGroupInput($label, $iconData, $inputData, TRUE,       TRUE);
+      generateFormGroup($label, 'input', $iconData, $inputData, TRUE, TRUE);
     ?>
   </div>
 </div>
@@ -44,8 +43,7 @@
         'maxlength'      => 72,
         'data-minlength' => 6
       );
-      //                     label,  iconData,  inputdata,  hasErrorDiv isRequired helpblocktext
-      generateFormGroupInput($label, $iconData, $inputData, TRUE,       TRUE,      $helpBlockText);
+      generateFormGroup($label, 'password', $iconData, $inputData, TRUE, TRUE, $helpBlockText);
     ?>
   </div>
 </div>
@@ -63,8 +61,7 @@
         'value'       => set_value('password-confirm'),
         'data-match'  => '#password'
       );
-      //                     label,  iconData,  inputdata,  hasErrorDiv isRequired
-      generateFormGroupInput($label, $iconData, $inputData, TRUE,       TRUE);
+      generateFormGroupInput($label, 'password', $iconData, $inputData, TRUE, TRUE);
     ?>
   </div>
 </div>
